@@ -8,6 +8,9 @@ public class SpawnerController : MonoBehaviour {
     [SerializeField] private int maxEnemies = 20;         // Maximum enemies alive at once
     [SerializeField] private float spawnOffset = 0.5f;    // Distance outside the camera viewport
 
+    [Header("XP Drop")]
+    [SerializeField] private GameObject xpDropPrefab;
+
     [Header("Player Reference")]
     [SerializeField] private Transform player;            // Player transform (auto-found if null)
 
@@ -31,33 +34,35 @@ public class SpawnerController : MonoBehaviour {
     private IEnumerator SpawnLoop() {
         while (true) {
             yield return new WaitForSeconds(spawnInterval);
-
-            // Check if we can spawn more enemies
             if (currentEnemyCount >= maxEnemies) continue;
 
-            // Get a position outside the camera viewport
-            Vector3 spawnPosition = GetSpawnPosition();
+            Vector3 spawnPos = GetSpawnPosition();
+            GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
-            // Instantiate the enemy
-            GameObject enemy = Instantiate(enemyPrefab, spawnPosition, Quaternion.identity);
-            currentEnemyCount++;
-
-            // Subscribe to the enemy's death event
-            EnemyController enemyController = enemy.GetComponent<EnemyController>();
-            if (enemyController != null) {
-                // Add listener to decrement counter when enemy dies
-                enemyController.OnDeath.AddListener(OnEnemyDeath);
-            } else {
-                Debug.LogWarning("SpawnerController: Enemy prefab does not have EnemyController component!");
+            EnemyController enemyCtrl = enemy.GetComponent<EnemyController>();
+            if (enemyCtrl != null) {
+                // Adiciona listener para quando o inimigo morrer
+                enemyCtrl.OnDeath.AddListener(() => OnEnemyDeath(enemy));
             }
+
+            currentEnemyCount++;
         }
     }
 
     // Handler for the death event
-    private void OnEnemyDeath() {
+    private void OnEnemyDeath(GameObject enemy) {
+        // Decrement enemy counter
         currentEnemyCount--;
-        // Optional: you can add debug or trigger other systems here
-        Debug.Log($"Enemy died. Alive: {currentEnemyCount}");
+
+        // Spawn XP drop at enemy position
+        if (xpDropPrefab != null) {
+            Instantiate(xpDropPrefab, enemy.transform.position, Quaternion.identity);
+        }
+
+        // Add kill to GameManager
+        if (GameplayManager.Instance != null) {
+            GameplayManager.Instance.AddKill();
+        }
     }
 
     // Calculates a spawn position just outside the camera viewport

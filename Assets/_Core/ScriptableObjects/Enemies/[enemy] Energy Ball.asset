@@ -17,7 +17,7 @@ MonoBehaviour:
   prefab: {fileID: 0}
   baseHealth: 1
   damage: 5
-  moveSpeed: 20
+  moveSpeed: 0.5
   knockbackResistance: 1
   xpReward: 1
   immuneToFreeze: 0
