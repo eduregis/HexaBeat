@@ -24,6 +24,7 @@ public class WeaponDataEditor : Editor
         data.weaponName = EditorGUILayout.TextField("Weapon Name", data.weaponName);
         data.icon = (Sprite)EditorGUILayout.ObjectField("Icon", data.icon, typeof(Sprite), false);
         data.attackPrefab = (GameObject)EditorGUILayout.ObjectField("Attack Prefab", data.attackPrefab, typeof(GameObject), false);
+        data.weaponPrefab = (GameObject)EditorGUILayout.ObjectField("Weapon Prefab", data.weaponPrefab, typeof(GameObject), false);
 
         EditorGUILayout.Space(10);
 

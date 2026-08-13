@@ -1,9 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class HeroController : MonoBehaviour
-{
-    [Header("Movimento")]
+public class HeroController : MonoBehaviour {
+    [Header("Move")]
     [SerializeField] private float moveSpeed = 3.5f;
 
     [Header("Weapons Slots")]
@@ -18,8 +17,7 @@ public class HeroController : MonoBehaviour
 
     public Vector2 FacingDirection { get; private set; } = Vector2.down;
 
-    private void Awake()
-    {
+    private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         if (rb == null) Debug.LogError("HeroController: Rigidbody2D not found!");
 
@@ -28,20 +26,14 @@ public class HeroController : MonoBehaviour
             weaponSlots = new WeaponBase[maxWeaponSlots];
     }
 
-    private void Start()
-    {
+    private void Start() {
         // If a starting weapon is defined, equip it in the first empty slot
-        if (startingWeapon != null)
-        {
+        if (startingWeapon != null) {
             EquipWeapon(startingWeapon);
-        }
-        else
-        {
+        } else {
             // Otherwise, check if any slot has already been filled in the Inspector
-            for (int i = 0; i < weaponSlots.Length; i++)
-            {
-                if (weaponSlots[i] != null && weaponSlots[i].data != null)
-                {
+            for (int i = 0; i < weaponSlots.Length; i++) {
+                if (weaponSlots[i] != null && weaponSlots[i].data != null) {
                     weaponSlots[i].Initialize(weaponSlots[i].data, 0);
                     Debug.Log($"Slot {i + 1}: {weaponSlots[i].data.weaponName} equiped.");
                 }
@@ -50,55 +42,57 @@ public class HeroController : MonoBehaviour
     }
 
     // --- Move (Input System) ---
-    public void OnMove(InputValue value)
-    {
+    public void OnMove(InputValue value) {
         moveInput = value.Get<Vector2>().normalized;
         if (moveInput != Vector2.zero) FacingDirection = moveInput;
     }
 
-    private void FixedUpdate()
-    {
+    private void FixedUpdate() {
         Vector2 targetPosition = rb.position + moveInput * moveSpeed * Time.fixedDeltaTime;
         rb.MovePosition(targetPosition);
     }
 
     // --- Weapon Management ---
     // Equip a new weapon in the first empty slot
-    public bool EquipWeapon(WeaponData weaponData)
-    {
-        for (int i = 0; i < weaponSlots.Length; i++)
-        {
-            if (weaponSlots[i] == null || weaponSlots[i].data == null)
-            {
-                // Creates a child GameObject for the weapon.
-                GameObject weaponGO = new GameObject(weaponData.weaponName);
-                weaponGO.transform.SetParent(transform);
+    public bool EquipWeapon(WeaponData weaponData) {
+        for (int i = 0; i < weaponSlots.Length; i++) {
+            if (weaponSlots[i] == null || weaponSlots[i].data == null) {
+                // Instancia o prefab da arma (que já tem o script específico, ex: Pistol)
+                if (weaponData.weaponPrefab == null) {
+                    Debug.LogError($"WeaponData {weaponData.weaponName} não tem weaponPrefab!");
+                    return false;
+                }
+
+                GameObject weaponGO = Instantiate(weaponData.weaponPrefab, transform);
                 weaponGO.transform.localPosition = Vector3.zero;
 
-                WeaponBase weapon = weaponGO.AddComponent<WeaponBase>();
+                WeaponBase weapon = weaponGO.GetComponent<WeaponBase>();
+                if (weapon == null) {
+                    Debug.LogError($"weaponPrefab de {weaponData.weaponName} não tem WeaponBase!");
+                    Destroy(weaponGO);
+                    return false;
+                }
+
                 weapon.Initialize(weaponData, 0);
                 weaponSlots[i] = weapon;
 
-                Debug.Log($"Weapon {weaponData.weaponName} equiped in slot {i + 1} (Lv.1)");
+                Debug.Log($"Arma {weaponData.weaponName} equipada no slot {i + 1} (Nv.1)");
                 return true;
             }
         }
-        Debug.LogWarning("All weapon slots are occupied!");
+        Debug.LogWarning("Todos os slots de arma estão ocupados!");
         return false;
     }
 
     // Replaces the weapon in a specific slot with a new one
-    public void SwapWeapon(int slotIndex, WeaponData newWeaponData)
-    {
-        if (slotIndex < 0 || slotIndex >= weaponSlots.Length)
-        {
+    public void SwapWeapon(int slotIndex, WeaponData newWeaponData) {
+        if (slotIndex < 0 || slotIndex >= weaponSlots.Length) {
             Debug.LogError("Invalid Slot!");
             return;
         }
 
         // Remove the old weapon (if it exists)
-        if (weaponSlots[slotIndex] != null)
-        {
+        if (weaponSlots[slotIndex] != null) {
             Destroy(weaponSlots[slotIndex].gameObject);
             weaponSlots[slotIndex] = null;
         }
@@ -116,12 +110,9 @@ public class HeroController : MonoBehaviour
     }
 
     // Increases the level of an already equipped weapon (if found)
-    public bool UpgradeWeapon(WeaponData weaponData)
-    {
-        foreach (var slot in weaponSlots)
-        {
-            if (slot != null && slot.data == weaponData)
-            {
+    public bool UpgradeWeapon(WeaponData weaponData) {
+        foreach (var slot in weaponSlots) {
+            if (slot != null && slot.data == weaponData) {
                 slot.LevelUp();
                 return true;
             }
@@ -131,8 +122,7 @@ public class HeroController : MonoBehaviour
     }
 
     // Checks if a weapon is already equipped
-    public bool HasWeapon(WeaponData weaponData)
-    {
+    public bool HasWeapon(WeaponData weaponData) {
         foreach (var slot in weaponSlots)
             if (slot != null && slot.data == weaponData)
                 return true;
@@ -140,8 +130,7 @@ public class HeroController : MonoBehaviour
     }
 
     // Returns the index of the slot where a weapon is equipped, or -1 if it is not
-    public int GetWeaponSlot(WeaponData weaponData)
-    {
+    public int GetWeaponSlot(WeaponData weaponData) {
         for (int i = 0; i < weaponSlots.Length; i++)
             if (weaponSlots[i] != null && weaponSlots[i].data == weaponData)
                 return i;

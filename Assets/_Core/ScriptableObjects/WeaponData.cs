@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "[weapon] New Weapon", menuName = "HexaBeat/Weapon Data")]
-public class WeaponData : ScriptableObject
-{
+public class WeaponData : ScriptableObject {
     [Header("General Info")]
     public string weaponName;
     public Sprite icon;
     public GameObject attackPrefab;
+    public GameObject weaponPrefab;
 
     [Header("Dynamic Fields (Optionals)")]
     public List<DynamicFieldDefinition> customFields = new List<DynamicFieldDefinition>();
@@ -16,47 +16,52 @@ public class WeaponData : ScriptableObject
     public List<WeaponLevelData> levels = new List<WeaponLevelData>();
 
     // Access methods to facilitate code readability
-    public float GetDamage(int levelIndex)
-    {
+    public float GetDamage(int levelIndex) {
         if (levelIndex < 0 || levelIndex >= levels.Count) return 0f;
         return levels[levelIndex].damage;
     }
 
-    public float GetCooldown(int levelIndex)
-    {
+    public float GetCooldown(int levelIndex) {
         if (levelIndex < 0 || levelIndex >= levels.Count) return 0f;
         return levels[levelIndex].cooldown;
     }
 
-    public int GetInt(int levelIndex, string fieldName)
-    {
+    public int GetInt(int levelIndex, DynamicParameter param) {
+        return GetInt(levelIndex, param.ToFieldName());
+    }
+
+    public float GetFloat(int levelIndex, DynamicParameter param) {
+        return GetFloat(levelIndex, param.ToFieldName());
+    }
+
+    public bool GetBool(int levelIndex, DynamicParameter param) {
+        return GetBool(levelIndex, param.ToFieldName());
+    }
+
+    public int GetInt(int levelIndex, string fieldName) {
         if (levelIndex < 0 || levelIndex >= levels.Count) return 0;
         return levels[levelIndex].GetInt(fieldName);
     }
 
-    public float GetFloat(int levelIndex, string fieldName)
-    {
+    public float GetFloat(int levelIndex, string fieldName) {
         if (levelIndex < 0 || levelIndex >= levels.Count) return 0f;
         return levels[levelIndex].GetFloat(fieldName);
     }
 
-    public bool GetBool(int levelIndex, string fieldName)
-    {
+    public bool GetBool(int levelIndex, string fieldName) {
         if (levelIndex < 0 || levelIndex >= levels.Count) return false;
         return levels[levelIndex].GetBool(fieldName);
     }
 }
 
 [System.Serializable]
-public class DynamicFieldDefinition
-{
+public class DynamicFieldDefinition {
     public string fieldName;
     public DynamicFieldType fieldType;
 }
 
 [System.Serializable]
-public class WeaponLevelData
-{
+public class WeaponLevelData {
     // Mandatory fixed fields
     public float damage;
     public float cooldown;
@@ -64,24 +69,21 @@ public class WeaponLevelData
     // Values for dynamic fields (optional)
     public List<DynamicFieldValue> customValues = new List<DynamicFieldValue>();
 
-    public int GetInt(string fieldName)
-    {
+    public int GetInt(string fieldName) {
         foreach (var v in customValues)
             if (v.fieldName == fieldName && v.fieldType == DynamicFieldType.Int)
                 return v.intValue;
         return 0;
     }
 
-    public float GetFloat(string fieldName)
-    {
+    public float GetFloat(string fieldName) {
         foreach (var v in customValues)
             if (v.fieldName == fieldName && v.fieldType == DynamicFieldType.Float)
                 return v.floatValue;
         return 0f;
     }
 
-    public bool GetBool(string fieldName)
-    {
+    public bool GetBool(string fieldName) {
         foreach (var v in customValues)
             if (v.fieldName == fieldName && v.fieldType == DynamicFieldType.Bool)
                 return v.boolValue;
@@ -90,8 +92,7 @@ public class WeaponLevelData
 }
 
 [System.Serializable]
-public class DynamicFieldValue
-{
+public class DynamicFieldValue {
     public string fieldName;
     public DynamicFieldType fieldType;
     public int intValue;
