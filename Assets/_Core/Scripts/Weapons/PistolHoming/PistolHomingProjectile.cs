@@ -34,13 +34,11 @@ public class PistolHomingProjectile : WeaponEffect {
     private void OnTriggerEnter2D(Collider2D other) {
         // Se colidir com um inimigo, aplica dano e destrói o projétil
         if (other.CompareTag("Enemy")) {
-            //EnemyController enemy = other.GetComponent<EnemyController>();
-            //if (enemy != null) {
-            //    enemy.TakeDamage(damage);
-            //}
+            EnemyController enemy = other.GetComponent<EnemyController>();
+            if (enemy != null) {
+                enemy.TakeDamage(damage);
+            }
             Destroy(gameObject);
-        }
-        // (Opcional) Se colidir com parede, também destrói
-        // else if (other.CompareTag("Wall")) Destroy(gameObject);
+        } else if (other.CompareTag("Wall")) Destroy(gameObject);
     }
 }
