@@ -16,6 +16,9 @@ public class EnemyController : MonoBehaviour {
     private Transform player;
     private Rigidbody2D rb;
 
+    [Header("Feedback")]
+    [SerializeField] private GameObject damagePopupPrefab;
+
     [Header("Events")]
     public UnityEvent OnDeath;
 
@@ -87,14 +90,24 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    public void TakeDamage(float damage) {
+    public void TakeDamage(float damageAmount) {
         if (isDead) return;
 
-        currentHealth -= Mathf.RoundToInt(damage);
+        int damage = Mathf.RoundToInt(damageAmount);
+        currentHealth -= damage;
+
+        // Mostra popup de dano
+        if (damagePopupPrefab != null) {
+            GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity, transform.parent);
+            DamagePopup popupScript = popup.GetComponent<DamagePopup>();
+            if (popupScript != null) {
+                Debug.Log($"Generating Damage Popup ({damage})");
+                popupScript.SetDamage(damage);
+            }
+        }
+
         if (currentHealth <= 0) {
             Die();
-        } else {
-            // animator?.SetTrigger("Hit");
         }
     }
 

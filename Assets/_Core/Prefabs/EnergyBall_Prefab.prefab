@@ -132,6 +132,10 @@ MonoBehaviour:
   data: {fileID: 11400000, guid: c10dda60bf2346c438bd4cea3b6a1818, type: 2}
   animator: {fileID: 5209323206620459747}
   hasDeathAnimation: 0
+  damagePopupPrefab: {fileID: 8336546267491661475, guid: 2a3bab496c7a0524eb868ef14d8b5d10, type: 3}
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!50 &5329499169669370933
 Rigidbody2D:
   serializedVersion: 5
