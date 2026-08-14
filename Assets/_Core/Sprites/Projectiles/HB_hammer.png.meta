@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f5b14e788b83a1f4cb830d99ba3edc00
+guid: 71dbafb8493d23145b070593df3ee211
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2658657683627862564
-    second: HB_xp_bar_bkg_0
+      213: -4513400649168006619
+    second: HAMMER_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,23 +126,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HB_xp_bar_bkg_0
+      name: HAMMER_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 42
+        height: 57
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 8, y: 8, z: 8, w: 8}
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd59ff34cec8a1bd0800000000000000
-      internalID: -2658657683627862564
+      spriteID: 522d259c50e2d51c0800000000000000
+      internalID: -4513400649168006619
       vertices: []
       indices: 
       edges: []
@@ -151,7 +151,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 208df1d6ffb2ae94ea1b1e7d2f895104
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      HB_xp_bar_bkg_0: -2658657683627862564
+      HAMMER_0: -4513400649168006619
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
