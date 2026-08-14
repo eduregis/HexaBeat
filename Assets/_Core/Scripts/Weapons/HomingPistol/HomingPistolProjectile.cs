@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PistolHomingProjectile : WeaponEffect {
+public class HomingPistolProjectile : WeaponEffect {
     [Header("Projectile Settings")]
     [SerializeField] private float maxLifetime = 3f; // Life time
 

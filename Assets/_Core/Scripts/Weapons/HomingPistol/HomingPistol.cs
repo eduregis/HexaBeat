@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PistolHoming : WeaponBase {
+public class HomingPistol : WeaponBase {
     protected override void Fire() {
         if (data.attackPrefab == null) return;
 
@@ -22,7 +22,7 @@ public class PistolHoming : WeaponBase {
 
         for (int i = 0; i < projectileCount; i++) {
             GameObject proj = Instantiate(data.attackPrefab, transform.position, Quaternion.identity);
-            PistolHomingProjectile effect = proj.GetComponent<PistolHomingProjectile>();
+            HomingPistolProjectile effect = proj.GetComponent<HomingPistolProjectile>();
             if (effect != null) {
                 Vector2 dir = direction;
                 // Aplica offset angular para múltiplos projéteis
