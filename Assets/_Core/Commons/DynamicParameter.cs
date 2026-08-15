@@ -5,7 +5,10 @@ public enum DynamicParameter {
     Cooldown,
     Projectiles,
     Speed,
-    Range
+    Range,
+    Angle,
+    Radius,
+    Knockback
 }
 
 public static class DynamicParameterExtensions {

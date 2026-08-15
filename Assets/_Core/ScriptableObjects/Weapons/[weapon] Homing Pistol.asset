@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26485cfb8288d0043bfcbdb881d0d3a8, type: 3}
   m_Name: '[weapon] Homing Pistol'
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: Pistol
+  weaponName: Homing Pistol
   icon: {fileID: 0}
   attackPrefab: {fileID: 7819238952419549191, guid: 9b54c95043a76144395f11f4d11bc924, type: 3}
   weaponPrefab: {fileID: 3119297777933600548, guid: f064292a7c8def747be656fec17a3d54, type: 3}

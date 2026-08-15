@@ -6,7 +6,7 @@ public class WeaponBase : MonoBehaviour {
     public int currentLevel = 1;
 
     private float timer;
-    private HeroController hero;
+    protected HeroController hero;
 
     private void Start() {
         hero = GetComponentInParent<HeroController>();
