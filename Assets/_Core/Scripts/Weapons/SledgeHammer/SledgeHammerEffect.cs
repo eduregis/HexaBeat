@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class SledgeHammerEffect : WeaponEffect {
     [Header("Swing Settings")]
     [SerializeField] private float swingDuration = 0.3f;
+    [SerializeField] private EasingType easingType = EasingType.Senoidal;
 
     [Header("References")]
     [SerializeField] private Transform hammerPivot;
@@ -17,7 +18,7 @@ public class SledgeHammerEffect : WeaponEffect {
     private float radius;
     private int damage;
     private float knockback;
-    private Transform heroTransform; // Referência ao herói
+    private Transform heroTransform; // referência ao herói
 
     private List<EnemyController> hitEnemies = new List<EnemyController>();
 
@@ -31,14 +32,18 @@ public class SledgeHammerEffect : WeaponEffect {
         damage = Mathf.RoundToInt(data.GetDamage(level));
         knockback = data.GetFloat(level, DynamicParameter.Knockback);
 
+        // Armazena a referência do herói (pai do weapon effect)
         // Busca o herói
         GameObject heroObj = GameObject.FindGameObjectWithTag("Player");
         if (heroObj != null) heroTransform = heroObj.transform;
 
+        // Posiciona o pivô inicialmente
         if (hammerPivot != null) {
+            hammerPivot.position = heroTransform != null ? heroTransform.position : transform.position;
             hammerPivot.rotation = Quaternion.identity;
         }
 
+        // Ajusta o tamanho baseado no radius
         if (hammerHead != null) {
             hammerHead.transform.localScale = Vector3.one * radius;
         }
@@ -58,30 +63,50 @@ public class SledgeHammerEffect : WeaponEffect {
     }
 
     private void Update() {
-        // Segue o herói
         if (hammerPivot != null && heroTransform != null) {
             hammerPivot.position = heroTransform.position;
         }
 
         timer += Time.deltaTime;
-        float progress = Mathf.Clamp01(timer / swingDuration);
+        float rawProgress = Mathf.Clamp01(timer / swingDuration);
+
+        float easedProgress = ApplyEasing(rawProgress);
 
         if (hammerPivot != null) {
             float baseAngle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             float startAngle = baseAngle + 90f - totalAngle / 2f;
             float endAngle = baseAngle + 90f + totalAngle / 2f;
-            float currentAngle = Mathf.Lerp(startAngle, endAngle, progress);
+            float currentAngle = Mathf.Lerp(startAngle, endAngle, easedProgress);
             hammerPivot.rotation = Quaternion.Euler(0, 0, currentAngle);
         }
 
-        if (progress >= 1f) {
+        if (rawProgress >= 1f) {
             Destroy(gameObject);
         }
     }
 
-    public void OnHammerHit(Collider2D other) {
-        Debug.Log("HammerHead collision detected with: " + other.name);
+    private float ApplyEasing(float t) {
+        switch (easingType) {
+            case EasingType.Linear:
+                return t;
 
+            case EasingType.EaseInOut:
+                return t < 0.5f ? 2f * t * t : 1f - Mathf.Pow(-2f * t + 2f, 2f) / 2f;
+
+            case EasingType.Senoidal:
+                return 0.5f - 0.5f * Mathf.Cos(t * Mathf.PI);
+
+            case EasingType.EaseOutBack:
+                float c1 = 1.70158f;
+                float c3 = c1 + 1f;
+                return 1f + c3 * Mathf.Pow(t - 1f, 3f) + c1 * Mathf.Pow(t - 1f, 2f);
+
+            default:
+                return t;
+        }
+    }
+
+    public void OnHammerHit(Collider2D other) {
         if (other.CompareTag("Enemy")) {
             EnemyController enemy = other.GetComponent<EnemyController>();
             if (enemy != null && !hitEnemies.Contains(enemy)) {
@@ -94,7 +119,6 @@ public class SledgeHammerEffect : WeaponEffect {
                     }
                 }
                 hitEnemies.Add(enemy);
-                Debug.Log($"Hit enemy! Damage applied: {damage}");
             }
         }
     }
