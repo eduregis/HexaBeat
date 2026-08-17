@@ -608,10 +608,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8022f9d9008c7284196f0ac9a211d14f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  moveSpeed: 3.5
+  heroData: {fileID: 0}
   maxWeaponSlots: 3
   weaponSlots: []
-  startingWeapon: {fileID: 11400000, guid: a0c56bfbbd5c54f4b9643e25bd92eca8, type: 2}
+  spriteRenderer: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!58 &466987702
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -732,7 +733,7 @@ SpriteRenderer:
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_SpriteSortPoint: 0
 --- !u!114 &466987705
 MonoBehaviour:

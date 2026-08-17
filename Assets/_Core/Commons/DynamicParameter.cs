@@ -7,7 +7,7 @@ public enum DynamicParameter {
     Speed,
     Range,
     Angle,
-    Radius,
+    Size,
     Knockback
 }
 

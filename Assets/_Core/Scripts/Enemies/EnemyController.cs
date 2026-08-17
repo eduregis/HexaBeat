@@ -25,7 +25,6 @@ public class EnemyController : MonoBehaviour {
     private void Awake() {
         rb = GetComponent<Rigidbody2D>();
         if (rb == null) Debug.LogError("EnemyController: Rigidbody2D not found!");
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         if (animator == null) animator = GetComponent<Animator>();
     }
 
@@ -57,6 +56,10 @@ public class EnemyController : MonoBehaviour {
             animator.SetBool("IsDead", false);
             animator.SetTrigger("Respawn");
         }
+    }
+
+    public void SetPlayerReference(Transform playerTransform) {
+        player = playerTransform;
     }
 
     private void OnEnable() {

@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class WeaponBase : MonoBehaviour {
     [Header("Weapon Data")]
@@ -9,12 +9,17 @@ public class WeaponBase : MonoBehaviour {
     protected HeroController hero;
 
     private void Start() {
-        hero = GetComponentInParent<HeroController>();
-        if (hero == null) Debug.LogError("WeaponBase must be a Hero child!");
+        if (hero == null)
+            hero = GetComponentInParent<HeroController>();
+    }
+
+    public void SetHeroController(HeroController heroController) {
+        hero = heroController;
     }
 
     private void Update() {
         if (data == null || data.levels.Count == 0) return;
+        if (hero == null) return;
 
         timer += Time.deltaTime;
         float cooldown = data.GetCooldown(currentLevel);
@@ -26,7 +31,6 @@ public class WeaponBase : MonoBehaviour {
 
     protected virtual void Fire() {
         Debug.Log($"{data.weaponName} (Nv.{currentLevel}) Generic fire!");
-        // Aqui entra a lógica de instanciar projétil, golpe, etc.
     }
 
     public void Initialize(WeaponData weaponData, int level = 1) {
@@ -35,7 +39,6 @@ public class WeaponBase : MonoBehaviour {
         gameObject.name = weaponData.weaponName;
     }
 
-    //Level up.
     public void LevelUp() {
         if (currentLevel < data.levels.Count - 1) {
             currentLevel++;

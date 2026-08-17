@@ -31,7 +31,7 @@ public class HomingPistol : WeaponBase {
                     float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
                     dir = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
                 }
-                effect.Initialize(data, currentLevel, dir);
+                effect.Initialize(data, currentLevel, dir, hero.transform);
             }
         }
     }

@@ -15,27 +15,23 @@ public class SledgeHammerEffect : WeaponEffect {
     private Vector2 direction;
     private float timer;
     private float totalAngle;
-    private float radius;
+    private float size;
     private int damage;
     private float knockback;
     private Transform heroTransform; // referência ao herói
 
     private List<EnemyController> hitEnemies = new List<EnemyController>();
 
-    public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 dir) {
+    public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 dir, Transform heroTransform) {
         data = weaponData;
         level = levelIndex;
         direction = -dir.normalized;
+        this.heroTransform = heroTransform; // Armazena a referência injetada
 
         totalAngle = data.GetFloat(level, DynamicParameter.Angle);
-        radius = data.GetFloat(level, DynamicParameter.Radius);
+        size = data.GetFloat(level, DynamicParameter.Size);
         damage = Mathf.RoundToInt(data.GetDamage(level));
         knockback = data.GetFloat(level, DynamicParameter.Knockback);
-
-        // Armazena a referência do herói (pai do weapon effect)
-        // Busca o herói
-        GameObject heroObj = GameObject.FindGameObjectWithTag("Player");
-        if (heroObj != null) heroTransform = heroObj.transform;
 
         // Posiciona o pivô inicialmente
         if (hammerPivot != null) {
@@ -45,14 +41,14 @@ public class SledgeHammerEffect : WeaponEffect {
 
         // Ajusta o tamanho baseado no radius
         if (hammerHead != null) {
-            hammerHead.transform.localScale = Vector3.one * radius;
+            hammerHead.transform.localScale = Vector3.one * size;
         }
 
         SetupHammer();
         timer = 0f;
         hitEnemies.Clear();
 
-        Debug.Log($"SledgeHammerEffect initialized: damage={damage}, angle={totalAngle}, radius={radius}, knockback={knockback}");
+        Debug.Log($"SledgeHammerEffect initialized: damage={damage}, angle={totalAngle}, radius={size}, knockback={knockback}");
     }
 
     private void SetupHammer() {
@@ -125,6 +121,6 @@ public class SledgeHammerEffect : WeaponEffect {
 
     private void OnDrawGizmosSelected() {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, radius);
+        Gizmos.DrawWireSphere(transform.position, size);
     }
 }

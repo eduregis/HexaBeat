@@ -141,7 +141,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HB_hero_sam_walk_spritesheet_0
+      name: HB_hero_sam_walk_right_spritesheet_0
       rect:
         serializedVersion: 2
         x: 0
@@ -154,16 +154,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: a2d382cf517e8fa20800000000000000
-      internalID: 3096478825428041002
+      spriteID: fed3f65f5c9bc1f4fbb93260f93c2489
+      internalID: 1346450498
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_hero_sam_walk_spritesheet_1
+      name: HB_hero_sam_walk_right_spritesheet_1
       rect:
         serializedVersion: 2
         x: 64
@@ -176,16 +176,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 35e77313c54f14690800000000000000
-      internalID: -7619540417734279597
+      spriteID: c55fb717c0486ea49b90ab99367259e3
+      internalID: 2117547046
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_hero_sam_walk_spritesheet_2
+      name: HB_hero_sam_walk_right_spritesheet_2
       rect:
         serializedVersion: 2
         x: 128
@@ -198,16 +198,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2bef3c7a775fbc120800000000000000
-      internalID: 2435309917788438194
+      spriteID: 160bd8c3011933843a93f54d49999641
+      internalID: 788207526
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_hero_sam_walk_spritesheet_3
+      name: HB_hero_sam_walk_right_spritesheet_3
       rect:
         serializedVersion: 2
         x: 192
@@ -220,16 +220,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e1c68dc2254093130800000000000000
-      internalID: 3546870932517186590
+      spriteID: 629d1eed9727cfd4780966986bd917c3
+      internalID: -343905270
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_hero_sam_walk_spritesheet_4
+      name: HB_hero_sam_walk_right_spritesheet_4
       rect:
         serializedVersion: 2
         x: 256
@@ -242,16 +242,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ee030ab4287219910800000000000000
-      internalID: 1842297163139264750
+      spriteID: 5f23730f685a5e5449f47b168bc9c810
+      internalID: 572180395
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_hero_sam_walk_spritesheet_5
+      name: HB_hero_sam_walk_right_spritesheet_5
       rect:
         serializedVersion: 2
         x: 320
@@ -264,10 +264,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: ff0a9dc79b60b8e20800000000000000
-      internalID: 3353781741240819967
+      spriteID: eacdf6afd4ac95a4487b39cb96958f6d
+      internalID: 944331510
       vertices: []
       indices: 
       edges: []
@@ -288,12 +288,12 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":6.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      HB_hero_sam_walk_spritesheet_0: 3096478825428041002
-      HB_hero_sam_walk_spritesheet_1: -7619540417734279597
-      HB_hero_sam_walk_spritesheet_2: 2435309917788438194
-      HB_hero_sam_walk_spritesheet_3: 3546870932517186590
-      HB_hero_sam_walk_spritesheet_4: 1842297163139264750
-      HB_hero_sam_walk_spritesheet_5: 3353781741240819967
+      HB_hero_sam_walk_right_spritesheet_0: 1346450498
+      HB_hero_sam_walk_right_spritesheet_1: 2117547046
+      HB_hero_sam_walk_right_spritesheet_2: 788207526
+      HB_hero_sam_walk_right_spritesheet_3: -343905270
+      HB_hero_sam_walk_right_spritesheet_4: 572180395
+      HB_hero_sam_walk_right_spritesheet_5: 944331510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

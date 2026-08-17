@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
 public class SpawnerController : MonoBehaviour {
@@ -39,9 +39,10 @@ public class SpawnerController : MonoBehaviour {
             Vector3 spawnPos = GetSpawnPosition();
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
+            // 🔥 Injeta a referência do jogador no inimigo
             EnemyController enemyCtrl = enemy.GetComponent<EnemyController>();
             if (enemyCtrl != null) {
-                // Adiciona listener para quando o inimigo morrer
+                enemyCtrl.SetPlayerReference(player); // player já é uma variável no SpawnerController
                 enemyCtrl.OnDeath.AddListener(() => OnEnemyDeath(enemy));
             }
 

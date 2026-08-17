@@ -9,7 +9,7 @@ public class HomingPistolProjectile : WeaponEffect {
     private float damage;
     private float lifetimeTimer;
 
-    public override void Initialize(WeaponData data, int levelIndex, Vector2 dir) {
+    public override void Initialize(WeaponData data, int levelIndex, Vector2 dir, Transform heroTransform) {
         damage = data.GetDamage(levelIndex);
         speed = data.GetFloat(levelIndex, DynamicParameter.Speed);
         direction = dir.normalized;

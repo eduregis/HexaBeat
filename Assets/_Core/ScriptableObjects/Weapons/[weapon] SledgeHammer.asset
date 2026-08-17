@@ -19,7 +19,7 @@ MonoBehaviour:
   customFields:
   - fieldName: Angle
     fieldType: 1
-  - fieldName: Radius
+  - fieldName: Size
     fieldType: 1
   - fieldName: Knockback
     fieldType: 1
@@ -32,15 +32,15 @@ MonoBehaviour:
       intValue: 0
       floatValue: 90
       boolValue: 0
-    - fieldName: Radius
-      fieldType: 1
-      intValue: 0
-      floatValue: 1
-      boolValue: 0
     - fieldName: Knockback
       fieldType: 1
       intValue: 0
       floatValue: 5
+      boolValue: 0
+    - fieldName: Size
+      fieldType: 1
+      intValue: 0
+      floatValue: 1
       boolValue: 0
   - damage: 30
     cooldown: 1.3
@@ -50,15 +50,15 @@ MonoBehaviour:
       intValue: 0
       floatValue: 100
       boolValue: 0
-    - fieldName: Radius
-      fieldType: 1
-      intValue: 0
-      floatValue: 0
-      boolValue: 0
     - fieldName: Knockback
       fieldType: 1
       intValue: 0
       floatValue: 5
+      boolValue: 0
+    - fieldName: Size
+      fieldType: 1
+      intValue: 0
+      floatValue: 1.1
       boolValue: 0
   - damage: 35
     cooldown: 1.2
@@ -68,15 +68,15 @@ MonoBehaviour:
       intValue: 0
       floatValue: 100
       boolValue: 0
-    - fieldName: Radius
-      fieldType: 1
-      intValue: 0
-      floatValue: 0
-      boolValue: 0
     - fieldName: Knockback
       fieldType: 1
       intValue: 0
       floatValue: 10
+      boolValue: 0
+    - fieldName: Size
+      fieldType: 1
+      intValue: 0
+      floatValue: 1.3
       boolValue: 0
   - damage: 40
     cooldown: 1.1
@@ -86,15 +86,15 @@ MonoBehaviour:
       intValue: 0
       floatValue: 130
       boolValue: 0
-    - fieldName: Radius
-      fieldType: 1
-      intValue: 0
-      floatValue: 1.9
-      boolValue: 0
     - fieldName: Knockback
       fieldType: 1
       intValue: 0
       floatValue: 10
+      boolValue: 0
+    - fieldName: Size
+      fieldType: 1
+      intValue: 0
+      floatValue: 1.4
       boolValue: 0
   - damage: 48
     cooldown: 1.1
@@ -104,15 +104,15 @@ MonoBehaviour:
       intValue: 0
       floatValue: 130
       boolValue: 0
-    - fieldName: Radius
-      fieldType: 1
-      intValue: 0
-      floatValue: 2.1
-      boolValue: 0
     - fieldName: Knockback
       fieldType: 1
       intValue: 0
       floatValue: 15
+      boolValue: 0
+    - fieldName: Size
+      fieldType: 1
+      intValue: 0
+      floatValue: 1.8
       boolValue: 0
   - damage: 56
     cooldown: 1
@@ -122,13 +122,13 @@ MonoBehaviour:
       intValue: 0
       floatValue: 180
       boolValue: 0
-    - fieldName: Radius
-      fieldType: 1
-      intValue: 0
-      floatValue: 2.3
-      boolValue: 0
     - fieldName: Knockback
       fieldType: 1
       intValue: 0
       floatValue: 15
+      boolValue: 0
+    - fieldName: Size
+      fieldType: 1
+      intValue: 0
+      floatValue: 2.5
       boolValue: 0
