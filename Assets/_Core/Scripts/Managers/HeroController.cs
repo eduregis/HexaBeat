@@ -9,9 +9,8 @@ public class HeroController : MonoBehaviour {
     [SerializeField] private int maxWeaponSlots = 3;
     public WeaponBase[] weaponSlots;
 
-    [Header("Visual")]
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [SerializeField] private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
 
     // Public properties for weapons to access
     public float DamageMultiplier { get; private set; } = 1f;
@@ -48,7 +47,7 @@ public class HeroController : MonoBehaviour {
             if (heroData.startingWeapon != null)
                 EquipWeapon(heroData.startingWeapon);
 
-            // 🔥 Assign the Animator Controller from HeroData
+            // Assign the Animator Controller from HeroData
             if (animator != null && heroData.animatorController != null) {
                 animator.runtimeAnimatorController = heroData.animatorController;
             } else if (animator == null) {
