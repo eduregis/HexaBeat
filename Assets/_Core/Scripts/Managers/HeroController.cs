@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class HeroController : MonoBehaviour {
@@ -9,13 +10,23 @@ public class HeroController : MonoBehaviour {
     [SerializeField] private int maxWeaponSlots = 3;
     public WeaponBase[] weaponSlots;
 
+    [Header("Damage Feedback")]
+    [SerializeField] private GameObject damagePopupPrefab;
+
     private SpriteRenderer spriteRenderer;
     private Animator animator;
+    Color originalColor;
 
     // Public properties for weapons to access
     public float DamageMultiplier { get; private set; } = 1f;
     public float ProjectileSpeedMultiplier { get; private set; } = 1f;
     public float GrowthMultiplier { get; private set; } = 1f;
+
+    // Health & Armor
+    private int currentHealth;
+    public int MaxHealth => heroData != null ? heroData.maxHealth : 100;
+    public int Armor => heroData != null ? heroData.armor : 0;
+    private Coroutine flashCoroutine;
 
     private Rigidbody2D rb;
     private Vector2 moveInput;
@@ -28,6 +39,7 @@ public class HeroController : MonoBehaviour {
 
         if (spriteRenderer == null)
             spriteRenderer = GetComponent<SpriteRenderer>();
+            originalColor = spriteRenderer.color;
 
         if (animator == null)
             animator = GetComponent<Animator>();
@@ -42,6 +54,7 @@ public class HeroController : MonoBehaviour {
             DamageMultiplier = heroData.damageMultiplier;
             ProjectileSpeedMultiplier = heroData.projectileSpeedMultiplier;
             GrowthMultiplier = heroData.growthMultiplier;
+            currentHealth = heroData.maxHealth;
 
             // Equip starting weapon
             if (heroData.startingWeapon != null)
@@ -84,7 +97,6 @@ public class HeroController : MonoBehaviour {
         if (animator == null) return;
 
         animator.SetFloat("DirectionX", FacingDirection.x);
-        animator.SetFloat("DirectionY", FacingDirection.y);
         animator.SetFloat("Speed", moveInput.magnitude);
     }
 
@@ -165,5 +177,44 @@ public class HeroController : MonoBehaviour {
             if (weaponSlots[i] != null && weaponSlots[i].data == weaponData)
                 return i;
         return -1;
+    }
+
+    // --- Health & Damage ---
+    public void TakeDamage(int damage) {
+        int finalDamage = Mathf.Max(1, damage - Armor);
+        currentHealth -= finalDamage;
+
+        if (flashCoroutine != null)
+            StopCoroutine(flashCoroutine);
+        flashCoroutine = StartCoroutine(FlashRed());
+
+        Debug.Log($"Hero took {finalDamage} damage. Health: {currentHealth}/{MaxHealth}");
+
+        // Show damage popup
+        if (damagePopupPrefab != null) {
+            GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity, transform.parent);
+            DamagePopup popupScript = popup.GetComponent<DamagePopup>();
+            if (popupScript != null) {
+                popupScript.SetDamage(damage);
+            }
+        }
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
+    private IEnumerator FlashRed() {
+        if (spriteRenderer != null) {
+            spriteRenderer.color = Color.red;
+            yield return new WaitForSeconds(0.1f);
+            spriteRenderer.color = originalColor;
+        }
+        flashCoroutine = null;
+    }
+
+    private void Die() {
+        Debug.Log("Hero died!");
+        gameObject.SetActive(false); // ou outra lógica
     }
 }

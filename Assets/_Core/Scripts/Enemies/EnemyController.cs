@@ -16,8 +16,12 @@ public class EnemyController : MonoBehaviour {
     private Transform player;
     private Rigidbody2D rb;
 
-    [Header("Feedback")]
+    [Header("Damage Feedback")]
     [SerializeField] private GameObject damagePopupPrefab;
+
+    [Header("Attack")]
+    [SerializeField] private float attackCooldown = 0.5f; // Time between contact damage
+    private float attackTimer = 0f;
 
     [Header("Events")]
     public UnityEvent OnDeath;
@@ -33,25 +37,21 @@ public class EnemyController : MonoBehaviour {
         currentHealth = data.baseHealth;
         currentSpeed = data.moveSpeed;
 
-        // Aplica scaling baseado na onda (ex: +10% de vida e velocidade por onda)
+        // Scaling based on wave
         if (data.healthScalesWithPlayerLevel) {
-            // (Opcional) Pega o nível do jogador
-            // int playerLevel = GameManager.Instance.PlayerLevel;
-            // currentHealth += data.baseHealth * playerLevel;
+            // Optional: use player level
         } else {
-            // Scaling por onda
             currentHealth += Mathf.RoundToInt(data.baseHealth * 0.1f * wave);
             currentSpeed += data.moveSpeed * 0.05f * wave;
         }
 
-        // Se for boss, aumenta mais
         if (data.isBoss) {
             currentHealth *= 3;
             currentSpeed *= 1.2f;
         }
 
-        // Reseta flags
         isDead = false;
+        attackTimer = 0f;
         if (animator != null) {
             animator.SetBool("IsDead", false);
             animator.SetTrigger("Respawn");
@@ -63,14 +63,21 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void OnEnable() {
-        // Reset (pooling)
+        // Reset for pooling
         currentHealth = data.baseHealth;
         currentSpeed = data.moveSpeed;
         isDead = false;
+        attackTimer = 0f;
         if (animator != null) {
             animator.SetBool("IsDead", false);
             animator.SetTrigger("Respawn");
         }
+    }
+
+    private void Update() {
+        // Update attack cooldown timer
+        if (attackTimer > 0f)
+            attackTimer -= Time.deltaTime;
     }
 
     private void FixedUpdate() {
@@ -79,17 +86,31 @@ public class EnemyController : MonoBehaviour {
         Vector2 direction = (player.position - transform.position).normalized;
         rb.MovePosition(rb.position + direction * currentSpeed * Time.fixedDeltaTime);
 
-        // Flip horizontal baseado na dire��o
+        // Flip horizontal
         if (direction.x != 0) {
             Vector3 scale = transform.localScale;
             scale.x = Mathf.Sign(direction.x) * Mathf.Abs(scale.x);
             transform.localScale = scale;
         }
 
-        // Atualiza parametros do Animator
+        // Update animator
         if (animator != null) {
             animator.SetFloat("Speed", rb.linearVelocity.magnitude);
             animator.SetFloat("DirectionX", direction.x);
+        }
+    }
+
+    // Contact damage to the player
+    private void OnTriggerStay2D(Collider2D other) {
+        Debug.Log("Trigger: " + other.name);
+        if (isDead || attackTimer > 0f) return;
+        if (other.gameObject.CompareTag("Player")) {
+            HeroController hero = other.gameObject.GetComponent<HeroController>();
+            if (hero != null) {
+                hero.TakeDamage(data.damage);
+                attackTimer = attackCooldown;
+                Debug.Log($"Enemy dealt {data.damage} damage to hero.");
+            }
         }
     }
 
@@ -99,12 +120,11 @@ public class EnemyController : MonoBehaviour {
         int damage = Mathf.RoundToInt(damageAmount);
         currentHealth -= damage;
 
-        // Mostra popup de dano
+        // Show damage popup
         if (damagePopupPrefab != null) {
             GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity, transform.parent);
             DamagePopup popupScript = popup.GetComponent<DamagePopup>();
             if (popupScript != null) {
-                Debug.Log($"Generating Damage Popup ({damage})");
                 popupScript.SetDamage(damage);
             }
         }
@@ -127,16 +147,13 @@ public class EnemyController : MonoBehaviour {
         } else {
             Destroy(gameObject);
         }
-
-        // Solta XP, etc.
-        // ...
     }
 
     private void OnDisable() {
         OnDeath.RemoveAllListeners();
     }
 
-    // M�todo chamado por Animation Event (opcional) para destruir no fim da anima��o
+    // Called by Animation Event
     public void OnDeathAnimationEnd() {
         Destroy(gameObject);
     }
