@@ -44,5 +44,7 @@ public enum AbilityType {
     MaxHealth,
     Amount,
     Cooldown,
-    Area
+    Area,
+    PickupRadius,
+    XPGain
 }

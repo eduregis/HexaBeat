@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponData : ScriptableObject {
     [Header("General Info")]
     public string weaponName;
+    [TextArea(3, 10)] public string description;
     public Sprite icon;
     public GameObject attackPrefab;
     public GameObject weaponPrefab;

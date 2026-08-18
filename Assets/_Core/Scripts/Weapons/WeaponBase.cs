@@ -22,7 +22,10 @@ public class WeaponBase : MonoBehaviour {
         if (hero == null) return;
 
         timer += Time.deltaTime;
-        float cooldown = data.GetCooldown(currentLevel);
+        float baseCooldown = data.GetCooldown(currentLevel);
+
+        float cooldown = baseCooldown * hero.GlobalCooldownModifier;
+
         if (timer >= cooldown) {
             timer = 0f;
             Fire();

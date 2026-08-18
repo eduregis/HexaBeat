@@ -30,6 +30,7 @@ public class HUDController : MonoBehaviour {
 
     private void UpdateLevel(int level) {
         if (levelText != null) levelText.text = $"Lv. {level}";
+        xpSlider.value = 0;
     }
 
     private void UpdateKills(int kills) {
