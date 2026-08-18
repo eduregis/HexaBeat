@@ -90,6 +90,10 @@ public partial class HeroController : DamageableCharacter {
         animator.SetFloat("Speed", moveInput.magnitude);
     }
 
+    public void SetHeroData(HeroData data) {
+        heroData = data;
+    }
+
     // --- UI Management ---
     private void UpdateHealthBar() {
         if (hpSlider != null) {

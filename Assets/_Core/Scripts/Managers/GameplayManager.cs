@@ -8,8 +8,9 @@ public class GameplayManager : MonoBehaviour {
     public static GameplayManager Instance { get; private set; }
 
     [Header("Hero Setup")]
-    [SerializeField] private List<HeroController> heroPrefabs; // List of Hero Prefabs for co-op
-    [SerializeField] private List<Transform> spawnPoints;      // Spawn points for each hero
+    [SerializeField] private HeroController heroPrefab;      // Single Hero Prefab reference
+    [SerializeField] private List<HeroData> heroesData;      // List of data to configure each hero
+    [SerializeField] private List<Transform> spawnPoints;    // Spawn points for each hero
     private List<HeroController> activeHeroes = new List<HeroController>(); // Runtime list
 
     [Header("XP Settings")]
@@ -21,7 +22,7 @@ public class GameplayManager : MonoBehaviour {
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private int totalKills = 0;
 
-    [Header("Camera Setup")] 
+    [Header("Camera Setup")]
     [SerializeField] private CinemachineCamera vcam;
 
     [Header("Level Up UI")]
@@ -50,19 +51,21 @@ public class GameplayManager : MonoBehaviour {
     }
 
     private void Start() {
-        // Instantiate all heroes based on the prefabs and spawn points
-        for (int i = 0; i < heroPrefabs.Count; i++) {
-            if (i < spawnPoints.Count) {
-                HeroController newHero = Instantiate(heroPrefabs[i], spawnPoints[i].position, Quaternion.identity);
-                activeHeroes.Add(newHero);
-            } else {
-                Debug.LogWarning("Not enough spawn points for all heroes. Spawning at (0,0,0).");
-                HeroController newHero = Instantiate(heroPrefabs[i], Vector3.zero, Quaternion.identity);
-                activeHeroes.Add(newHero);
-            }
+        // Instantiate heroes using the single prefab and the HeroData list
+        for (int i = 0; i < heroesData.Count; i++) {
+            Transform spawnPos = (i < spawnPoints.Count) ? spawnPoints[i] : null;
+            Vector3 position = spawnPos != null ? spawnPos.position : Vector3.zero;
+
+            // Instantiate the base prefab
+            HeroController newHero = Instantiate(heroPrefab, position, Quaternion.identity);
+
+            // Inject the specific HeroData from the array
+            newHero.SetHeroData(heroesData[i]);
+
+            activeHeroes.Add(newHero);
         }
 
-        if (activeHeroes.Count == 0) Debug.LogError("No heroes were spawned! Check Hero Prefabs.");
+        if (activeHeroes.Count == 0) Debug.LogError("No heroes were spawned! Check Hero Data list.");
 
         // --- CINEMACHINE SETUP ---
         if (activeHeroes.Count > 0) {
@@ -82,9 +85,9 @@ public class GameplayManager : MonoBehaviour {
         }
     }
 
-    // CHANGED: No collector parameter needed. XP is shared and added directly to the pool.
+    // XP is shared and added directly to the pool.
     public void AddXP(int amount) {
-        currentXP += amount; // XP is completely shared, no individual multipliers here.
+        currentXP += amount;
         OnXPChanged?.Invoke(currentXP);
 
         while (currentXP >= XPToNextLevel) {
