@@ -13,6 +13,9 @@ public class GameplayManager : MonoBehaviour {
     [SerializeField] private int currentLevel = 1;
     [SerializeField] private int totalKills = 0;
 
+    [Header("Level Up UI")]
+    [SerializeField] private GameObject levelUpPanelPrefab;
+
     public int CurrentXP => currentXP;
     public int CurrentLevel => currentLevel;
     public int TotalKills => totalKills;
@@ -39,6 +42,11 @@ public class GameplayManager : MonoBehaviour {
         while (currentXP >= XPToNextLevel) {
             currentXP -= XPToNextLevel;
             currentLevel++;
+
+            if (levelUpPanelPrefab != null) {
+                Instantiate(levelUpPanelPrefab);
+            }
+
             OnLevelUp?.Invoke(currentLevel);
             Debug.Log($"Level Up! Now Level {currentLevel}");
         }

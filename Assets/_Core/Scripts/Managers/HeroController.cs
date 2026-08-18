@@ -11,7 +11,7 @@ public class HeroController : DamageableCharacter {
     public WeaponBase[] weaponSlots;
 
     [Header("UI")]
-    [SerializeField] private HeroHPSlider hpSlider; // <--- UPDATED TYPE HERE
+    [SerializeField] private HeroHPSlider hpSlider;
 
     // Public properties for weapons to access
     public float DamageMultiplier { get; private set; } = 1f;
