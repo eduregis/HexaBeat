@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class HeroController : DamageableCharacter {
     [Header("Character Data")]
@@ -8,6 +9,9 @@ public class HeroController : DamageableCharacter {
     [Header("Weapons Slots")]
     [SerializeField] private int maxWeaponSlots = 3;
     public WeaponBase[] weaponSlots;
+
+    [Header("UI")]
+    [SerializeField] private HeroHPSlider hpSlider; // <--- UPDATED TYPE HERE
 
     // Public properties for weapons to access
     public float DamageMultiplier { get; private set; } = 1f;
@@ -52,9 +56,10 @@ public class HeroController : DamageableCharacter {
             }
         } else {
             Debug.LogWarning("HeroController: HeroData not assigned! Using default values.");
-            // Fallback: usa valores padrão da classe base (100 HP, 0 armor)
+            // Fallback: uses default values from base class (100 HP, 0 armor)
             SetHealth(maxHealth, armor);
         }
+        OnHealthChanged += UpdateHealthBar;
     }
 
     // --- Movement ---
@@ -157,6 +162,13 @@ public class HeroController : DamageableCharacter {
             if (weaponSlots[i] != null && weaponSlots[i].data == weaponData)
                 return i;
         return -1;
+    }
+
+    // --- UI Management ---
+    private void UpdateHealthBar() {
+        if (hpSlider != null) {
+            hpSlider.value = (float)currentHealth / maxHealth; // Value still works perfectly because HeroHPSlider inherits Slider
+        }
     }
 
     // --- Override Die ---

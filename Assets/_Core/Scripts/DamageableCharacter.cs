@@ -14,13 +14,15 @@ public abstract class DamageableCharacter : MonoBehaviour {
     protected Color originalColor;
     protected Coroutine flashCoroutine;
 
+    public System.Action OnHealthChanged;
+
     protected virtual void Awake() {
         spriteRenderer = GetComponent<SpriteRenderer>();
         if (spriteRenderer != null)
             originalColor = spriteRenderer.color;
     }
 
-    // 🔥 Método para inicializar a vida e armadura a partir dos dados do SO
+    // Método para inicializar a vida e armadura a partir dos dados do SO
     protected void SetHealth(int health, int armorValue) {
         maxHealth = health;
         armor = armorValue;
@@ -46,6 +48,7 @@ public abstract class DamageableCharacter : MonoBehaviour {
         }
 
         Debug.Log($"{gameObject.name} took {finalDamage} damage. Health: {currentHealth}/{maxHealth}");
+        OnHealthChanged?.Invoke();
 
         if (currentHealth <= 0)
             Die();
