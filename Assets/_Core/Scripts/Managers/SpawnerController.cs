@@ -14,6 +14,11 @@ public class SpawnerController : MonoBehaviour {
     [Header("Player Reference")]
     [SerializeField] private Transform player;            // Player transform (auto-found if null)
 
+    // 🔥 Wave system (optional)
+    private int currentWave = 0;
+    private float waveTimer = 0f;
+    [SerializeField] private float waveInterval = 10f;   // Time between waves (seconds)
+
     private Camera mainCamera;
     private int currentEnemyCount = 0;
 
@@ -31,6 +36,16 @@ public class SpawnerController : MonoBehaviour {
         StartCoroutine(SpawnLoop());
     }
 
+    private void Update() {
+        // Increment wave every 'waveInterval' seconds
+        waveTimer += Time.deltaTime;
+        if (waveTimer >= waveInterval) {
+            waveTimer = 0f;
+            currentWave++;
+            Debug.Log($"Wave {currentWave} started!");
+        }
+    }
+
     private IEnumerator SpawnLoop() {
         while (true) {
             yield return new WaitForSeconds(spawnInterval);
@@ -39,10 +54,16 @@ public class SpawnerController : MonoBehaviour {
             Vector3 spawnPos = GetSpawnPosition();
             GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);
 
-            // 🔥 Injeta a referência do jogador no inimigo
             EnemyController enemyCtrl = enemy.GetComponent<EnemyController>();
             if (enemyCtrl != null) {
-                enemyCtrl.SetPlayerReference(player); // player já é uma variável no SpawnerController
+                enemyCtrl.SetPlayerReference(player);
+
+                EnemyData enemyData = enemyCtrl.Data;
+                if (enemyData != null) {
+                    enemyCtrl.Initialize(enemyData, currentWave);
+                }
+
+                // Inscreve no evento de morte
                 enemyCtrl.OnDeath.AddListener(() => OnEnemyDeath(enemy));
             }
 
@@ -68,11 +89,9 @@ public class SpawnerController : MonoBehaviour {
 
     // Calculates a spawn position just outside the camera viewport
     private Vector3 GetSpawnPosition() {
-        // Get world-space bounds of the camera viewport
         Vector3 min = mainCamera.ViewportToWorldPoint(new Vector3(0, 0, 0));
         Vector3 max = mainCamera.ViewportToWorldPoint(new Vector3(1, 1, 0));
 
-        // Choose a random side (0=left, 1=right, 2=top, 3=bottom)
         int side = Random.Range(0, 4);
         Vector3 spawnPos = Vector3.zero;
 
@@ -98,9 +117,7 @@ public class SpawnerController : MonoBehaviour {
         return spawnPos;
     }
 
-    // Optional: clean up listeners when object is destroyed
     private void OnDestroy() {
-        // If using pooling, you might want to unsubscribe all listeners
-        // But since we destroy enemies, it's not strictly necessary.
+        // Clean up listeners (if any)
     }
 }

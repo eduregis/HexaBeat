@@ -611,6 +611,7 @@ MonoBehaviour:
   heroData: {fileID: 11400000, guid: 468c4b60820aa844a89bce559cd45658, type: 2}
   maxWeaponSlots: 3
   weaponSlots: []
+  damagePopupPrefab: {fileID: 8336546267491661475, guid: 2a3bab496c7a0524eb868ef14d8b5d10, type: 3}
 --- !u!58 &466987702
 CircleCollider2D:
   m_ObjectHideFlags: 0
