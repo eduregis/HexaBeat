@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using HexaBit.Core;
 
 [CustomEditor(typeof(WeaponData))]
 public class WeaponDataEditor : Editor {

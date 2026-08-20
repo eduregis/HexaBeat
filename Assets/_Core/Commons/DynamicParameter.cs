@@ -1,19 +1,23 @@
 using System;
 
-public enum DynamicParameter {
-    Damage,
-    Cooldown,
-    Projectiles,
-    Speed,
-    Range,
-    Angle,
-    Size,
-    Knockback
-}
+namespace HexaBit.Core {
 
-public static class DynamicParameterExtensions {
-    // Convert the DynamicParameter enum to the corresponding string
-    public static string ToFieldName(this DynamicParameter parameter) {
-        return parameter.ToString();
+    public enum DynamicParameter {
+        Damage,
+        Cooldown,
+        Projectiles,
+        Speed,
+        Range,
+        Angle,
+        Size,
+        Knockback
     }
+
+    public static class DynamicParameterExtensions {
+        // Convert the DynamicParameter enum to the corresponding string
+        public static string ToFieldName(this DynamicParameter parameter) {
+            return parameter.ToString();
+        }
+    }
+
 }
