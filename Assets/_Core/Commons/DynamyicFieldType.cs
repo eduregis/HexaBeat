@@ -1,7 +1,9 @@
 using UnityEngine;
 
-public enum DynamicFieldType {
-    Int,
-    Float,
-    Bool
+namespace HexaBit.Core {
+    public enum DynamicFieldType {
+        Int,
+        Float,
+        Bool
+    }
 }

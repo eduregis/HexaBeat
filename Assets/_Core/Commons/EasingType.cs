@@ -1,7 +1,10 @@
 using UnityEngine;
-public enum EasingType {
-    Linear,
-    EaseInOut,
-    Senoidal,
-    EaseOutBack
+
+namespace HexaBit.Core {
+    public enum EasingType {
+        Linear,
+        EaseInOut,
+        Senoidal,
+        EaseOutBack
+    }
 }
