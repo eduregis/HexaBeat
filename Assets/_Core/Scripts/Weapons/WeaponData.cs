@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace HexaBit.Core {
 
-    [CreateAssetMenu(fileName = "[weapon] New Weapon", menuName = "HexaBeat/Weapon Data")]
+    [CreateAssetMenu(fileName = "[weapon] New Weapon", menuName = "HexaBit/Weapon Data")]
     public class WeaponData : ScriptableObject {
         [Header("General Info")]
         public string weaponName;

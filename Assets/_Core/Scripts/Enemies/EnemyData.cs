@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace HexaBit.Core {
-    [CreateAssetMenu(fileName = "[enemy] New Enemy", menuName = "HexaBeat/Enemy Data")]
+    [CreateAssetMenu(fileName = "[enemy] New Enemy", menuName = "HexaBit/Enemy Data")]
     public class EnemyData : ScriptableObject {
         [Header("General Info")]
         public string enemyName;

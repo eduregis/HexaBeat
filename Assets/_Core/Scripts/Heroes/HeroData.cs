@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace HexaBit.Core {
-    [CreateAssetMenu(fileName = "[hero] New Hero", menuName = "HexaBeat/Hero Data")]
+    [CreateAssetMenu(fileName = "[hero] New Hero", menuName = "HexaBit/Hero Data")]
     public class HeroData : ScriptableObject {
         [Header("General")]
         public string heroName;

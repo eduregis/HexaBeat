@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace HexaBit.Core {
 
-    [CreateAssetMenu(fileName = "[buff] New Buff", menuName = "HexaBeat/Buff Data")]
+    [CreateAssetMenu(fileName = "[buff] New Buff", menuName = "HexaBit/Buff Data")]
     public class BuffData : ScriptableObject {
         public string buffName;
         [TextArea] public string description;
