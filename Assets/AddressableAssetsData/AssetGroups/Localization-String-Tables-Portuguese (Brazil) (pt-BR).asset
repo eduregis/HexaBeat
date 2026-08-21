@@ -14,8 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
   m_GroupName: Localization-String-Tables-Portuguese (Brazil) (pt-BR)
   m_GUID: 954661a7448ad8949b536998e9784dfb
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 4aeea26cd1f721846b5b32fa28f16cfe
+    m_Address: UI_Texts_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f984354c5d8b4694ba6e7fe254a2066a
+    m_Address: Weapon_Texts_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 59cd79aa8dfcba449aeddd9636c6527d, type: 2}
   m_SchemaSet:
-    m_Schemas: []
+    m_Schemas:
+    - {fileID: 11400000, guid: 87337ea0ddddc8a4693ebbab397d5993, type: 2}
+    - {fileID: 11400000, guid: b4d2a284d3c05c34a8be71821418903f, type: 2}

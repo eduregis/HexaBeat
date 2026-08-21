@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26485cfb8288d0043bfcbdb881d0d3a8, type: 3}
   m_Name: '[weapon] SledgeHammer'
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: Sledge Hammer
-  description: 
+  localizedName:
+    m_TableReference:
+      m_TableCollectionName: GUID:629ae6d7136a5214bb38b872524876f2
+    m_TableEntryReference:
+      m_KeyId: 666188402688
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  localizedDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:629ae6d7136a5214bb38b872524876f2
+    m_TableEntryReference:
+      m_KeyId: 734400368640
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   icon: {fileID: 0}
   attackPrefab: {fileID: 6523647716834906497, guid: 2f5b52fdae1d0f84c9f046bce7bcbfa7, type: 3}
   weaponPrefab: {fileID: 5703442293481947569, guid: 3d1911a9c64f9cf43901efd1b9afb14d, type: 3}
@@ -133,3 +149,6 @@ MonoBehaviour:
       intValue: 0
       floatValue: 2.5
       boolValue: 0
+  references:
+    version: 2
+    RefIds: []

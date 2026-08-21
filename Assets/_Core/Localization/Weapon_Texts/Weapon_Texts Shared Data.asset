@@ -14,7 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
   m_TableCollectionName: Weapon_Texts
   m_TableCollectionNameGuidString: 629ae6d7136a5214bb38b872524876f2
-  m_Entries: []
+  m_Entries:
+  - m_Id: 190210396160
+    m_Key: weapon_homing_pistol_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 335790493696
+    m_Key: weapon_homing_pistol_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 666188402688
+    m_Key: weapon_sledgehammer_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 734400368640
+    m_Key: weapon_sledgehammer_description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
