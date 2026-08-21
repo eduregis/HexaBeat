@@ -4,6 +4,7 @@
     "references": [
         "UnityEngine.UI",
         "Unity.TextMeshPro",
+        "Unity.Localization",
         "HexaBit.Core"
     ],
     "includePlatforms": ["Editor"],

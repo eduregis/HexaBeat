@@ -105,7 +105,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3838521193213193371}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -123,7 +123,7 @@ Rigidbody2D:
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &8922028137349023169
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -178,7 +178,7 @@ MonoBehaviour:
   heroData: {fileID: 11400000, guid: 468c4b60820aa844a89bce559cd45658, type: 2}
   maxWeaponSlots: 3
   weaponSlots: []
-  hpSlider: {fileID: 0}
+  hpSlider: {fileID: 8674356503627388765}
 --- !u!114 &1266335925793253038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -401,8 +401,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 2693947476375540402}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -476,7 +476,7 @@ RectTransform:
   m_Father: {fileID: 402818229198446725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -538,7 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.24642348, a: 1}
+  m_Color: {r: 0, g: 1, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -564,7 +564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 402818229198446725}
-  - component: {fileID: 1319985219590820849}
+  - component: {fileID: 8674356503627388765}
   m_Layer: 0
   m_Name: HPSlider
   m_TagString: Untagged
@@ -594,7 +594,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1319985219590820849
+--- !u!114 &8674356503627388765
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -603,9 +603,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 7624029939634373982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3bc27b4176d470044b00c4429f83dd27, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
+  m_EditorClassIdentifier: HexaBit.Core::HexaBit.Core.HeroHPSlider
   m_Navigation:
     m_Mode: 3
     m_WrapAround: 0
@@ -613,7 +613,7 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 0
+  m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
@@ -633,10 +633,10 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
-  m_TargetGraphic: {fileID: 3395232451182666816}
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 2635306925284135645}
-  m_HandleRect: {fileID: 2875169733448030447}
+  m_HandleRect: {fileID: 2693947476375540402}
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
@@ -645,6 +645,9 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+  colorGreen: {r: 0, g: 1, b: 0, a: 1}
+  colorYellow: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  colorRed: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8581614538196232794
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@
         "Unity.TextMeshPro",
         "Unity.InputSystem",
         "Unity.Cinemachine",
+        "Unity.Localization",
         "UnityEngine.UI",
         "Unity.RenderPipelines.Universal.Runtime"
     ],

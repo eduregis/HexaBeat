@@ -1,13 +1,15 @@
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Localization;
+using System.Collections.Generic;
+
 
 namespace HexaBit.Core {
 
     [CreateAssetMenu(fileName = "[weapon] New Weapon", menuName = "HexaBit/Weapon Data")]
     public class WeaponData : ScriptableObject {
-        [Header("General Info")]
-        public string weaponName;
-        [TextArea(3, 10)] public string description;
+        [Header("Localization")]
+        public LocalizedString localizedName;
+        public LocalizedString localizedDescription;
         public Sprite icon;
         public GameObject attackPrefab;
         public GameObject weaponPrefab;
