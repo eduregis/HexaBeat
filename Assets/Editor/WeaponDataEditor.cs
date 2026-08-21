@@ -19,11 +19,13 @@ public class WeaponDataEditor : Editor {
 
         // ---- SECTION: General Info ----
         EditorGUILayout.LabelField("General Info", EditorStyles.boldLabel);
-        data.weaponName = EditorGUILayout.TextField("Weapon Name", data.weaponName);
 
-        // ADDED: Description Field
-        EditorGUILayout.LabelField("Description");
-        data.description = EditorGUILayout.TextArea(data.description, GUILayout.Height(60));
+        // Usar SerializedProperty para LocalizedString
+        SerializedProperty localizedNameProp = serializedObject.FindProperty("localizedName");
+        SerializedProperty localizedDescProp = serializedObject.FindProperty("localizedDescription");
+
+        EditorGUILayout.PropertyField(localizedNameProp, new GUIContent("Localized Name"));
+        EditorGUILayout.PropertyField(localizedDescProp, new GUIContent("Localized Description"));
 
         data.icon = (Sprite)EditorGUILayout.ObjectField("Icon", data.icon, typeof(Sprite), false);
         data.attackPrefab = (GameObject)EditorGUILayout.ObjectField("Attack Prefab", data.attackPrefab, typeof(GameObject), false);

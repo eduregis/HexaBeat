@@ -1,13 +1,21 @@
+﻿using UnityEngine;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace HexaBit.Core {
     public class HUDController : MonoBehaviour {
         [Header("XP Bar")]
         [SerializeField] private Slider xpSlider;
         [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private TextMeshProUGUI killsText; // Opcional
+        [SerializeField] private TextMeshProUGUI killsText;
+
+        [SerializeField] private LocalizedString levelFormat = new LocalizedString("UI_Texts", "hud_level");
+        [SerializeField] private LocalizedString killsFormat = new LocalizedString("UI_Texts", "hud_kills");
+
+        private int currentLevel;
+        private int currentKills;
 
         private void Start() {
             if (GameplayManager.Instance != null) {
@@ -16,10 +24,23 @@ namespace HexaBit.Core {
                 GameplayManager.Instance.OnKillCountChanged.AddListener(UpdateKills);
             }
 
-            // Initial update
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+
+            currentLevel = GameplayManager.Instance.CurrentLevel;
+            currentKills = GameplayManager.Instance.TotalKills;
             UpdateXP(GameplayManager.Instance.CurrentXP);
-            UpdateLevel(GameplayManager.Instance.CurrentLevel);
-            UpdateKills(GameplayManager.Instance.TotalKills);
+            RefreshTexts();
+        }
+
+        private void OnLocaleChanged(UnityEngine.Localization.Locale newLocale) {
+            RefreshTexts();
+        }
+
+        private void RefreshTexts() {
+            if (levelText != null)
+                levelText.text = levelFormat.GetLocalizedString(currentLevel);
+            if (killsText != null)
+                killsText.text = killsFormat.GetLocalizedString(currentKills);
         }
 
         private void UpdateXP(int currentXP) {
@@ -30,12 +51,14 @@ namespace HexaBit.Core {
         }
 
         private void UpdateLevel(int level) {
-            if (levelText != null) levelText.text = $"Lv. {level}";
-            xpSlider.value = 0;
+            currentLevel = level;
+            RefreshTexts();
+            if (xpSlider != null) xpSlider.value = 0;
         }
 
         private void UpdateKills(int kills) {
-            if (killsText != null) killsText.text = $"Kills: {kills}";
+            currentKills = kills;
+            RefreshTexts();
         }
 
         private void OnDestroy() {
@@ -44,6 +67,7 @@ namespace HexaBit.Core {
                 GameplayManager.Instance.OnLevelUp.RemoveListener(UpdateLevel);
                 GameplayManager.Instance.OnKillCountChanged.RemoveListener(UpdateKills);
             }
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
         }
     }
 }

@@ -79,10 +79,7 @@ namespace HexaBit.Core {
                     // Set Follow and LookAt to the first hero that was spawned
                     vcam.Follow = activeHeroes[0].transform;
                     vcam.LookAt = activeHeroes[0].transform;
-                    Debug.Log($"Cinemachine targeting {activeHeroes[0].name}");
-                } else {
-                    Debug.LogWarning("No CinemachineVirtualCamera found in the scene!");
-                }
+                } 
             }
         }
 
@@ -139,8 +136,8 @@ namespace HexaBit.Core {
                 if (options.Count >= count) break;
 
                 if (item is WeaponData weaponData) {
-                    string displayText = weaponData.weaponName;
-                    string descText = weaponData.description;
+                    string displayText = weaponData.localizedName.GetLocalizedString();
+                    string descText = weaponData.localizedDescription.GetLocalizedString();
                     System.Action action = null;
 
                     // Check the TARGET HERO's inventory

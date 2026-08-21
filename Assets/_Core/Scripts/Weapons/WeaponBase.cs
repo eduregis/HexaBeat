@@ -34,21 +34,21 @@ namespace HexaBit.Core {
         }
 
         protected virtual void Fire() {
-            Debug.Log($"{data.weaponName} (Nv.{currentLevel}) Generic fire!");
+            Debug.Log($"{data.localizedName.GetLocalizedString()} (Nv.{currentLevel}) Generic fire!");
         }
 
         public void Initialize(WeaponData weaponData, int level = 1) {
             data = weaponData;
             currentLevel = Mathf.Clamp(level, 0, data.levels.Count - 1);
-            gameObject.name = weaponData.weaponName;
+            gameObject.name = weaponData.localizedName.GetLocalizedString();
         }
 
         public void LevelUp() {
             if (currentLevel < data.levels.Count - 1) {
                 currentLevel++;
-                Debug.Log($"{data.weaponName} up to Lv.{currentLevel + 1}");
+                Debug.Log($"{data.localizedName.GetLocalizedString()} up to Lv.{currentLevel + 1}");
             } else {
-                Debug.Log($"{data.weaponName} is in maximum level!");
+                Debug.Log($"{data.localizedName.GetLocalizedString()} is in maximum level!");
             }
         }
     }

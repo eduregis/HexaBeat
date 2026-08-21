@@ -6,7 +6,7 @@ namespace HexaBit.Core {
             for (int i = 0; i < weaponSlots.Length; i++) {
                 if (weaponSlots[i] == null || weaponSlots[i].data == null) {
                     if (weaponData.weaponPrefab == null) {
-                        Debug.LogError($"WeaponData {weaponData.weaponName} has no weaponPrefab!");
+                        Debug.LogError($"WeaponData {weaponData.localizedName.GetLocalizedString()} has no weaponPrefab!");
                         return false;
                     }
 
@@ -15,7 +15,7 @@ namespace HexaBit.Core {
 
                     WeaponBase weapon = weaponGO.GetComponent<WeaponBase>();
                     if (weapon == null) {
-                        Debug.LogError($"weaponPrefab of {weaponData.weaponName} has no WeaponBase component!");
+                        Debug.LogError($"weaponPrefab of {weaponData.localizedName.GetLocalizedString()} has no WeaponBase component!");
                         Destroy(weaponGO);
                         return false;
                     }
@@ -24,7 +24,7 @@ namespace HexaBit.Core {
                     weaponSlots[i] = weapon;
                     weapon.SetHeroController(this);
 
-                    Debug.Log($"Weapon {weaponData.weaponName} equipped in slot {i + 1} (Nv.1)");
+                    Debug.Log($"Weapon {weaponData.localizedName.GetLocalizedString()} equipped in slot {i + 1} (Nv.1)");
                     return true;
                 }
             }
@@ -43,7 +43,7 @@ namespace HexaBit.Core {
                 weaponSlots[slotIndex] = null;
             }
 
-            GameObject weaponGO = new GameObject(newWeaponData.weaponName);
+            GameObject weaponGO = new GameObject(newWeaponData.localizedName.GetLocalizedString());
             weaponGO.transform.SetParent(transform);
             weaponGO.transform.localPosition = Vector3.zero;
 
@@ -52,7 +52,7 @@ namespace HexaBit.Core {
             weaponSlots[slotIndex] = newWeapon;
             newWeapon.SetHeroController(this);
 
-            Debug.Log($"Weapon {newWeaponData.weaponName} equipped in slot {slotIndex + 1} (Nv.1)");
+            Debug.Log($"Weapon {newWeaponData.localizedName.GetLocalizedString()} equipped in slot {slotIndex + 1} (Nv.1)");
         }
 
         public bool UpgradeWeapon(WeaponData weaponData) {
@@ -62,7 +62,7 @@ namespace HexaBit.Core {
                     return true;
                 }
             }
-            Debug.LogWarning($"Weapon {weaponData.weaponName} not found to upgrade.");
+            Debug.LogWarning($"Weapon {weaponData.localizedName.GetLocalizedString()} not found to upgrade.");
             return false;
         }
 
