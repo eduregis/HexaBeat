@@ -12,8 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc00e48a9df41784eb336ccad5bafffd, type: 3}
   m_Name: '[buff] Injection'
   m_EditorClassIdentifier: Assembly-CSharp::BuffData
-  buffName: Injection
-  description: Increase max. health
+  localizedName:
+    m_TableReference:
+      m_TableCollectionName: GUID:5d9b9906f171a594190160af4b6abf72
+    m_TableEntryReference:
+      m_KeyId: 19388977152
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  localizedDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:5d9b9906f171a594190160af4b6abf72
+    m_TableEntryReference:
+      m_KeyId: 178923524096
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   icon: {fileID: 0}
   type: 5
   values:
@@ -23,3 +39,6 @@ MonoBehaviour:
   - 60
   - 75
   - 90
+  references:
+    version: 2
+    RefIds: []

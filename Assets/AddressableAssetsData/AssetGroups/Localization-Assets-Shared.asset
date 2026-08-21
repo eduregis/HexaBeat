@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Localization-Assets-Shared
   m_GUID: 2012c14d577b26540ad9cbc20ce4e7d6
   m_SerializeEntries:
+  - m_GUID: 5d9b9906f171a594190160af4b6abf72
+    m_Address: Assets/_Core/Localization/Buff_Texts/Buff_Texts Shared Data.asset
+    m_ReadOnly: 1
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 629ae6d7136a5214bb38b872524876f2
     m_Address: Assets/_Core/Localization/Weapon_Texts Shared Data.asset
     m_ReadOnly: 1

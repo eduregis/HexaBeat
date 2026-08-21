@@ -21,6 +21,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale-pt-BR
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b233343d5a7c1d4c93f4d2849df3f9b
+    m_Address: Buff_Texts_pt-BR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-pt-BR
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f984354c5d8b4694ba6e7fe254a2066a
     m_Address: Weapon_Texts_pt-BR
     m_ReadOnly: 1
