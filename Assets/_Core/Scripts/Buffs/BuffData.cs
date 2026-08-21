@@ -1,11 +1,12 @@
 using UnityEngine;
+using UnityEngine.Localization;
 
 namespace HexaBit.Core {
 
     [CreateAssetMenu(fileName = "[buff] New Buff", menuName = "HexaBit/Buff Data")]
     public class BuffData : ScriptableObject {
-        public string buffName;
-        [TextArea] public string description;
+        public LocalizedString localizedName;
+        public LocalizedString localizedDescription;
         public Sprite icon;
         public AbilityType type;
 

@@ -17,7 +17,15 @@ MonoBehaviour:
   m_SharedData: {fileID: 11400000, guid: 629ae6d7136a5214bb38b872524876f2, type: 2}
   m_Metadata:
     m_Items: []
-  m_TableData: []
+  m_TableData:
+  - m_Id: 190210396160
+    m_Localized: Homing Pistol
+    m_Metadata:
+      m_Items: []
+  - m_Id: 666188402688
+    m_Localized: SledgeHammer
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

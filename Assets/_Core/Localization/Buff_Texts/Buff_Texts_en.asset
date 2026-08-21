@@ -10,20 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: Weapon_Texts_pt-BR
+  m_Name: Buff_Texts_en
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.StringTable
   m_LocaleId:
-    m_Code: pt-BR
-  m_SharedData: {fileID: 11400000, guid: 629ae6d7136a5214bb38b872524876f2, type: 2}
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 5d9b9906f171a594190160af4b6abf72, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 190210396160
-    m_Localized: Pistola Teleguiada
-    m_Metadata:
-      m_Items: []
-  - m_Id: 666188402688
-    m_Localized: Marreta
+  - m_Id: 19388977152
+    m_Localized: Injection
     m_Metadata:
       m_Items: []
   references:

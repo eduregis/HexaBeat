@@ -10,35 +10,27 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: Weapon_Texts Shared Data
+  m_Name: Buff_Texts Shared Data
   m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Tables.SharedTableData
-  m_TableCollectionName: Weapon_Texts
-  m_TableCollectionNameGuidString: 629ae6d7136a5214bb38b872524876f2
+  m_TableCollectionName: Buff_Texts
+  m_TableCollectionNameGuidString: 5d9b9906f171a594190160af4b6abf72
   m_Entries:
-  - m_Id: 190210396160
-    m_Key: weapon_homing_pistol_name
+  - m_Id: 19388977152
+    m_Key: buff_injection_name
     m_Metadata:
       m_Items: []
-  - m_Id: 335790493696
-    m_Key: weapon_homing_pistol_description
-    m_Metadata:
-      m_Items: []
-  - m_Id: 666188402688
-    m_Key: weapon_sledgehammer_name
-    m_Metadata:
-      m_Items: []
-  - m_Id: 734400368640
-    m_Key: weapon_sledgehammer_description
+  - m_Id: 178923524096
+    m_Key: buff_injection_description
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 8886842803534954721
+    rid: 8886842809574228043
   references:
     version: 2
     RefIds:
-    - rid: 8886842803534954721
+    - rid: 8886842809574228043
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1787331006570
+        m_CustomEpoch: 1787346919117

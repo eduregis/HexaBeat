@@ -157,8 +157,8 @@ namespace HexaBit.Core {
                         onSelected = action
                     });
                 } else if (item is BuffData buffData) {
-                    string displayText = buffData.buffName;
-                    string descText = buffData.description;
+                    string displayText = buffData.localizedName.GetLocalizedString();
+                    string descText = buffData.localizedDescription.GetLocalizedString();
                     System.Action action = null;
 
                     // Check the TARGET HERO's buff list
