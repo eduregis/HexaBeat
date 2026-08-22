@@ -102,6 +102,12 @@ namespace HexaBit.Core {
             }
         }
 
+        // --- Override Animate Taking Damage ---
+        protected override void AnimateTakingDamage(bool damaged) {
+            if (animator == null) return;
+            animator.SetBool("Damaged", damaged);
+        }
+
         // --- Override Die ---
         protected override void Die() {
             Debug.Log("Hero died!");

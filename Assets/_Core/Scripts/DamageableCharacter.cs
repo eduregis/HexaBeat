@@ -57,12 +57,16 @@ namespace HexaBit.Core {
 
         protected virtual IEnumerator FlashRed() {
             if (spriteRenderer != null) {
+                AnimateTakingDamage(true);
                 spriteRenderer.color = Color.red;
                 yield return new WaitForSeconds(0.1f);
                 spriteRenderer.color = originalColor;
+                AnimateTakingDamage(false);
             }
             flashCoroutine = null;
         }
+
+        protected abstract void AnimateTakingDamage(bool damaged);
 
         // Abstract method to be implemented by derived classes
         protected abstract void Die();

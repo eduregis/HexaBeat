@@ -117,6 +117,10 @@ namespace HexaBit.Core {
             }
         }
 
+        protected override void AnimateTakingDamage(bool damaged) {
+            throw new System.NotImplementedException();
+        }
+
         // Override Die
         protected override void Die() {
             if (isDead) return;
