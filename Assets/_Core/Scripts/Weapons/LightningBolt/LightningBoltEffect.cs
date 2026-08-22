@@ -14,7 +14,6 @@ namespace HexaBit.Core {
         private Transform target;
         private bool isDead = false;
 
-        // Método da classe base (obrigatório)
         public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 direction, Transform heroTransform) {
             data = weaponData;
             level = levelIndex;
@@ -22,7 +21,6 @@ namespace HexaBit.Core {
             damage = Mathf.RoundToInt(data.GetDamage(level));
         }
 
-        // Método público para definir o alvo e iniciar o efeito
         public void SetTarget(Transform targetTransform) {
             target = targetTransform;
             if (target == null) {
@@ -32,7 +30,11 @@ namespace HexaBit.Core {
 
             transform.position = target.position;
 
-            // Aplica dano após o delay
+            float baseArea = 1.5f; // Rescale sprite
+            float scaleFactor = splashArea / baseArea;
+            transform.localScale = Vector3.one * scaleFactor;
+
+            // Apply damage after delay
             StartCoroutine(ApplyDamageAfterDelay());
         }
 
@@ -41,7 +43,7 @@ namespace HexaBit.Core {
 
             if (isDead || target == null) yield break;
 
-            // Aplica dano em área
+            // Splash damage
             Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, splashArea);
             foreach (var collider in hitColliders) {
                 if (collider.CompareTag("Enemy")) {

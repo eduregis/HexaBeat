@@ -31,8 +31,8 @@ MonoBehaviour:
     m_WaitForCompletion: 0
     m_LocalVariables: []
   icon: {fileID: 0}
-  attackPrefab: {fileID: 0}
-  weaponPrefab: {fileID: 0}
+  attackPrefab: {fileID: 5843121796841178620, guid: f56b84f8d573e2d4793d94a8d0d658eb, type: 3}
+  weaponPrefab: {fileID: 1319609285509950128, guid: 13d34c86f8f024d4dbc6921162db89da, type: 3}
   customFields:
   - fieldName: SplashArea
     fieldType: 1

@@ -59,6 +59,9 @@ TextureImporter:
   - first:
       213: 8883865491390257258
     second: HB_lightning_bolt_18
+  - first:
+      213: -8168266882872857865
+    second: HB_lightning_bolt_19
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -91,7 +94,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -129,7 +132,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -377,11 +380,33 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: HB_lightning_bolt_9
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 32
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6389ec9e4304eee90800000000000000
+      internalID: -6994582575254693834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f7b700af638dd5f4b845f15817ecf396
+    spriteID: 1f787ffdfb1ff1342925041cb5f6214d
     internalID: 0
     vertices: []
     indices: 
@@ -402,6 +427,7 @@ TextureImporter:
       HB_lightning_bolt_6: -4149577260204768647
       HB_lightning_bolt_7: 2691477474741378881
       HB_lightning_bolt_8: 8752348334056033743
+      HB_lightning_bolt_9: -6994582575254693834
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
