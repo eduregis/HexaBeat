@@ -10,7 +10,9 @@ namespace HexaBit.Core {
         Range,
         Angle,
         Size,
-        Knockback
+        Knockback,
+        ExtraTargets,
+        SplashArea
     }
 
     public static class DynamicParameterExtensions {

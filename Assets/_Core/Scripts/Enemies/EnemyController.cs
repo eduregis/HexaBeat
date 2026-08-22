@@ -117,6 +117,7 @@ namespace HexaBit.Core {
             }
         }
 
+        // Override Animate Taking Damage
         protected override void AnimateTakingDamage(bool damaged) {
             throw new System.NotImplementedException();
         }
