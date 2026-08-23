@@ -43,7 +43,7 @@ namespace HexaBit.Core {
             gameObject.name = weaponData.localizedName.GetLocalizedString();
         }
 
-        public void LevelUp() {
+        public virtual void LevelUp() {
             if (currentLevel < data.levels.Count - 1) {
                 currentLevel++;
                 Debug.Log($"{data.localizedName.GetLocalizedString()} up to Lv.{currentLevel + 1}");

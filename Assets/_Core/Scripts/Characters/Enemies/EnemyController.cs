@@ -10,9 +10,7 @@ namespace HexaBit.Core {
         [SerializeField] private Animator animator;
         [SerializeField] private bool hasDeathAnimation = true;
 
-        private float currentSpeed;
         private bool isDead = false;
-
         private Transform player;
         private Rigidbody2D rb;
 
@@ -24,6 +22,7 @@ namespace HexaBit.Core {
         public UnityEvent OnDeath;
 
         public EnemyData Data => data;
+        public bool IsDead => isDead;
 
         protected override void Awake() {
             base.Awake();
@@ -35,7 +34,6 @@ namespace HexaBit.Core {
         public void Initialize(EnemyData enemyData, int wave) {
             data = enemyData;
 
-            // Aplica a vida base + scaling
             int scaledHealth = data.baseHealth;
             if (!data.healthScalesWithPlayerLevel) {
                 scaledHealth += Mathf.RoundToInt(data.baseHealth * 0.1f * wave);
@@ -44,14 +42,15 @@ namespace HexaBit.Core {
             if (data.isBoss)
                 scaledHealth *= 3;
 
-            SetHealth(scaledHealth, 0); // enemies have no armor
+            SetHealth(scaledHealth, 0);
 
-            currentSpeed = data.moveSpeed;
+            baseSpeed = data.moveSpeed;
             if (data.isBoss)
-                currentSpeed *= 1.2f;
+                baseSpeed *= 1.2f;
             else
-                currentSpeed += data.moveSpeed * 0.05f * wave;
+                baseSpeed += data.moveSpeed * 0.05f * wave;
 
+            CurrentSpeed = baseSpeed;
             isDead = false;
             attackTimer = 0f;
             if (animator != null) {
@@ -67,10 +66,12 @@ namespace HexaBit.Core {
         private void OnEnable() {
             if (data != null) {
                 SetHealth(data.baseHealth, 0);
-                currentSpeed = data.moveSpeed;
+                baseSpeed = data.moveSpeed;
+                CurrentSpeed = baseSpeed;
             } else {
                 SetHealth(maxHealth, armor);
-                currentSpeed = 3f;
+                baseSpeed = 3f;
+                CurrentSpeed = baseSpeed;
             }
 
             isDead = false;
@@ -79,18 +80,22 @@ namespace HexaBit.Core {
                 animator.SetBool("IsDead", false);
                 animator.SetTrigger("Respawn");
             }
+
+            ClearAllStatuses();
         }
 
         private void Update() {
             if (attackTimer > 0f)
                 attackTimer -= Time.deltaTime;
+
+            UpdateStatuses();
         }
 
         private void FixedUpdate() {
             if (isDead || player == null) return;
 
             Vector2 direction = (player.position - transform.position).normalized;
-            rb.MovePosition(rb.position + direction * currentSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(rb.position + direction * CurrentSpeed * Time.fixedDeltaTime);
 
             if (direction.x != 0) {
                 Vector3 scale = transform.localScale;
@@ -117,16 +122,17 @@ namespace HexaBit.Core {
             }
         }
 
-        // Override Animate Taking Damage
         protected override void AnimateTakingDamage(bool damaged) {
-            throw new System.NotImplementedException();
+            if (animator == null) return;
+            // Adding a damaged animation to enemies
+            // animator.SetBool("Damaged", damaged);
         }
 
-        // Override Die
         protected override void Die() {
             if (isDead) return;
             isDead = true;
 
+            ClearAllStatuses();
             OnDeath?.Invoke();
 
             if (hasDeathAnimation && animator != null && animator.HasState(0, Animator.StringToHash("Death"))) {
@@ -142,7 +148,6 @@ namespace HexaBit.Core {
             OnDeath.RemoveAllListeners();
         }
 
-        // Called by Animation Event
         public void OnDeathAnimationEnd() {
             Destroy(gameObject);
         }

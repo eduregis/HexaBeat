@@ -2,7 +2,7 @@
 using System.Collections;
 
 namespace HexaBit.Core {
-    public abstract class DamageableCharacter : MonoBehaviour {
+    public abstract partial class DamageableCharacter : MonoBehaviour {
         [Header("Health & Armor")]
         [SerializeField] protected int maxHealth = 100;
         [SerializeField] protected int armor = 0;
@@ -23,24 +23,21 @@ namespace HexaBit.Core {
                 originalColor = spriteRenderer.color;
         }
 
-        // Método para inicializar a vida e armadura a partir dos dados do SO
         protected void SetHealth(int health, int armorValue) {
             maxHealth = health;
             armor = armorValue;
             currentHealth = maxHealth;
         }
 
-        // Public method to apply damage
         public virtual void TakeDamage(float damage) {
-            int finalDamage = (int)Mathf.Max(1, damage - armor);
+            float effectiveDamage = damage * DamageMultiplier;
+            int finalDamage = (int)Mathf.Max(1, effectiveDamage - armor);
             currentHealth -= finalDamage;
 
-            // Visual feedback (flash red)
             if (flashCoroutine != null)
                 StopCoroutine(flashCoroutine);
             flashCoroutine = StartCoroutine(FlashRed());
 
-            // Show damage popup if prefab is assigned
             if (damagePopupPrefab != null) {
                 GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity, transform.parent);
                 DamagePopup popupScript = popup.GetComponent<DamagePopup>();
@@ -66,9 +63,12 @@ namespace HexaBit.Core {
             flashCoroutine = null;
         }
 
-        protected abstract void AnimateTakingDamage(bool damaged);
+        public virtual void Heal(float amount) {
+            currentHealth = Mathf.Min(currentHealth + Mathf.RoundToInt(amount), maxHealth);
+            OnHealthChanged?.Invoke();
+        }
 
-        // Abstract method to be implemented by derived classes
+        protected abstract void AnimateTakingDamage(bool damaged);
         protected abstract void Die();
     }
 }

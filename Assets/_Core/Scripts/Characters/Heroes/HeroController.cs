@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using System.Collections.Generic; // For List
+using System.Collections.Generic;
 
 namespace HexaBit.Core {
     public partial class HeroController : DamageableCharacter {
@@ -16,7 +16,6 @@ namespace HexaBit.Core {
         [SerializeField] private HeroHPSlider hpSlider;
 
         // Public properties for weapons to access
-        public float DamageMultiplier { get; private set; } = 1f;
         public float ProjectileSpeedMultiplier { get; private set; } = 1f;
         public float GrowthMultiplier { get; private set; } = 1f;
 
@@ -28,7 +27,7 @@ namespace HexaBit.Core {
         public Vector2 FacingDirection { get; private set; } = Vector2.down;
 
         protected override void Awake() {
-            base.Awake(); // calls base Awake to set spriteRenderer and originalColor
+            base.Awake();
 
             rb = GetComponent<Rigidbody2D>();
             if (rb == null) Debug.LogError("HeroController: Rigidbody2D not found!");
@@ -43,7 +42,7 @@ namespace HexaBit.Core {
             if (heroData != null) {
                 SetHealth(heroData.maxHealth, heroData.armor);
 
-                DamageMultiplier = heroData.damageMultiplier;
+                base.DamageMultiplier = heroData.damageMultiplier;
                 ProjectileSpeedMultiplier = heroData.projectileSpeedMultiplier;
                 GrowthMultiplier = heroData.growthMultiplier;
 
@@ -63,9 +62,11 @@ namespace HexaBit.Core {
             }
 
             currentSpeed = heroData != null ? heroData.moveSpeed : 3.5f;
+            baseSpeed = currentSpeed;
+            CurrentSpeed = currentSpeed;
+
             OnHealthChanged += UpdateHealthBar;
 
-            // Initial refresh of stats (in case there are no buffs yet)
             RefreshStats();
         }
 
@@ -81,8 +82,13 @@ namespace HexaBit.Core {
         }
 
         private void FixedUpdate() {
-            Vector2 targetPosition = rb.position + moveInput * currentSpeed * Time.fixedDeltaTime;
+            // Use CurrentSpeed which is modified by statuses
+            float effectiveSpeed = CurrentSpeed > 0 ? CurrentSpeed : currentSpeed;
+            Vector2 targetPosition = rb.position + moveInput * effectiveSpeed * Time.fixedDeltaTime;
             rb.MovePosition(targetPosition);
+
+            // Update status effects
+            UpdateStatuses();
         }
 
         private void UpdateAnimationDirection() {
