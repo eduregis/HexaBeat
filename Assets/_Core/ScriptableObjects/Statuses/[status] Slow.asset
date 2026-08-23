@@ -15,9 +15,9 @@ MonoBehaviour:
   statusName: Slow
   icon: {fileID: 0}
   statusColor: {r: 1, g: 1, b: 1, a: 1}
-  duration: 0.5
+  duration: 1
   applySlow: 1
-  slowPercentage: 5
+  slowPercentage: 50
   applyDamageOverTime: 0
   dotDamagePerSecond: 5
   dotTickInterval: 1
@@ -28,6 +28,5 @@ MonoBehaviour:
   applyHealOverTime: 0
   hotHealPerSecond: 3
   hotTickInterval: 1
-  visualEffectPrefab: {fileID: 0}
-  overrideSpriteColor: 0
-  spriteColorOverride: {r: 0.48235294, g: 1, b: 1, a: 1}
+  overrideSpriteColor: 1
+  spriteColorOverride: {r: 0, g: 1, b: 0.122285604, a: 1}

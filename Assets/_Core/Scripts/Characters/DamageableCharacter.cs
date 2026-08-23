@@ -19,8 +19,9 @@ namespace HexaBit.Core {
 
         protected virtual void Awake() {
             spriteRenderer = GetComponent<SpriteRenderer>();
-            if (spriteRenderer != null)
+            if (spriteRenderer != null) {
                 originalColor = spriteRenderer.color;
+            }
         }
 
         protected void SetHealth(int health, int armorValue) {
@@ -54,7 +55,6 @@ namespace HexaBit.Core {
 
         protected virtual IEnumerator FlashRed() {
             if (spriteRenderer != null) {
-                AnimateTakingDamage(true);
                 Color currentColor = spriteRenderer.color;
                 spriteRenderer.color = Color.red;
                 yield return new WaitForSeconds(0.1f);

@@ -40,8 +40,9 @@ namespace HexaBit.Core {
                     Destroy(effect.visualEffectInstance);
                 activeStatuses.Remove(effect);
 
-                if (spriteRenderer != null)
+                if (spriteRenderer != null) {
                     spriteRenderer.color = originalColor;
+                }
 
                 RecalculateStats();
                 OnStatusChanged?.Invoke();
@@ -116,6 +117,7 @@ namespace HexaBit.Core {
             foreach (var status in activeStatuses) {
                 if (status.data.applySlow)
                     speedMultiplier *= (1f - status.data.slowPercentage);
+                    speedMultiplier = Mathf.Clamp(speedMultiplier, 0.1f, 1f);
                 if (status.data.applyDamageReduction)
                     DamageMultiplier *= (1f - status.data.damageReductionPercentage);
             }

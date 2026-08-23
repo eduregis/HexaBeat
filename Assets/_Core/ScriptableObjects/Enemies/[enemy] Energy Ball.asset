@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyName: Energy Ball
   icon: {fileID: 0}
   prefab: {fileID: 0}
-  baseHealth: 1
+  baseHealth: 20
   damage: 5
   moveSpeed: 0.5
   knockbackResistance: 1
