@@ -37,7 +37,7 @@ namespace HexaBit.Core {
 
             if (flashCoroutine != null)
                 StopCoroutine(flashCoroutine);
-            flashCoroutine = StartCoroutine(FlashRed());
+            flashCoroutine = StartCoroutine(AnimateTakingDamage());
 
             if (damagePopupPrefab != null) {
                 GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity, transform.parent);
@@ -53,13 +53,11 @@ namespace HexaBit.Core {
                 Die();
         }
 
-        protected virtual IEnumerator FlashRed() {
+        protected virtual IEnumerator AnimateTakingDamage() {
             if (spriteRenderer != null) {
-                Color currentColor = spriteRenderer.color;
-                spriteRenderer.color = Color.red;
+                Damaged(true);
                 yield return new WaitForSeconds(0.1f);
-                spriteRenderer.color = currentColor;
-                AnimateTakingDamage(false);
+                Damaged(false);
             }
             flashCoroutine = null;
         }
@@ -69,7 +67,7 @@ namespace HexaBit.Core {
             OnHealthChanged?.Invoke();
         }
 
-        protected abstract void AnimateTakingDamage(bool damaged);
+        protected abstract void Damaged(bool damaged);
         protected abstract void Die();
     }
 }

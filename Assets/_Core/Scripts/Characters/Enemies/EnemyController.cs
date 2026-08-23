@@ -122,7 +122,7 @@ namespace HexaBit.Core {
             }
         }
 
-        protected override void AnimateTakingDamage(bool damaged) {
+        protected override void Damaged(bool damaged) {
             if (animator == null) return;
             // Adding a damaged animation to enemies
             // animator.SetBool("Damaged", damaged);
