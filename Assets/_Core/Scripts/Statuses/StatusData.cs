@@ -30,7 +30,6 @@ namespace HexaBit.Core {
         public float hotTickInterval = 1f;
 
         [Header("Visual Feedback")]
-        public GameObject visualEffectPrefab; // Particle system or sprite overlay
         public bool overrideSpriteColor = false;
         public Color spriteColorOverride = Color.white;
     }

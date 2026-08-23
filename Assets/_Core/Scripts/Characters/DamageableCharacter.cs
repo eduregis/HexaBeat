@@ -55,9 +55,10 @@ namespace HexaBit.Core {
         protected virtual IEnumerator FlashRed() {
             if (spriteRenderer != null) {
                 AnimateTakingDamage(true);
+                Color currentColor = spriteRenderer.color;
                 spriteRenderer.color = Color.red;
                 yield return new WaitForSeconds(0.1f);
-                spriteRenderer.color = originalColor;
+                spriteRenderer.color = currentColor;
                 AnimateTakingDamage(false);
             }
             flashCoroutine = null;

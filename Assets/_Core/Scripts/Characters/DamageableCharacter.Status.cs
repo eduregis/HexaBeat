@@ -22,9 +22,6 @@ namespace HexaBit.Core {
             }
 
             StatusEffect newStatus = new StatusEffect(statusData);
-            if (statusData.visualEffectPrefab != null) {
-                newStatus.visualEffectInstance = Instantiate(statusData.visualEffectPrefab, transform.position, Quaternion.identity, transform);
-            }
 
             if (statusData.overrideSpriteColor && spriteRenderer != null) {
                 spriteRenderer.color = statusData.spriteColorOverride;

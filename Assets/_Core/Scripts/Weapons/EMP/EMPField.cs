@@ -8,6 +8,7 @@ namespace HexaBit.Core {
         [SerializeField] private SpriteRenderer fieldSprite;
 
         private StatusData slowStatusData;
+        private bool hasStatusEffect = false;
 
         private WeaponData data;
         private int currentLevel;
@@ -18,7 +19,6 @@ namespace HexaBit.Core {
         private float tickInterval;
         private float timer;
 
-        // Enemies currently inside the field
         private List<EnemyController> enemiesInRange = new List<EnemyController>();
 
         public void Initialize(WeaponData weaponData, int level, HeroController heroController) {
@@ -29,7 +29,7 @@ namespace HexaBit.Core {
             radius = data.GetFloat(currentLevel, DynamicParameter.Radius);
             slowAmount = data.GetFloat(currentLevel, DynamicParameter.SlowAmount);
             damage = Mathf.RoundToInt(data.GetDamage(currentLevel));
-            tickInterval = data.GetCooldown(currentLevel); // Cooldown = tick interval
+            tickInterval = data.GetCooldown(currentLevel);
 
             if (fieldCollider != null)
                 fieldCollider.radius = radius / 5f;
@@ -39,11 +39,15 @@ namespace HexaBit.Core {
                 fieldSprite.transform.localScale = new Vector3(scale, scale, 1f);
             }
 
-            // Setup slow status
-            if (data.statusData != null) {
-                slowStatusData = data.statusData;
+            // Cria uma cópia do StatusData com duração maior
+            if (data.statusData != null && slowAmount > 0) {
+                slowStatusData = ScriptableObject.Instantiate(data.statusData);
                 slowStatusData.slowPercentage = slowAmount;
-                slowStatusData.duration = 0.5f; // Short duration, refreshed on each tick
+                slowStatusData.duration = 2f; // Duração maior que o tick interval
+                hasStatusEffect = true;
+            } else {
+                slowStatusData = null;
+                hasStatusEffect = false;
             }
 
             timer = 0f;
@@ -53,7 +57,6 @@ namespace HexaBit.Core {
         private void Update() {
             if (hero == null || data == null) return;
 
-            // Tick timer
             timer += Time.deltaTime;
             if (timer >= tickInterval) {
                 timer = 0f;
@@ -61,21 +64,13 @@ namespace HexaBit.Core {
             }
         }
 
-        // Applies damage and slow to all enemies currently in the field
         private void ApplyTickEffects() {
-            // Copy the list to avoid modification during iteration
             EnemyController[] enemiesCopy = enemiesInRange.ToArray();
 
             foreach (var enemy in enemiesCopy) {
                 if (enemy != null && !enemy.IsDead && enemiesInRange.Contains(enemy)) {
-                    // Apply damage
+                    // Apply damage only
                     enemy.TakeDamage(damage);
-
-                    // Reapply slow (resets duration, no accumulation)
-                    if (slowAmount > 0 && slowStatusData != null) {
-                        slowStatusData.slowPercentage = slowAmount;
-                        enemy.ApplyStatus(slowStatusData);
-                    }
                 }
             }
         }
@@ -87,8 +82,8 @@ namespace HexaBit.Core {
                 if (enemy != null && !enemiesInRange.Contains(enemy)) {
                     enemiesInRange.Add(enemy);
 
-                    // Apply slow immediately on entry (so it works before first tick)
-                    if (slowAmount > 0 && slowStatusData != null) {
+                    // Apply slow ONLY on entry (not on every tick)
+                    if (hasStatusEffect && slowStatusData != null) {
                         slowStatusData.slowPercentage = slowAmount;
                         enemy.ApplyStatus(slowStatusData);
                     }
@@ -97,7 +92,6 @@ namespace HexaBit.Core {
         }
 
         private void OnTriggerStay2D(Collider2D other) {
-            // Ensure enemies are in the list (in case they were added via other means)
             if (other.CompareTag("Enemy")) {
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null && !enemiesInRange.Contains(enemy) && !enemy.IsDead) {
@@ -112,17 +106,17 @@ namespace HexaBit.Core {
                 if (enemy != null && enemiesInRange.Contains(enemy)) {
                     enemiesInRange.Remove(enemy);
 
-                    // Remove slow status when enemy leaves
-                    if (slowStatusData != null)
+                    // Remove slow when enemy leaves
+                    if (hasStatusEffect && slowStatusData != null) {
                         enemy.RemoveStatus(slowStatusData);
+                    }
                 }
             }
         }
 
         private void OnDestroy() {
-            // Clean up slow from all enemies still in range
             foreach (var enemy in enemiesInRange) {
-                if (enemy != null && slowStatusData != null)
+                if (enemy != null && hasStatusEffect && slowStatusData != null)
                     enemy.RemoveStatus(slowStatusData);
             }
             enemiesInRange.Clear();

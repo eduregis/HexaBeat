@@ -166,4 +166,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: HexaBit.Core::HexaBit.Core.EMPField
   fieldCollider: {fileID: 1548413847686705932}
   fieldSprite: {fileID: 2230831126930528365}
-  slowStatusData: {fileID: 11400000, guid: 3642753f52e263b4582d62fa4cb02c35, type: 2}
