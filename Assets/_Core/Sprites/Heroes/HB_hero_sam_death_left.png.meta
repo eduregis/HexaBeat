@@ -1,28 +1,28 @@
 fileFormatVersion: 2
-guid: dcfbd29ef0b1e1947bb7925b5f7c616a
+guid: a78a5bc1e9ca3944fbf66a2366b98094
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6936638055743446817
-    second: HB_hero_sam_death_left_0
+      213: 8043915814640689078
+    second: HB_HERO_SAM_Death_Hologram_Left_v2_0
   - first:
-      213: -4758040798693515752
-    second: HB_hero_sam_death_left_1
+      213: -5059718454978467454
+    second: HB_HERO_SAM_Death_Hologram_Left_v2_1
   - first:
-      213: 3786587674073705884
-    second: HB_hero_sam_death_left_2
+      213: 3917573950174100516
+    second: HB_HERO_SAM_Death_Hologram_Left_v2_2
   - first:
-      213: 866539826906101358
-    second: HB_hero_sam_death_left_3
+      213: -1969829048656573019
+    second: HB_HERO_SAM_Death_Hologram_Left_v2_3
   - first:
-      213: 9091158653143619663
-    second: HB_hero_sam_death_left_4
+      213: -6016498448564102473
+    second: HB_HERO_SAM_Death_Hologram_Left_v2_4
   - first:
-      213: 6597924033249955921
-    second: HB_hero_sam_death_left_5
+      213: 4195514654780480591
+    second: HB_HERO_SAM_Death_Hologram_Left_v2_5
   - first:
-      213: 3924443993753374657
-    second: HB_hero_sam_death_left_6
+      213: 915429769187820201
+    second: HB_HERO_SAM_Death_Hologram_Left_v2_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -157,10 +157,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 12f5b005f83e34060800000000000000
-      internalID: 6936638055743446817
+      spriteID: 0575d99a9366a9946983ab1dc8b2755e
+      internalID: -233290965
       vertices: []
       indices: 
       edges: []
@@ -179,10 +179,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 81e9e0f4a1b08fdb0800000000000000
-      internalID: -4758040798693515752
+      spriteID: f5e8af376fa6c214d8609cca3b9f54ff
+      internalID: 2052431567
       vertices: []
       indices: 
       edges: []
@@ -201,10 +201,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c9d29086d69ac8430800000000000000
-      internalID: 3786587674073705884
+      spriteID: 76df7287eb9b6ba468f9e6cadffe2bbe
+      internalID: -1082043674
       vertices: []
       indices: 
       edges: []
@@ -223,10 +223,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: e667776a161960c00800000000000000
-      internalID: 866539826906101358
+      spriteID: a0cbb19fe1a7c064aa4ac2bf71325eda
+      internalID: 1972747673
       vertices: []
       indices: 
       edges: []
@@ -245,10 +245,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f481855c0a84a2e70800000000000000
-      internalID: 9091158653143619663
+      spriteID: ebaef56fc651990458f4e17d79bdc7b8
+      internalID: -2036214260
       vertices: []
       indices: 
       edges: []
@@ -267,10 +267,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 15050e073f8809b50800000000000000
-      internalID: 6597924033249955921
+      spriteID: 8dbe284075adaec41900df37b064010e
+      internalID: -839975103
       vertices: []
       indices: 
       edges: []
@@ -289,10 +289,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1cfc59c050d667630800000000000000
-      internalID: 3924443993753374657
+      spriteID: d2b5d4f4d9d66ae429c89ca96b0e9cb0
+      internalID: 1261988456
       vertices: []
       indices: 
       edges: []
@@ -301,7 +301,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6e546185d82780c43b8b35f3e69ba880
+    spriteID: 168256094a0a7fb41a8f230e97541cf9
     internalID: 0
     vertices: []
     indices: 
@@ -313,13 +313,13 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      HB_hero_sam_death_left_0: 6936638055743446817
-      HB_hero_sam_death_left_1: -4758040798693515752
-      HB_hero_sam_death_left_2: 3786587674073705884
-      HB_hero_sam_death_left_3: 866539826906101358
-      HB_hero_sam_death_left_4: 9091158653143619663
-      HB_hero_sam_death_left_5: 6597924033249955921
-      HB_hero_sam_death_left_6: 3924443993753374657
+      HB_hero_sam_death_left_0: -233290965
+      HB_hero_sam_death_left_1: 2052431567
+      HB_hero_sam_death_left_2: -1082043674
+      HB_hero_sam_death_left_3: 1972747673
+      HB_hero_sam_death_left_4: -2036214260
+      HB_hero_sam_death_left_5: -839975103
+      HB_hero_sam_death_left_6: 1261988456
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
