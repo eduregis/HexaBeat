@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9571643cd9df7ce4f881165bce69900d, type: 3}
+  m_Name: '[status] Slow'
+  m_EditorClassIdentifier: HexaBit.Core::HexaBit.Core.StatusData
+  statusName: Slow
+  icon: {fileID: 0}
+  statusColor: {r: 1, g: 1, b: 1, a: 1}
+  duration: 1
+  applySlow: 1
+  slowPercentage: 50
+  applyDamageOverTime: 0
+  dotDamagePerSecond: 5
+  dotTickInterval: 1
+  applyStun: 0
+  stunDuration: 1
+  applyDamageReduction: 0
+  damageReductionPercentage: 0.3
+  applyHealOverTime: 0
+  hotHealPerSecond: 3
+  hotTickInterval: 1
+  overrideSpriteColor: 1
+  spriteColorOverride: {r: 0.70645, g: 0, b: 1, a: 1}

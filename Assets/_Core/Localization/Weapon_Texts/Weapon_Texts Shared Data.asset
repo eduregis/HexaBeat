@@ -31,6 +31,22 @@ MonoBehaviour:
     m_Key: weapon_sledgehammer_description
     m_Metadata:
       m_Items: []
+  - m_Id: 272956251721728
+    m_Key: weapon_lightning_bolt_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273103811530752
+    m_Key: weapon_lightning_bolt_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716872226721792
+    m_Key: weapon_emp_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716956364460032
+    m_Key: weapon_emp_description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

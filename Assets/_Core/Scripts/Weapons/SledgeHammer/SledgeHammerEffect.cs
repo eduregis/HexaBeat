@@ -48,8 +48,6 @@ namespace HexaBit.Core {
             SetupHammer();
             timer = 0f;
             hitEnemies.Clear();
-
-            Debug.Log($"SledgeHammerEffect initialized: damage={damage}, angle={totalAngle}, radius={size}, knockback={knockback}");
         }
 
         private void SetupHammer() {

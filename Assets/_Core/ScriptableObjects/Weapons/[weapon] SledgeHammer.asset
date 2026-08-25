@@ -40,6 +40,7 @@ MonoBehaviour:
     fieldType: 1
   - fieldName: Knockback
     fieldType: 1
+  statusData: {fileID: 0}
   levels:
   - damage: 25
     cooldown: 1.5

@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26485cfb8288d0043bfcbdb881d0d3a8, type: 3}
+  m_Name: '[weapon] EMP'
+  m_EditorClassIdentifier: HexaBit.Core::HexaBit.Core.WeaponData
+  localizedName:
+    m_TableReference:
+      m_TableCollectionName: GUID:629ae6d7136a5214bb38b872524876f2
+    m_TableEntryReference:
+      m_KeyId: 716872226721792
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  localizedDescription:
+    m_TableReference:
+      m_TableCollectionName: GUID:629ae6d7136a5214bb38b872524876f2
+    m_TableEntryReference:
+      m_KeyId: 716956364460032
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  icon: {fileID: 0}
+  attackPrefab: {fileID: 9072996400847554555, guid: 5446507e3e42f4b4d88d854dd6ef98df, type: 3}
+  weaponPrefab: {fileID: 3720550410646003826, guid: 295db4da8cbe3594b85ad0fd58806d7d, type: 3}
+  customFields:
+  - fieldName: Radius
+    fieldType: 1
+  - fieldName: SlowAmount
+    fieldType: 1
+  statusData: {fileID: 11400000, guid: 3642753f52e263b4582d62fa4cb02c35, type: 2}
+  levels:
+  - damage: 6
+    cooldown: 0.5
+    customValues:
+    - fieldName: Radius
+      fieldType: 1
+      intValue: 0
+      floatValue: 2
+      boolValue: 0
+    - fieldName: SlowAmount
+      fieldType: 1
+      intValue: 0
+      floatValue: 0.1
+      boolValue: 0
+  - damage: 8
+    cooldown: 0.47
+    customValues:
+    - fieldName: Radius
+      fieldType: 1
+      intValue: 0
+      floatValue: 2.2
+      boolValue: 0
+    - fieldName: SlowAmount
+      fieldType: 1
+      intValue: 0
+      floatValue: 0.2
+      boolValue: 0
+  - damage: 10
+    cooldown: 0.44
+    customValues:
+    - fieldName: Radius
+      fieldType: 1
+      intValue: 0
+      floatValue: 2.5
+      boolValue: 0
+    - fieldName: SlowAmount
+      fieldType: 1
+      intValue: 0
+      floatValue: 0.3
+      boolValue: 0
+  - damage: 13
+    cooldown: 0.41
+    customValues:
+    - fieldName: Radius
+      fieldType: 1
+      intValue: 0
+      floatValue: 2.8
+      boolValue: 0
+    - fieldName: SlowAmount
+      fieldType: 1
+      intValue: 0
+      floatValue: 0.4
+      boolValue: 0
+  - damage: 16
+    cooldown: 0.38
+    customValues:
+    - fieldName: Radius
+      fieldType: 1
+      intValue: 0
+      floatValue: 3.2
+      boolValue: 0
+    - fieldName: SlowAmount
+      fieldType: 1
+      intValue: 0
+      floatValue: 0.5
+      boolValue: 0
+  - damage: 20
+    cooldown: 0.35
+    customValues:
+    - fieldName: Radius
+      fieldType: 1
+      intValue: 0
+      floatValue: 3.6
+      boolValue: 0
+    - fieldName: SlowAmount
+      fieldType: 1
+      intValue: 0
+      floatValue: 0.6
+      boolValue: 0
+  references:
+    version: 2
+    RefIds: []

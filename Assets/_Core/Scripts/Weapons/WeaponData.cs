@@ -17,6 +17,9 @@ namespace HexaBit.Core {
         [Header("Dynamic Fields (Optionals)")]
         public List<DynamicFieldDefinition> customFields = new List<DynamicFieldDefinition>();
 
+        [Header("Status Effect (Optional)")]
+        public StatusData statusData;
+
         [Header("Levels (Lv.1 ao Lv.6)")]
         public List<WeaponLevelData> levels = new List<WeaponLevelData>();
 

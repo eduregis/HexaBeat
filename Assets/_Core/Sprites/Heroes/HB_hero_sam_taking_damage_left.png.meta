@@ -1,10 +1,28 @@
 fileFormatVersion: 2
-guid: 45bde99f3d55f4f4dbac7e8ca11b2840
+guid: d57f6f182f87e1f469e8cdf78e88798b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6616382676172976785
-    second: tileset_9_pieces_placeholder_0
+      213: 6438865242412351182
+    second: HB_HERO_SAM_taking_DAMAGE_left (1)_0
+  - first:
+      213: 7989158369133799277
+    second: HB_HERO_SAM_taking_DAMAGE_left (1)_1
+  - first:
+      213: -6528831805414795714
+    second: HB_HERO_SAM_taking_DAMAGE_left (1)_2
+  - first:
+      213: 8924055516649596427
+    second: HB_HERO_SAM_taking_DAMAGE_left (1)_3
+  - first:
+      213: 4757894402659439858
+    second: HB_HERO_SAM_taking_DAMAGE_left (1)_4
+  - first:
+      213: -4036331140035194395
+    second: HB_HERO_SAM_taking_DAMAGE_left (1)_5
+  - first:
+      213: 2271617017292898507
+    second: HB_HERO_SAM_taking_DAMAGE_left (1)_6
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -126,139 +144,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f6d49a8d203ed24a0800000000000000
-      internalID: -6616382676172976785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_1
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a5c66ff4baec72943bd479cf2ad4b573
-      internalID: -355088772
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_2
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 128
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 458648f7fd2977b42a6bb3670d070848
-      internalID: 1106361993
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 1cb2675e24a23ef45a45245c83a598a5
-      internalID: -1298955882
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_4
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cbf1c46947843304f9a04773a39919b0
-      internalID: -421158943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_5
-      rect:
-        serializedVersion: 2
-        x: 128
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 29e941b7837802e44be7fe31c1090614
-      internalID: 586985754
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_6
+      name: HB_hero_sam_taking_damage_left_0
       rect:
         serializedVersion: 2
         x: 0
@@ -273,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c4018e598793de041be0cda40a329f7d
-      internalID: -1567689599
+      spriteID: 9dad6d89b9960604a865cdc439b8b1af
+      internalID: -1049916913
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_7
+      name: HB_hero_sam_taking_damage_left_1
       rect:
         serializedVersion: 2
         x: 64
@@ -295,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a11854bf6bab8634abcafa397e541922
-      internalID: 1099655857
+      spriteID: 8b8cb2c3860b33e4c9e63c52c1f930dc
+      internalID: -1573346848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tileset_9_pieces_placeholder_8
+      name: HB_hero_sam_taking_damage_left_2
       rect:
         serializedVersion: 2
         x: 128
@@ -317,8 +203,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2e35e09f903c7c140b5285797c4fcfcb
-      internalID: 1084875772
+      spriteID: fff9ecca5baec0d4bbf8ea4c56346490
+      internalID: -192736300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: HB_hero_sam_taking_damage_left_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6630236eb00d4454a89997a0127e3f9b
+      internalID: 146293838
       vertices: []
       indices: 
       edges: []
@@ -327,7 +235,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8415729d50e08744ab48c22bcb6d1244
+    spriteID: 5b89623786eecad4590be8a1da9f96c9
     internalID: 0
     vertices: []
     indices: 
@@ -339,15 +247,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      tileset_9_pieces_placeholder_0: -6616382676172976785
-      tileset_9_pieces_placeholder_1: -355088772
-      tileset_9_pieces_placeholder_2: 1106361993
-      tileset_9_pieces_placeholder_3: -1298955882
-      tileset_9_pieces_placeholder_4: -421158943
-      tileset_9_pieces_placeholder_5: 586985754
-      tileset_9_pieces_placeholder_6: -1567689599
-      tileset_9_pieces_placeholder_7: 1099655857
-      tileset_9_pieces_placeholder_8: 1084875772
+      HB_hero_sam_taking_damage_left_0: -1049916913
+      HB_hero_sam_taking_damage_left_1: -1573346848
+      HB_hero_sam_taking_damage_left_2: -192736300
+      HB_hero_sam_taking_damage_left_3: 146293838
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

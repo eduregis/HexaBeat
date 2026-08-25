@@ -31,6 +31,9 @@ public class WeaponDataEditor : Editor {
         data.attackPrefab = (GameObject)EditorGUILayout.ObjectField("Attack Prefab", data.attackPrefab, typeof(GameObject), false);
         data.weaponPrefab = (GameObject)EditorGUILayout.ObjectField("Weapon Prefab", data.weaponPrefab, typeof(GameObject), false);
 
+        // ---- SECTION: Status Data (Optionals) ----
+        EditorGUILayout.LabelField("Status Data (Optionals)", EditorStyles.boldLabel);
+        data.statusData = (StatusData)EditorGUILayout.ObjectField("Status Data", data.statusData, typeof(StatusData), false);
         EditorGUILayout.Space(10);
 
         // ---- SECTION: Dynamic Fields (Optionals) ----
