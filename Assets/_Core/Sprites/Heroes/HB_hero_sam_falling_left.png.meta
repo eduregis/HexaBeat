@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 4543bcb2b38f6fc43ac084f78c557233
+guid: 4f0393db8c9ae4c4a830e3fdaa033902
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5300095083393480351
-    second: HB_Hero_Sam_Falling_Left 1_0
+      213: 202219856992584070
+    second: HB_Hero_Sam_Falling_Right 1_0
   - first:
-      213: 2094492471695995863
-    second: HB_Hero_Sam_Falling_Left 1_1
+      213: 180970103063566903
+    second: HB_Hero_Sam_Falling_Right 1_1
   - first:
-      213: 3741148355429654516
-    second: HB_Hero_Sam_Falling_Left 1_2
+      213: -4193205596806298573
+    second: HB_Hero_Sam_Falling_Right 1_2
   - first:
-      213: -8817029216879942020
-    second: HB_Hero_Sam_Falling_Left 1_3
+      213: -2548941355627024391
+    second: HB_Hero_Sam_Falling_Right 1_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -135,7 +135,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: HB_Hero_Sam_Falling_Left 1_0
+      name: HB_hero_sam_falling_left_0
       rect:
         serializedVersion: 2
         x: 0
@@ -148,16 +148,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: f967671b568bd8940800000000000000
-      internalID: 5300095083393480351
+      spriteID: 34382123bdadd124e8eddc3c579a8979
+      internalID: 1358435823
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_Hero_Sam_Falling_Left 1_1
+      name: HB_hero_sam_falling_left_1
       rect:
         serializedVersion: 2
         x: 64
@@ -170,16 +170,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 7d37b205ec1211d10800000000000000
-      internalID: 2094492471695995863
+      spriteID: e078ca11d8bb6454493fc1f939fe4ee8
+      internalID: 2072715004
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_Hero_Sam_Falling_Left 1_2
+      name: HB_hero_sam_falling_left_2
       rect:
         serializedVersion: 2
         x: 128
@@ -192,16 +192,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 4ffdb699b9a3be330800000000000000
-      internalID: 3741148355429654516
+      spriteID: 6ab7830e491eeaf42b400f055b4ad747
+      internalID: -1215201099
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: HB_Hero_Sam_Falling_Left 1_3
+      name: HB_hero_sam_falling_left_3
       rect:
         serializedVersion: 2
         x: 192
@@ -214,10 +214,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: c7661a154ae93a580800000000000000
-      internalID: -8817029216879942020
+      spriteID: cd3271175745faa49af41f38cbeb2f47
+      internalID: 99474688
       vertices: []
       indices: 
       edges: []
@@ -226,7 +226,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 0df92fdff3597564ab9232068c92cf30
+    spriteID: 1c24afd24dcdc95469db353cdbb3427c
     internalID: 0
     vertices: []
     indices: 
@@ -238,10 +238,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      HB_Hero_Sam_Falling_Left 1_0: 5300095083393480351
-      HB_Hero_Sam_Falling_Left 1_1: 2094492471695995863
-      HB_Hero_Sam_Falling_Left 1_2: 3741148355429654516
-      HB_Hero_Sam_Falling_Left 1_3: -8817029216879942020
+      HB_hero_sam_falling_left_0: 1358435823
+      HB_hero_sam_falling_left_1: 2072715004
+      HB_hero_sam_falling_left_2: -1215201099
+      HB_hero_sam_falling_left_3: 99474688
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
