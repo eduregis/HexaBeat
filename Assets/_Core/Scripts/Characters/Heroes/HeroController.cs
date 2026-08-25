@@ -19,6 +19,9 @@ namespace HexaBit.Core {
         public float ProjectileSpeedMultiplier { get; private set; } = 1f;
         public float GrowthMultiplier { get; private set; } = 1f;
 
+        public bool IsDead { get; private set; } = false;
+        public static event System.Action OnHeroDied;
+
         private Rigidbody2D rb;
         private Vector2 moveInput;
         private Animator animator;
@@ -109,15 +112,18 @@ namespace HexaBit.Core {
         }
 
         // --- Override Animate Taking Damage ---
-        protected override void Damaged(bool damaged) {
+        protected override void AnimateTakingDamage() {
             if (animator == null) return;
-            animator.SetBool("Damaged", damaged);
+                animator.SetTrigger("Hit");
         }
 
         // --- Override Die ---
         protected override void Die() {
+            IsDead = true;
+            OnHeroDied?.Invoke();
             Debug.Log("Hero died!");
-            gameObject.SetActive(false);
+            if (animator != null)
+                animator.SetTrigger("Falling");
         }
     }
 }

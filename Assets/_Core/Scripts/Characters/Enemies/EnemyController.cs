@@ -24,6 +24,8 @@ namespace HexaBit.Core {
         public EnemyData Data => data;
         public bool IsDead => isDead;
 
+        private HeroController heroController;
+
         protected override void Awake() {
             base.Awake();
             rb = GetComponent<Rigidbody2D>();
@@ -59,8 +61,9 @@ namespace HexaBit.Core {
             }
         }
 
-        public void SetPlayerReference(Transform playerTransform) {
-            player = playerTransform;
+        public void SetPlayerReference(HeroController hero) {
+            heroController = hero;
+            player = hero != null ? hero.transform : null;
         }
 
         private void OnEnable() {
@@ -92,7 +95,8 @@ namespace HexaBit.Core {
         }
 
         private void FixedUpdate() {
-            if (isDead || player == null) return;
+            if (isDead) return;
+            if (heroController == null || heroController.IsDead) return;
 
             Vector2 direction = (player.position - transform.position).normalized;
             rb.MovePosition(rb.position + direction * CurrentSpeed * Time.fixedDeltaTime);
@@ -112,6 +116,7 @@ namespace HexaBit.Core {
         // Contact damage
         private void OnTriggerStay2D(Collider2D other) {
             if (isDead || attackTimer > 0f) return;
+            if (heroController == null || heroController.IsDead) return;
             if (other.CompareTag("Player")) {
                 HeroController hero = other.GetComponent<HeroController>();
                 if (hero != null) {
@@ -122,7 +127,7 @@ namespace HexaBit.Core {
             }
         }
 
-        protected override void Damaged(bool damaged) {
+        protected override void AnimateTakingDamage() {
             if (animator == null) return;
             // Adding a damaged animation to enemies
             // animator.SetBool("Damaged", damaged);

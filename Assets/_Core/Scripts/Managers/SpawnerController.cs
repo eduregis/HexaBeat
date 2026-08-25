@@ -57,14 +57,16 @@ namespace HexaBit.Core {
 
                 EnemyController enemyCtrl = enemy.GetComponent<EnemyController>();
                 if (enemyCtrl != null) {
-                    enemyCtrl.SetPlayerReference(player);
+                    HeroController hero = player.GetComponent<HeroController>();
+                    if (hero != null) {
+                        enemyCtrl.SetPlayerReference(hero);
+                    }
 
                     EnemyData enemyData = enemyCtrl.Data;
                     if (enemyData != null) {
                         enemyCtrl.Initialize(enemyData, currentWave);
                     }
 
-                    // Inscreve no evento de morte
                     enemyCtrl.OnDeath.AddListener(() => OnEnemyDeath(enemy));
                 }
 
