@@ -117,7 +117,7 @@ namespace HexaBit.Core {
             foreach (var status in activeStatuses) {
                 if (status.data.applySlow)
                     speedMultiplier *= (1f - status.data.slowPercentage);
-                    speedMultiplier = Mathf.Clamp(speedMultiplier, 0.1f, 1f);
+                    //speedMultiplier = Mathf.Clamp(speedMultiplier, 0.1f, 1f);
                 if (status.data.applyDamageReduction)
                     DamageMultiplier *= (1f - status.data.damageReductionPercentage);
             }
