@@ -13,7 +13,6 @@ namespace HexaBit.Core {
         protected int currentHealth;
         protected SpriteRenderer spriteRenderer;
         protected Color originalColor;
-        protected Coroutine flashCoroutine;
 
         public System.Action OnHealthChanged;
 
@@ -35,9 +34,7 @@ namespace HexaBit.Core {
             int finalDamage = (int)Mathf.Max(1, effectiveDamage - armor);
             currentHealth -= finalDamage;
 
-            if (flashCoroutine != null)
-                StopCoroutine(flashCoroutine);
-            flashCoroutine = StartCoroutine(AnimateTakingDamage());
+            AnimateTakingDamage();
 
             if (damagePopupPrefab != null) {
                 GameObject popup = Instantiate(damagePopupPrefab, transform.position + Vector3.up * 0.5f, Quaternion.identity, transform.parent);
@@ -53,21 +50,12 @@ namespace HexaBit.Core {
                 Die();
         }
 
-        protected virtual IEnumerator AnimateTakingDamage() {
-            if (spriteRenderer != null) {
-                Damaged(true);
-                yield return new WaitForSeconds(0.1f);
-                Damaged(false);
-            }
-            flashCoroutine = null;
-        }
-
         public virtual void Heal(float amount) {
             currentHealth = Mathf.Min(currentHealth + Mathf.RoundToInt(amount), maxHealth);
             OnHealthChanged?.Invoke();
         }
 
-        protected abstract void Damaged(bool damaged);
+        protected abstract void AnimateTakingDamage();
         protected abstract void Die();
     }
 }

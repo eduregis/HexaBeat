@@ -21,6 +21,7 @@ namespace HexaBit.Core {
         private void Update() {
             if (data == null || data.levels.Count == 0) return;
             if (hero == null) return;
+            if (hero.IsDead) return;
 
             timer += Time.deltaTime;
             float baseCooldown = data.GetCooldown(currentLevel);
