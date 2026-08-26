@@ -134,29 +134,20 @@ namespace HexaBit.Core {
             List<LevelUpOption> options = new List<LevelUpOption>();
             List<Object> shuffledPool = upgradePool.OrderBy(x => System.Guid.NewGuid()).ToList();
 
-            Debug.Log($"GenerateChoices: Generating {count} options for hero {hero.name}");
-
             foreach (var item in shuffledPool) {
                 if (options.Count >= count) break;
-
-                Debug.Log($"GenerateChoices: Processing item: {item.name} (Type: {item.GetType()})");
 
                 if (item is WeaponData weaponData) {
                     LevelUpOption option = weaponData.GetUpgradeOption(hero);
                     options.Add(option);
-                    Debug.Log($"Added Weapon option: {option.displayName}, targetLevel={option.targetLevel}");
                 } else if (item is BuffData buffData) {
                     LevelUpOption option = buffData.GetUpgradeOption(hero);
                     options.Add(option);
-                    Debug.Log($"Added Buff option: {option.displayName}, targetLevel={option.targetLevel}");
-                } else {
-                    Debug.LogWarning($"GenerateChoices: Unknown item type: {item.GetType()} - skipping.");
-                }
+                } 
             }
 
             // Fill remaining slots with "Skip" option
             while (options.Count < count) {
-                Debug.Log($"GenerateChoices: Adding Skip option (slot {options.Count + 1})");
                 options.Add(new LevelUpOption {
                     displayName = "Skip",
                     description = "",
@@ -165,13 +156,6 @@ namespace HexaBit.Core {
                     targetLevel = 0,
                     onSelected = () => { Debug.Log("Executing: Skip"); }
                 });
-            }
-
-            // Log final summary
-            Debug.Log($"GenerateChoices: Generated {options.Count} options:");
-            for (int i = 0; i < options.Count; i++) {
-                var opt = options[i];
-                Debug.Log($"  [{i}] {opt.displayName} | isWeapon={opt.isWeapon} | targetLevel={opt.targetLevel}");
             }
 
             return options;

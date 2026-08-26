@@ -7,6 +7,7 @@ namespace HexaBit.Core {
         [Header("UI References")]
         public Image frameImage;
         public Image iconImage;
+        public Image backgroundImage;
         public Image selectionGlow;
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI descriptionText;

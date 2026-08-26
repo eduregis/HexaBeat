@@ -131,6 +131,8 @@ MonoBehaviour:
   - {fileID: 2398853979101620886, guid: b1a74ae7fe5cf8d42bcc1baeb112bef4, type: 3}
   - {fileID: -1849810437313239372, guid: b1a74ae7fe5cf8d42bcc1baeb112bef4, type: 3}
   defaultIcon: {fileID: 7571422448734101759, guid: b2158d16e0a3b384b9bf0922f58d3795, type: 3}
+  weaponColor: {r: 0.8207547, g: 0.41885975, b: 0.034843344, a: 1}
+  buffColor: {r: 0.118948035, g: 0.60924715, b: 0.9339623, a: 1}
 --- !u!1 &6986234065841106671
 GameObject:
   m_ObjectHideFlags: 0

@@ -34,6 +34,22 @@ MonoBehaviour:
     m_Localized: PEM
     m_Metadata:
       m_Items: []
+  - m_Id: 335790493696
+    m_Localized: "descri\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 734400368640
+    m_Localized: "descri\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 273103811530752
+    m_Localized: "descri\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 716956364460032
+    m_Localized: "descri\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

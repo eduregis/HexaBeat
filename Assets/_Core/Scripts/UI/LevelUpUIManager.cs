@@ -14,6 +14,10 @@ namespace HexaBit.Core {
         [SerializeField] private Sprite[] levelFrames;
         [SerializeField] private Sprite defaultIcon;
 
+        [Header("Colors")]
+        [SerializeField] private Color weaponColor = new Color(1f, 0.6f, 0f, 1f);
+        [SerializeField] private Color buffColor = new Color(0.2f, 0.6f, 1f, 1f);
+
         private System.Action<int> _onChoiceMade;
         private int _currentSelectedIndex = -1;
 
@@ -27,20 +31,30 @@ namespace HexaBit.Core {
                 LevelUpButton btn = choiceButtons[i];
                 GameplayManager.LevelUpOption opt = options[i];
 
+                // Apply background color based on type
+                if (btn.backgroundImage != null) {
+                    Color bgColor = opt.isWeapon ? weaponColor : buffColor;
+                    btn.backgroundImage.color = bgColor;
+                }
+
+                // Configure Frame
                 if (btn.frameImage != null && levelFrames != null && levelFrames.Length > 0) {
                     int frameIndex = Mathf.Clamp(opt.targetLevel - 1, 0, levelFrames.Length - 1);
                     btn.frameImage.sprite = levelFrames[frameIndex];
                 }
 
+                // Configure Icon
                 if (btn.iconImage != null)
                     btn.iconImage.sprite = opt.icon != null ? opt.icon : defaultIcon;
 
+                // Configure Texts
                 if (btn.nameText != null)
                     btn.nameText.text = opt.displayName;
 
                 if (btn.descriptionText != null)
                     btn.descriptionText.text = opt.description;
 
+                // Configure Level Text
                 if (btn.levelText != null) {
                     if (opt.targetLevel == 1)
                         btn.levelText.text = "NEW";
@@ -68,7 +82,7 @@ namespace HexaBit.Core {
                     choiceButtons[i].gameObject.SetActive(false);
             }
 
-            // Setup selection event listeners (to detect focus changes via navigation)
+            // Setup selection event listeners
             SetupButtonSelectionListeners();
 
             // Select first button by default
@@ -82,15 +96,12 @@ namespace HexaBit.Core {
             for (int i = 0; i < choiceButtons.Length; i++) {
                 if (choiceButtons[i] == null || choiceButtons[i].button == null) continue;
 
-                // Get or create EventTrigger
                 EventTrigger trigger = choiceButtons[i].button.gameObject.GetComponent<EventTrigger>();
                 if (trigger == null)
                     trigger = choiceButtons[i].button.gameObject.AddComponent<EventTrigger>();
 
-                // Clear existing entries
                 trigger.triggers.Clear();
 
-                // Add OnSelect event
                 EventTrigger.Entry selectEntry = new EventTrigger.Entry();
                 selectEntry.eventID = EventTriggerType.Select;
                 int capturedIndex = i;
@@ -105,20 +116,15 @@ namespace HexaBit.Core {
         private void SetSelectedButton(int index) {
             if (_currentSelectedIndex == index) return;
 
-            // Deselect previous
             if (_currentSelectedIndex >= 0 && _currentSelectedIndex < choiceButtons.Length) {
-                if (choiceButtons[_currentSelectedIndex] != null) {
+                if (choiceButtons[_currentSelectedIndex] != null)
                     choiceButtons[_currentSelectedIndex].SetSelected(false);
-                    Debug.Log($"Button {_currentSelectedIndex} deselected");
-                }
             }
 
             _currentSelectedIndex = index;
 
-            // Select new
             if (index >= 0 && index < choiceButtons.Length && choiceButtons[index] != null) {
                 choiceButtons[index].SetSelected(true);
-                Debug.Log($"Button {index} selected, glow active: {choiceButtons[index].selectionGlow?.gameObject.activeSelf}");
             }
         }
 
