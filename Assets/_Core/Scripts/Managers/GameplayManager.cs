@@ -124,6 +124,8 @@ namespace HexaBit.Core {
             public string displayName;
             public string description;
             public Sprite icon;
+            public bool isWeapon; 
+            public int targetLevel;
             public System.Action onSelected;
         }
 
@@ -132,56 +134,44 @@ namespace HexaBit.Core {
             List<LevelUpOption> options = new List<LevelUpOption>();
             List<Object> shuffledPool = upgradePool.OrderBy(x => System.Guid.NewGuid()).ToList();
 
+            Debug.Log($"GenerateChoices: Generating {count} options for hero {hero.name}");
+
             foreach (var item in shuffledPool) {
                 if (options.Count >= count) break;
 
+                Debug.Log($"GenerateChoices: Processing item: {item.name} (Type: {item.GetType()})");
+
                 if (item is WeaponData weaponData) {
-                    string displayText = weaponData.localizedName.GetLocalizedString();
-                    string descText = weaponData.localizedDescription.GetLocalizedString();
-                    System.Action action = null;
-
-                    // Check the TARGET HERO's inventory
-                    if (hero.HasWeapon(weaponData)) {
-                        int currentLv = hero.weaponSlots.First(x => x?.data == weaponData).currentLevel + 1;
-                        displayText += $"\n(Upgrade to Lv.{currentLv + 1})";
-                        action = () => hero.UpgradeWeapon(weaponData);
-                    } else {
-                        displayText += $"\n(Lv.1)";
-                        action = () => hero.EquipWeapon(weaponData);
-                    }
-
-                    options.Add(new LevelUpOption {
-                        displayName = displayText,
-                        description = descText,
-                        icon = weaponData.icon,
-                        onSelected = action
-                    });
+                    LevelUpOption option = weaponData.GetUpgradeOption(hero);
+                    options.Add(option);
+                    Debug.Log($"Added Weapon option: {option.displayName}, targetLevel={option.targetLevel}");
                 } else if (item is BuffData buffData) {
-                    string displayText = buffData.localizedName.GetLocalizedString();
-                    string descText = buffData.localizedDescription.GetLocalizedString();
-                    System.Action action = null;
-
-                    // Check the TARGET HERO's buff list
-                    ActiveBuff existing = hero.activeBuffs.Find(b => b.data == buffData);
-                    if (existing != null) {
-                        int nextLv = Mathf.Min(existing.currentLevel + 1, buffData.MaxLevel);
-                        displayText += $" (Upgrade to Lv.{nextLv})";
-                    } else {
-                        displayText += $" (Lv.1)";
-                    }
-                    action = () => hero.ApplyBuff(buffData);
-
-                    options.Add(new LevelUpOption {
-                        displayName = displayText,
-                        description = descText,
-                        icon = buffData.icon,
-                        onSelected = action
-                    });
+                    LevelUpOption option = buffData.GetUpgradeOption(hero);
+                    options.Add(option);
+                    Debug.Log($"Added Buff option: {option.displayName}, targetLevel={option.targetLevel}");
+                } else {
+                    Debug.LogWarning($"GenerateChoices: Unknown item type: {item.GetType()} - skipping.");
                 }
             }
 
+            // Fill remaining slots with "Skip" option
             while (options.Count < count) {
-                options.Add(new LevelUpOption { displayName = "Skip", description = "", icon = null, onSelected = () => { } });
+                Debug.Log($"GenerateChoices: Adding Skip option (slot {options.Count + 1})");
+                options.Add(new LevelUpOption {
+                    displayName = "Skip",
+                    description = "",
+                    icon = null,
+                    isWeapon = false,
+                    targetLevel = 0,
+                    onSelected = () => { Debug.Log("Executing: Skip"); }
+                });
+            }
+
+            // Log final summary
+            Debug.Log($"GenerateChoices: Generated {options.Count} options:");
+            for (int i = 0; i < options.Count; i++) {
+                var opt = options[i];
+                Debug.Log($"  [{i}] {opt.displayName} | isWeapon={opt.isWeapon} | targetLevel={opt.targetLevel}");
             }
 
             return options;
