@@ -97,15 +97,16 @@ namespace HexaBit.Core {
                 HeroController targetHero = activeHeroes[Random.Range(0, activeHeroes.Count)];
 
                 // 2. Generate the options based SOLELY on the target hero's inventory
+                // Inside AddXP(), when level up occurs:
                 if (levelUpPanelPrefab != null) {
                     GameObject panelObj = Instantiate(levelUpPanelPrefab);
                     LevelUpUIManager uiManager = panelObj.GetComponent<LevelUpUIManager>();
 
                     List<LevelUpOption> options = GenerateChoices(3, targetHero);
 
-                    uiManager.OpenWithOptions(options, (int selectedIndex) => {
+                    // Pass the targetHero to the UI manager
+                    uiManager.OpenWithOptions(options, targetHero, (int selectedIndex) => {
                         LevelUpOption chosenOption = options[selectedIndex];
-                        // The action inside this option already has the 'targetHero' captured
                         chosenOption.onSelected.Invoke();
                     });
                 }
@@ -127,6 +128,12 @@ namespace HexaBit.Core {
             public bool isWeapon; 
             public int targetLevel;
             public System.Action onSelected;
+        }
+
+        public HeroController GetActiveHero(int index) {
+            if (index >= 0 && index < activeHeroes.Count)
+                return activeHeroes[index];
+            return null;
         }
 
         // Receives the specific 'hero' that was randomly drawn for this reward

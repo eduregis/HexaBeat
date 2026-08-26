@@ -10,51 +10,69 @@ namespace HexaBit.Core {
         [SerializeField] private GameObject levelUpPanel;
         [SerializeField] private LevelUpButton[] choiceButtons;
 
+        [Header("Inventory Chips")]
+        [SerializeField] private InventoryChip[] weaponChips; // 3 slots
+        [SerializeField] private InventoryChip[] buffChips;   // 3 slots
+
+        [Header("Inventory Color Images")]
+        [SerializeField] private Image weaponColorImage; // Image behind weapon chips
+        [SerializeField] private Image buffColorImage;   // Image behind buff chips
+
         [Header("Visual Configuration")]
-        [SerializeField] private Sprite[] levelFrames;
+        [SerializeField] private Sprite[] levelFrames; // Size 6 (Lv.1 to Lv.6)
         [SerializeField] private Sprite defaultIcon;
 
         [Header("Colors")]
-        [SerializeField] private Color weaponColor = new Color(1f, 0.6f, 0f, 1f);
-        [SerializeField] private Color buffColor = new Color(0.2f, 0.6f, 1f, 1f);
+        [SerializeField] private Color weaponColor = new Color(1f, 0.6f, 0f, 1f); // Orange
+        [SerializeField] private Color buffColor = new Color(0.2f, 0.6f, 1f, 1f); // Cyan
 
         private System.Action<int> _onChoiceMade;
         private int _currentSelectedIndex = -1;
+        private HeroController _targetHero;
 
-        public void OpenWithOptions(List<GameplayManager.LevelUpOption> options, System.Action<int> onChoiceMade) {
+        public void OpenWithOptions(
+            List<GameplayManager.LevelUpOption> options,
+            HeroController targetHero,
+            System.Action<int> onChoiceMade) {
+            _targetHero = targetHero;
             _onChoiceMade = onChoiceMade;
 
             Time.timeScale = 0f;
             levelUpPanel.SetActive(true);
 
+            // --- Apply colors to external images ---
+            if (weaponColorImage != null)
+                weaponColorImage.color = weaponColor;
+            if (buffColorImage != null)
+                buffColorImage.color = buffColor;
+
+            // --- Populate Inventory Chips ---
+            PopulateInventoryChips(_targetHero);
+
+            // --- Populate Choice Buttons ---
             for (int i = 0; i < choiceButtons.Length && i < options.Count; i++) {
                 LevelUpButton btn = choiceButtons[i];
                 GameplayManager.LevelUpOption opt = options[i];
 
-                // Apply background color based on type
                 if (btn.backgroundImage != null) {
                     Color bgColor = opt.isWeapon ? weaponColor : buffColor;
                     btn.backgroundImage.color = bgColor;
                 }
 
-                // Configure Frame
                 if (btn.frameImage != null && levelFrames != null && levelFrames.Length > 0) {
                     int frameIndex = Mathf.Clamp(opt.targetLevel - 1, 0, levelFrames.Length - 1);
                     btn.frameImage.sprite = levelFrames[frameIndex];
                 }
 
-                // Configure Icon
                 if (btn.iconImage != null)
                     btn.iconImage.sprite = opt.icon != null ? opt.icon : defaultIcon;
 
-                // Configure Texts
                 if (btn.nameText != null)
                     btn.nameText.text = opt.displayName;
 
                 if (btn.descriptionText != null)
                     btn.descriptionText.text = opt.description;
 
-                // Configure Level Text
                 if (btn.levelText != null) {
                     if (opt.targetLevel == 1)
                         btn.levelText.text = "NEW";
@@ -82,14 +100,58 @@ namespace HexaBit.Core {
                     choiceButtons[i].gameObject.SetActive(false);
             }
 
-            // Setup selection event listeners
             SetupButtonSelectionListeners();
 
-            // Select first button by default
             if (choiceButtons.Length > 0 && choiceButtons[0] != null && choiceButtons[0].button != null) {
                 SetSelectedButton(0);
                 EventSystem.current.SetSelectedGameObject(choiceButtons[0].button.gameObject);
             }
+        }
+
+        private void PopulateInventoryChips(HeroController hero) {
+            if (hero == null) return;
+
+            // --- Populate Weapon Chips ---
+            int weaponSlots = Mathf.Min(weaponChips.Length, hero.weaponSlots.Length);
+            for (int i = 0; i < weaponSlots; i++) {
+                WeaponBase weapon = hero.weaponSlots[i];
+                if (weapon != null && weapon.data != null) {
+                    Sprite icon = weapon.data.icon;
+                    Sprite frame = GetLevelFrame(weapon.currentLevel);
+                    weaponChips[i].SetChip(icon, frame);
+                } else {
+                    weaponChips[i].ClearChip();
+                }
+            }
+
+            // Clear remaining weapon chips
+            for (int i = weaponSlots; i < weaponChips.Length; i++) {
+                weaponChips[i].ClearChip();
+            }
+
+            // --- Populate Buff Chips ---
+            int buffSlots = Mathf.Min(buffChips.Length, hero.activeBuffs.Count);
+            for (int i = 0; i < buffSlots; i++) {
+                ActiveBuff buff = hero.activeBuffs[i];
+                if (buff != null && buff.data != null) {
+                    Sprite icon = buff.data.icon;
+                    Sprite frame = GetLevelFrame(buff.currentLevel);
+                    buffChips[i].SetChip(icon, frame);
+                } else {
+                    buffChips[i].ClearChip();
+                }
+            }
+
+            // Clear remaining buff chips
+            for (int i = buffSlots; i < buffChips.Length; i++) {
+                buffChips[i].ClearChip();
+            }
+        }
+
+        private Sprite GetLevelFrame(int level) {
+            if (levelFrames == null || levelFrames.Length == 0) return null;
+            int index = Mathf.Clamp(level - 1, 0, levelFrames.Length - 1);
+            return levelFrames[index];
         }
 
         private void SetupButtonSelectionListeners() {
@@ -107,7 +169,6 @@ namespace HexaBit.Core {
                 int capturedIndex = i;
                 selectEntry.callback.AddListener((data) => {
                     SetSelectedButton(capturedIndex);
-                    Debug.Log($"Focus changed to button {capturedIndex}: {choiceButtons[capturedIndex]?.name}");
                 });
                 trigger.triggers.Add(selectEntry);
             }
