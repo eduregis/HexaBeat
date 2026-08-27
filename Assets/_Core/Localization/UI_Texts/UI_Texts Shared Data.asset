@@ -23,6 +23,14 @@ MonoBehaviour:
     m_Key: hud_kills
     m_Metadata:
       m_Items: []
+  - m_Id: 1917467801440256
+    m_Key: hud_level_up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1917563251216384
+    m_Key: hud_choose_one
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
