@@ -55,6 +55,14 @@ MonoBehaviour:
     m_Key: weapon_chakram_description
     m_Metadata:
       m_Items: []
+  - m_Id: 2259006947872768
+    m_Key: weapon_corruption_napalm_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2259146995683328
+    m_Key: weapon_corruption_napalm_description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

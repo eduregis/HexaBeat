@@ -16,7 +16,9 @@ namespace HexaBit.Core {
         Radius,
         SlowAmount,
         MaxDistance,
-        Hitbox
+        Hitbox,
+        Duration,
+        Tick
     }
 
     public static class DynamicParameterExtensions {

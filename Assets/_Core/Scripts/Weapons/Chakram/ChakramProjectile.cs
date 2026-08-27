@@ -1,11 +1,9 @@
 using UnityEngine;
-using System.Collections.Generic;
 
 namespace HexaBit.Core {
     public class ChakramProjectile : WeaponEffect {
         [Header("Chakram Settings")]
         [SerializeField] private float maxLifetime = 5f;
-        [SerializeField] private float hitCooldown = 0.3f;
 
         private Vector2 initialDirection;
         private Vector2 currentDirection;
@@ -19,9 +17,6 @@ namespace HexaBit.Core {
         private bool isReturning = false;
         private float currentSpeed;
         private float lifetimeTimer;
-
-        // Track enemies and their hit timers
-        private Dictionary<EnemyController, float> hitTimers = new Dictionary<EnemyController, float>();
 
         private float returnAcceleration = 15f;
 
@@ -39,13 +34,10 @@ namespace HexaBit.Core {
             distanceTraveled = 0f;
             isReturning = false;
             lifetimeTimer = 0f;
-            hitTimers.Clear();
 
-            // Set initial rotation
             float angle = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
             transform.rotation = Quaternion.Euler(0, 0, angle);
 
-            // Set collider radius
             CircleCollider2D col = GetComponent<CircleCollider2D>();
             if (col != null)
                 col.radius = hitboxRadius;
@@ -74,7 +66,6 @@ namespace HexaBit.Core {
                 return;
             }
 
-            // Check if returned to hero (collected)
             if (isReturning) {
                 float distToHero = Vector2.Distance(transform.position, heroTransform.position);
                 if (distToHero < 0.8f) {
@@ -82,14 +73,10 @@ namespace HexaBit.Core {
                     return;
                 }
             }
-
-            // Update hit timers
-            UpdateHitTimers();
         }
 
         private void UpdateMovement() {
             if (!isReturning) {
-                // Outward: decelerate from speed to 0 over maxDistance
                 float progress = Mathf.Clamp01(distanceTraveled / maxDistance);
                 currentSpeed = Mathf.Lerp(speed, 0f, progress * progress);
 
@@ -103,23 +90,8 @@ namespace HexaBit.Core {
                     Debug.Log($"Chakram starting return journey");
                 }
             } else {
-                // Return: accelerate continuously
                 currentSpeed = Mathf.Min(currentSpeed + returnAcceleration * Time.deltaTime, speed);
                 transform.Translate(currentDirection * currentSpeed * Time.deltaTime, Space.World);
-            }
-        }
-
-        private void UpdateHitTimers() {
-            List<EnemyController> toRemove = new List<EnemyController>();
-            foreach (var kvp in hitTimers) {
-                float newTime = kvp.Value - Time.deltaTime;
-                if (newTime <= 0f)
-                    toRemove.Add(kvp.Key);
-                else
-                    hitTimers[kvp.Key] = newTime;
-            }
-            foreach (var enemy in toRemove) {
-                hitTimers.Remove(enemy);
             }
         }
 
@@ -138,14 +110,7 @@ namespace HexaBit.Core {
             if (other.CompareTag("Enemy")) {
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null && !enemy.IsDead) {
-                    // Check if enemy is on cooldown
-                    if (hitTimers.ContainsKey(enemy))
-                        return;
-
-                    // Apply damage
                     enemy.TakeDamage(damage);
-                    hitTimers[enemy] = hitCooldown;
-
                     Debug.Log($"Chakram hit enemy for {damage} damage on {(isReturning ? "return" : "outward")} pass!");
                 }
             } else if (other.CompareTag("Wall")) {
@@ -154,7 +119,6 @@ namespace HexaBit.Core {
         }
 
         private void DestroyProjectile() {
-            hitTimers.Clear();
             if (heroTransform != null) {
                 ChakramWeapon weapon = heroTransform.GetComponentInChildren<ChakramWeapon>();
                 if (weapon != null)

@@ -58,6 +58,14 @@ MonoBehaviour:
     m_Localized: description
     m_Metadata:
       m_Items: []
+  - m_Id: 2259146995683328
+    m_Localized: description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2259006947872768
+    m_Localized: Corruption Napalm
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
