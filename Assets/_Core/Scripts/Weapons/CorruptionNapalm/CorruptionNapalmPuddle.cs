@@ -19,6 +19,9 @@ namespace HexaBit.Core {
         private Transform heroTransform;
         private List<EnemyController> enemiesInPuddle = new List<EnemyController>();
 
+        // Status data from weapon
+        private StatusData corruptedStatusData;
+
         public void Initialize(WeaponData weaponData, int levelIndex, Transform hero) {
             data = weaponData;
             level = levelIndex;
@@ -28,6 +31,12 @@ namespace HexaBit.Core {
             radius = data.GetFloat(level, DynamicParameter.Radius);
             damagePerTick = Mathf.RoundToInt(data.GetDamage(level));
             tickInterval = data.GetFloat(level, DynamicParameter.Tick);
+
+            // Get the status data from the weapon (if any)
+            if (data.statusData != null) {
+                corruptedStatusData = data.statusData;
+                Debug.Log($"CorruptionNapalm puddle will apply status: {corruptedStatusData.statusName}");
+            }
 
             if (puddleCollider != null)
                 puddleCollider.radius = radius;
@@ -48,6 +57,8 @@ namespace HexaBit.Core {
             lifetimeTimer += Time.deltaTime;
 
             if (lifetimeTimer >= duration) {
+                // Remove status from all enemies still in the puddle
+                RemoveStatusFromAllEnemies();
                 enemiesInPuddle.Clear();
                 Destroy(gameObject);
                 return;
@@ -61,26 +72,51 @@ namespace HexaBit.Core {
         }
 
         private void ApplyDamageToEnemies() {
-            // Create a copy of the list to iterate safely
             List<EnemyController> enemiesCopy = new List<EnemyController>(enemiesInPuddle);
 
             foreach (var enemy in enemiesCopy) {
                 if (enemy != null && !enemy.IsDead) {
+                    // Apply damage
                     enemy.TakeDamage(damagePerTick);
-                    Debug.Log($"CorruptionNapalm dealt {damagePerTick} damage to {enemy.name}");
+
+                    // Apply corrupted status if available (only once, when enemy enters)
+                    // We apply it on entry, not on every tick.
                 }
             }
 
-            // Remove dead enemies from the original list (safe to do after iteration)
             enemiesInPuddle.RemoveAll(e => e == null || e.IsDead);
         }
 
+        private void ApplyStatusToEnemy(EnemyController enemy) {
+            if (corruptedStatusData != null && enemy != null && !enemy.IsDead) {
+                enemy.ApplyStatus(corruptedStatusData);
+                Debug.Log($"Applied {corruptedStatusData.statusName} to {enemy.name}");
+            }
+        }
+
+        private void RemoveStatusFromAllEnemies() {
+            if (corruptedStatusData == null) return;
+
+            foreach (var enemy in enemiesInPuddle) {
+                if (enemy != null) {
+                    enemy.RemoveStatus(corruptedStatusData);
+                    Debug.Log($"Removed {corruptedStatusData.statusName} from {enemy.name}");
+                }
+            }
+        }
+
+        // Trigger events
         private void OnTriggerEnter2D(Collider2D other) {
             if (other.CompareTag("Enemy")) {
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null && !enemiesInPuddle.Contains(enemy) && !enemy.IsDead) {
                     enemiesInPuddle.Add(enemy);
+
+                    // Apply damage immediately on entry
                     enemy.TakeDamage(damagePerTick);
+
+                    // Apply corrupted status on entry (once per enemy entry)
+                    ApplyStatusToEnemy(enemy);
                     Debug.Log($"CorruptionNapalm entered puddle: {enemy.name}");
                 }
             }
@@ -91,8 +127,18 @@ namespace HexaBit.Core {
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null && enemiesInPuddle.Contains(enemy)) {
                     enemiesInPuddle.Remove(enemy);
+
+                    // Remove corrupted status when enemy leaves the puddle
+                    if (corruptedStatusData != null) {
+                        enemy.RemoveStatus(corruptedStatusData);
+                        Debug.Log($"Removed {corruptedStatusData.statusName} from {enemy.name} on exit");
+                    }
                 }
             }
+        }
+
+        private void OnDestroy() {
+            RemoveStatusFromAllEnemies();
         }
 
         private void OnDrawGizmosSelected() {

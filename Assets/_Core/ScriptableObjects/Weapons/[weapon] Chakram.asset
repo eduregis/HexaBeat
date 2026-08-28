@@ -40,7 +40,7 @@ MonoBehaviour:
     fieldType: 1
   - fieldName: Speed
     fieldType: 1
-  statusData: {fileID: 0}
+  statusData: {fileID: 11400000, guid: 914906822b32657438cd2a86b4b8bae6, type: 2}
   levels:
   - damage: 15
     cooldown: 6

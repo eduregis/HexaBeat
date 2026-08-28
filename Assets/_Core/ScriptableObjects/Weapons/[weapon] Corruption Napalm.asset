@@ -42,7 +42,7 @@ MonoBehaviour:
     fieldType: 1
   - fieldName: Range
     fieldType: 1
-  statusData: {fileID: 0}
+  statusData: {fileID: 11400000, guid: 58a7381147482724aaedcce5651944f3, type: 2}
   levels:
   - damage: 8
     cooldown: 4

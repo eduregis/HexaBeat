@@ -78,7 +78,6 @@ namespace HexaBit.Core {
 
         private void CreatePuddle(Vector3 position) {
             if (puddlePrefab == null) {
-                Debug.LogWarning("CorruptionNapalmProjectile: puddlePrefab is null!");
                 return;
             }
 
@@ -86,9 +85,7 @@ namespace HexaBit.Core {
             CorruptionNapalmPuddle puddle = puddleGO.GetComponent<CorruptionNapalmPuddle>();
             if (puddle != null) {
                 puddle.Initialize(data, level, heroTransform);
-                Debug.Log($"CorruptionNapalm puddle created at {position}");
             } else {
-                Debug.LogWarning("CorruptionNapalmProjectile: puddlePrefab does not have CorruptionNapalmPuddle component!");
                 Destroy(puddleGO);
             }
         }

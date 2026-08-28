@@ -20,6 +20,9 @@ namespace HexaBit.Core {
 
         private float returnAcceleration = 15f;
 
+        // Status data from weapon
+        private StatusData poisonStatusData;
+
         public override void Initialize(WeaponData data, int levelIndex, Vector2 dir, Transform hero) {
             initialDirection = dir.normalized;
             currentDirection = initialDirection;
@@ -29,6 +32,12 @@ namespace HexaBit.Core {
             maxDistance = data.GetFloat(levelIndex, DynamicParameter.MaxDistance);
             hitboxRadius = data.GetFloat(levelIndex, DynamicParameter.Hitbox);
             damage = Mathf.RoundToInt(data.GetDamage(levelIndex));
+
+            // Get status data from weapon
+            if (data.statusData != null) {
+                poisonStatusData = data.statusData;
+                Debug.Log($"Chakram will apply status: {poisonStatusData.statusName}");
+            }
 
             currentSpeed = speed;
             distanceTraveled = 0f;
@@ -110,8 +119,15 @@ namespace HexaBit.Core {
             if (other.CompareTag("Enemy")) {
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null && !enemy.IsDead) {
+                    // Apply damage
                     enemy.TakeDamage(damage);
                     Debug.Log($"Chakram hit enemy for {damage} damage on {(isReturning ? "return" : "outward")} pass!");
+
+                    // Apply poison status if available
+                    if (poisonStatusData != null) {
+                        enemy.ApplyStatus(poisonStatusData);
+                        Debug.Log($"Applied {poisonStatusData.statusName} to {enemy.name}");
+                    }
                 }
             } else if (other.CompareTag("Wall")) {
                 DestroyProjectile();
