@@ -46,6 +46,9 @@ TagManager:
   - name: Wall
     uniqueID: 1260170295
     locked: 0
+  - name: Projectile
+    uniqueID: 3113204403
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

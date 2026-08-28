@@ -26,6 +26,14 @@ MonoBehaviour:
     m_Localized: 'Kills: {0}'
     m_Metadata:
       m_Items: []
+  - m_Id: 1917467801440256
+    m_Localized: Level Up!!!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1917563251216384
+    m_Localized: 'Choose one:'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

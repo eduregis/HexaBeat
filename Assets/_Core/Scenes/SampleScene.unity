@@ -234,12 +234,7 @@ MonoBehaviour:
   totalKills: 0
   vcam: {fileID: 845402945}
   levelUpPanelPrefab: {fileID: 6326986732019956444, guid: 4f10577951c5b864bb5a5e84a2434ccc, type: 3}
-  upgradePool:
-  - {fileID: 11400000, guid: 1de82299f6633d946b30cf78e974ec9d, type: 2}
-  - {fileID: 11400000, guid: dd53496d7a48aed4c83154706de374ed, type: 2}
-  - {fileID: 11400000, guid: a0c56bfbbd5c54f4b9643e25bd92eca8, type: 2}
-  - {fileID: 11400000, guid: 9e20170d8e1e5b84d9df6534f953308a, type: 2}
-  - {fileID: 11400000, guid: a7daab6f2f713314185c5a5b5ca1a1ef, type: 2}
+  upgradePoolData: {fileID: 11400000, guid: f3565500e19639341972ca7eb4fcafa1, type: 2}
   OnXPChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -493,8 +488,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Kills: 0'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 914c5b5d228dd224e836ada46bc1d1e1, type: 2}
+  m_sharedMaterial: {fileID: 6295962781548511756, guid: 914c5b5d228dd224e836ada46bc1d1e1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -679,7 +674,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.8125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -756,8 +751,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.PixelPerfectCamera
   m_ComponentVersion: 1
   m_AssetsPPU: 64
-  m_RefResolutionX: 960
-  m_RefResolutionY: 540
+  m_RefResolutionX: 640
+  m_RefResolutionY: 320
   m_CropFrame: 0
   m_GridSnapping: 0
   m_FilterMode: 0
@@ -825,8 +820,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lv. 0
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 914c5b5d228dd224e836ada46bc1d1e1, type: 2}
+  m_sharedMaterial: {fileID: 6295962781548511756, guid: 914c5b5d228dd224e836ada46bc1d1e1, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -989,7 +984,7 @@ MonoBehaviour:
   m_Intensity: 1
   m_LightVolumeIntensity: 1
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 000000006f154f4d37ac1c4b
+  m_ApplyToSortingLayers: 000000006f154f4d37ac1c4bb3ba8fb9
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -1311,7 +1306,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1260170295
-  m_SortingLayer: -1
+  m_SortingLayer: -2
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
@@ -2189,7 +2184,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 1297028463
-  m_SortingLayer: -2
+  m_SortingLayer: -3
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}

@@ -25,7 +25,6 @@ namespace HexaBit.Core {
 
             timer += Time.deltaTime;
             float baseCooldown = data.GetCooldown(currentLevel);
-
             float cooldown = baseCooldown * hero.GlobalCooldownModifier;
 
             if (timer >= cooldown) {

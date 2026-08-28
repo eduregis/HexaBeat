@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Localization;
 using System.Collections.Generic;
+using System.Linq;
 
 
 namespace HexaBit.Core {
@@ -60,6 +61,35 @@ namespace HexaBit.Core {
             if (levelIndex < 0 || levelIndex >= levels.Count) return false;
             return levels[levelIndex].GetBool(fieldName);
         }
+
+        // Generates a LevelUpOption for this weapon based on the hero's current state
+        public GameplayManager.LevelUpOption GetUpgradeOption(HeroController hero) {
+            string displayName = localizedName.GetLocalizedString();
+            string description = localizedDescription.GetLocalizedString();
+            int targetLevel = 1;
+            bool isWeapon = true;
+            System.Action action = null;
+
+            if (hero.HasWeapon(this)) {
+                int currentLv = hero.weaponSlots.First(x => x?.data == this).currentLevel + 1;
+                targetLevel = currentLv + 1;
+                if (targetLevel > 6) targetLevel = 6;
+
+                action = () => hero.UpgradeWeapon(this);
+            } else {
+                targetLevel = 1;
+                action = () => hero.EquipWeapon(this);
+            }
+
+            return new GameplayManager.LevelUpOption {
+                displayName = displayName,
+                description = description,
+                icon = icon,
+                isWeapon = isWeapon,
+                targetLevel = targetLevel,
+                onSelected = action
+            };
+        }
     }
 
     [System.Serializable]
@@ -97,7 +127,10 @@ namespace HexaBit.Core {
                     return v.boolValue;
             return false;
         }
+
+
     }
+
 
     [System.Serializable]
     public class DynamicFieldValue {

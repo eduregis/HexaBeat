@@ -2,7 +2,6 @@ using UnityEngine;
 using UnityEngine.Localization;
 
 namespace HexaBit.Core {
-
     [CreateAssetMenu(fileName = "[buff] New Buff", menuName = "HexaBit/Buff Data")]
     public class BuffData : ScriptableObject {
         public LocalizedString localizedName;
@@ -19,6 +18,34 @@ namespace HexaBit.Core {
         }
 
         public int MaxLevel => values.Length;
-    }
 
+        // Generates a LevelUpOption for this buff based on the hero's current state
+        public GameplayManager.LevelUpOption GetUpgradeOption(HeroController hero) {
+            string displayName = localizedName.GetLocalizedString();
+            string description = localizedDescription.GetLocalizedString();
+            int targetLevel = 1;
+            bool isWeapon = false;
+            System.Action action = null;
+
+            ActiveBuff existing = hero.activeBuffs.Find(b => b.data == this);
+            if (existing != null) {
+                targetLevel = existing.currentLevel + 1;
+                if (targetLevel > MaxLevel) targetLevel = MaxLevel;
+
+                action = () => hero.ApplyBuff(this);
+            } else {
+                targetLevel = 1;
+                action = () => hero.ApplyBuff(this);
+            }
+
+            return new GameplayManager.LevelUpOption {
+                displayName = displayName,
+                description = description,
+                icon = icon,
+                isWeapon = isWeapon,
+                targetLevel = targetLevel,
+                onSelected = action
+            };
+        }
+    }
 }

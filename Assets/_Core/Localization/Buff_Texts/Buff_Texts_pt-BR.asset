@@ -22,6 +22,10 @@ MonoBehaviour:
     m_Localized: "Inje\xE7\xE3o"
     m_Metadata:
       m_Items: []
+  - m_Id: 178923524096
+    m_Localized: "descri\xE7\xE3o"
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

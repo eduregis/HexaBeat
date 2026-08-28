@@ -67,19 +67,29 @@ namespace HexaBit.Core {
         protected virtual void UpdateStatuses() {
             if (activeStatuses.Count == 0) return;
 
+            // Create a copy of the list to iterate safely
+            List<StatusEffect> statusesCopy = new List<StatusEffect>(activeStatuses);
             List<StatusEffect> expired = new List<StatusEffect>();
-            foreach (var status in activeStatuses) {
+
+            foreach (var status in statusesCopy) {
+                // Check if status is still in the original list (could have been removed)
+                if (!activeStatuses.Contains(status)) continue;
+
                 status.Update(Time.deltaTime);
                 ProcessStatusTick(status);
+
                 if (status.IsExpired)
                     expired.Add(status);
             }
 
+            // Remove expired statuses from the original list
             foreach (var status in expired) {
-                if (status.visualEffectInstance != null)
-                    Destroy(status.visualEffectInstance);
-                activeStatuses.Remove(status);
-                Debug.Log($"{gameObject.name}: Status {status.data.statusName} expired.");
+                if (activeStatuses.Contains(status)) {
+                    if (status.visualEffectInstance != null)
+                        Destroy(status.visualEffectInstance);
+                    activeStatuses.Remove(status);
+                    Debug.Log($"{gameObject.name}: Status {status.data.statusName} expired.");
+                }
             }
 
             if (expired.Count > 0) {
@@ -117,7 +127,7 @@ namespace HexaBit.Core {
             foreach (var status in activeStatuses) {
                 if (status.data.applySlow)
                     speedMultiplier *= (1f - status.data.slowPercentage);
-                    //speedMultiplier = Mathf.Clamp(speedMultiplier, 0.1f, 1f);
+                    speedMultiplier = Mathf.Clamp(speedMultiplier, 0.1f, 1f);
                 if (status.data.applyDamageReduction)
                     DamageMultiplier *= (1f - status.data.damageReductionPercentage);
             }
