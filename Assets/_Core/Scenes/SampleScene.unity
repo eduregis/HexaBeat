@@ -234,13 +234,7 @@ MonoBehaviour:
   totalKills: 0
   vcam: {fileID: 845402945}
   levelUpPanelPrefab: {fileID: 6326986732019956444, guid: 4f10577951c5b864bb5a5e84a2434ccc, type: 3}
-  upgradePool:
-  - {fileID: 11400000, guid: 1de82299f6633d946b30cf78e974ec9d, type: 2}
-  - {fileID: 11400000, guid: dd53496d7a48aed4c83154706de374ed, type: 2}
-  - {fileID: 11400000, guid: a0c56bfbbd5c54f4b9643e25bd92eca8, type: 2}
-  - {fileID: 11400000, guid: 9e20170d8e1e5b84d9df6534f953308a, type: 2}
-  - {fileID: 11400000, guid: a7daab6f2f713314185c5a5b5ca1a1ef, type: 2}
-  - {fileID: 11400000, guid: f1576056d1ea77e4ca0a9ab9000784a9, type: 2}
+  upgradePoolData: {fileID: 11400000, guid: f3565500e19639341972ca7eb4fcafa1, type: 2}
   OnXPChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -680,7 +674,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 2.8125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
