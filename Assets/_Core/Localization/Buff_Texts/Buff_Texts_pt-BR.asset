@@ -38,6 +38,50 @@ MonoBehaviour:
     m_Localized: Magnetron
     m_Metadata:
       m_Items: []
+  - m_Id: 3181016301457408
+    m_Localized: Aumenta o raio de coleta de XP.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181381054910464
+    m_Localized: Overclocker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181519706017792
+    m_Localized: Aumenta a quantidade de XP ganho.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181951593500672
+    m_Localized: Overdrive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182007834923008
+    m_Localized: Aumenta o dano de todas as armas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182206187753472
+    m_Localized: Sincronia de Resfriamento
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182273137233920
+    m_Localized: Reduz o tempo de recarga de todas as armas.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3183556048998400
+    m_Localized: Aumenta a velocidade de movimento do personagem.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3183220617924608
+    m_Localized: Acelerador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3187625513734144
+    m_Localized: Amplificador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3187677460189184
+    m_Localized: "Aumenta a \xE1rea de efeito de todas as armas."
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -14,18 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: HexaBit.Core::HexaBit.Core.BuffData
   localizedName:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:5d9b9906f171a594190160af4b6abf72
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 3181951593500672
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
     m_LocalVariables: []
   localizedDescription:
     m_TableReference:
-      m_TableCollectionName: 
+      m_TableCollectionName: GUID:5d9b9906f171a594190160af4b6abf72
     m_TableEntryReference:
-      m_KeyId: 0
+      m_KeyId: 3182007834923008
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -33,12 +33,12 @@ MonoBehaviour:
   icon: {fileID: 0}
   type: 0
   values:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
+  - 0.1
+  - 0.2
+  - 0.3
+  - 0.4
+  - 0.5
+  - 0.6
   references:
     version: 2
     RefIds: []

@@ -35,6 +35,50 @@ MonoBehaviour:
     m_Key: buff_magnetrom_name
     m_Metadata:
       m_Items: []
+  - m_Id: 3181016301457408
+    m_Key: buff_magnetrom_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181381054910464
+    m_Key: buff_overclocker_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181519706017792
+    m_Key: buff_overclocker_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181951593500672
+    m_Key: buff_overdrive_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182007834923008
+    m_Key: buff_overdrive_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182206187753472
+    m_Key: buff_cooler_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182273137233920
+    m_Key: buff_cooler_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3183220617924608
+    m_Key: buff_accelerator_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3183556048998400
+    m_Key: buff_accelerator_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3187625513734144
+    m_Key: buff_amplifier_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3187677460189184
+    m_Key: buff_amplifier_description
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

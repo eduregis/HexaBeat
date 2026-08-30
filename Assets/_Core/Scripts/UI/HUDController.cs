@@ -11,6 +11,10 @@ namespace HexaBit.Core {
         [SerializeField] private TextMeshProUGUI levelText;
         [SerializeField] private TextMeshProUGUI killsText;
 
+        [Header("Timer")]
+        [SerializeField] private TextMeshProUGUI timerText;
+
+        [Header("Localization")]
         [SerializeField] private LocalizedString levelFormat = new LocalizedString("UI_Texts", "hud_level");
         [SerializeField] private LocalizedString killsFormat = new LocalizedString("UI_Texts", "hud_kills");
 
@@ -22,6 +26,7 @@ namespace HexaBit.Core {
                 GameplayManager.Instance.OnXPChanged.AddListener(UpdateXP);
                 GameplayManager.Instance.OnLevelUp.AddListener(UpdateLevel);
                 GameplayManager.Instance.OnKillCountChanged.AddListener(UpdateKills);
+                GameplayManager.Instance.OnTimerUpdated.AddListener(UpdateTimer);
             }
 
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
@@ -29,6 +34,7 @@ namespace HexaBit.Core {
             currentLevel = GameplayManager.Instance.CurrentLevel;
             currentKills = GameplayManager.Instance.TotalKills;
             UpdateXP(GameplayManager.Instance.CurrentXP);
+            UpdateTimer(GameplayManager.Instance.CurrentTime);
             RefreshTexts();
         }
 
@@ -61,11 +67,20 @@ namespace HexaBit.Core {
             RefreshTexts();
         }
 
+        private void UpdateTimer(float time) {
+            if (timerText != null) {
+                int minutes = Mathf.FloorToInt(time / 60f);
+                int seconds = Mathf.FloorToInt(time % 60f);
+                timerText.text = $"{minutes:00}:{seconds:00}";
+            }
+        }
+
         private void OnDestroy() {
             if (GameplayManager.Instance != null) {
                 GameplayManager.Instance.OnXPChanged.RemoveListener(UpdateXP);
                 GameplayManager.Instance.OnLevelUp.RemoveListener(UpdateLevel);
                 GameplayManager.Instance.OnKillCountChanged.RemoveListener(UpdateKills);
+                GameplayManager.Instance.OnTimerUpdated.RemoveListener(UpdateTimer);
             }
             LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
         }

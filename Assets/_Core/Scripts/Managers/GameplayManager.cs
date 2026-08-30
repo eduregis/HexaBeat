@@ -32,15 +32,22 @@ namespace HexaBit.Core {
         [Header("Upgrade Pool")]
         [SerializeField] private UpgradePoolData upgradePoolData;
 
+        [Header("Timer")]
+        [SerializeField] private float currentTime = 0f;
+        private bool isTimerPaused = false;
+
         public int CurrentXP => currentXP;
         public int CurrentLevel => currentLevel;
         public int TotalKills => totalKills;
         public int XPToNextLevel => baseXPToLevel + (currentLevel - 1) * xpPerLevelMultiplier;
+        public float CurrentTime => currentTime;
+        public bool IsTimerPaused => isTimerPaused;
 
         // Events
         public UnityEvent<int> OnXPChanged;
         public UnityEvent<int> OnLevelUp;
         public UnityEvent<int> OnKillCountChanged;
+        public UnityEvent<float> OnTimerUpdated;
 
         private void Awake() {
             if (Instance != null && Instance != this) {
@@ -79,13 +86,26 @@ namespace HexaBit.Core {
                     // Set Follow and LookAt to the first hero that was spawned
                     vcam.Follow = activeHeroes[0].transform;
                     vcam.LookAt = activeHeroes[0].transform;
-                } 
+                }
             }
         }
 
-        // XP is shared and added directly to the pool.
+        private void Update() {
+            if (!isTimerPaused) {
+                currentTime += Time.deltaTime;
+                OnTimerUpdated?.Invoke(currentTime);
+            }
+        }
 
-            public void AddXP(int amount, HeroController hero) {
+        /// <summary>
+        /// Pauses or resumes the game timer.
+        /// </summary>
+        public void SetTimerPaused(bool paused) {
+            isTimerPaused = paused;
+        }
+
+        // XP is shared and added directly to the pool.
+        public void AddXP(int amount, HeroController hero) {
 
             currentXP += amount;
             OnXPChanged?.Invoke(currentXP);
@@ -127,7 +147,7 @@ namespace HexaBit.Core {
             public string displayName;
             public string description;
             public Sprite icon;
-            public bool isWeapon; 
+            public bool isWeapon;
             public int targetLevel;
             public System.Action onSelected;
         }
@@ -158,18 +178,18 @@ namespace HexaBit.Core {
             // Shuffle the available items
             List<Object> shuffledPool = availableItems.OrderBy(x => System.Guid.NewGuid()).ToList();
 
-            
+
             foreach (var item in shuffledPool) {
                 if (options.Count >= count) break;
 
-               
+
                 if (item is WeaponData weaponData) {
                     LevelUpOption option = weaponData.GetUpgradeOption(hero);
                     options.Add(option);
                 } else if (item is BuffData buffData) {
                     LevelUpOption option = buffData.GetUpgradeOption(hero);
                     options.Add(option);
-                } 
+                }
             }
 
             // Fill remaining slots with "Skip" option

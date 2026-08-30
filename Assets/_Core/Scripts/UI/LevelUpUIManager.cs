@@ -37,6 +37,11 @@ namespace HexaBit.Core {
             _targetHero = targetHero;
             _onChoiceMade = onChoiceMade;
 
+            // Pause the game timer
+            if (GameplayManager.Instance != null) {
+                GameplayManager.Instance.SetTimerPaused(true);
+            }
+
             Time.timeScale = 0f;
             levelUpPanel.SetActive(true);
 
@@ -191,6 +196,12 @@ namespace HexaBit.Core {
 
         public void CloseLevelUpMenu() {
             Time.timeScale = 1f;
+
+            // Resume the game timer
+            if (GameplayManager.Instance != null) {
+                GameplayManager.Instance.SetTimerPaused(false);
+            }
+
             Destroy(gameObject);
         }
 
