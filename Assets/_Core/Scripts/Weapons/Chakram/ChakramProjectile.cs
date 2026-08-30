@@ -23,14 +23,14 @@ namespace HexaBit.Core {
         // Status data from weapon
         private StatusData poisonStatusData;
 
-        public override void Initialize(WeaponData data, int levelIndex, Vector2 dir, Transform hero) {
+        public override void Initialize(WeaponData data, int levelIndex, Vector2 dir, HeroController hero) {
             initialDirection = dir.normalized;
             currentDirection = initialDirection;
-            heroTransform = hero;
+            heroTransform = hero.transform;
 
             speed = data.GetFloat(levelIndex, DynamicParameter.Speed);
             maxDistance = data.GetFloat(levelIndex, DynamicParameter.MaxDistance);
-            hitboxRadius = data.GetFloat(levelIndex, DynamicParameter.Hitbox);
+            hitboxRadius = data.GetFloat(levelIndex, DynamicParameter.Hitbox) * hero.GlobalAreaModifier;
             damage = Mathf.RoundToInt(data.GetDamage(levelIndex));
 
             // Get status data from weapon
@@ -141,11 +141,6 @@ namespace HexaBit.Core {
                     weapon.OnChakramDestroyed();
             }
             Destroy(gameObject);
-        }
-
-        private void OnDrawGizmosSelected() {
-            Gizmos.color = Color.green;
-            Gizmos.DrawWireSphere(transform.position, hitboxRadius);
         }
     }
 }

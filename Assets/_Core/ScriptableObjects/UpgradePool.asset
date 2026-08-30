@@ -20,4 +20,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9e20170d8e1e5b84d9df6534f953308a, type: 2}
   - {fileID: 11400000, guid: a0c56bfbbd5c54f4b9643e25bd92eca8, type: 2}
   buffs:
+  - {fileID: 11400000, guid: 48c0e55514611464fbb05b5959d17b63, type: 2}
+  - {fileID: 11400000, guid: 1e3b0fef248de9448aa2712ca20f9633, type: 2}
+  - {fileID: 11400000, guid: 14a5cbd3cb5beb54c8bed63637d2f8df, type: 2}
+  - {fileID: 11400000, guid: 5507d4da92899b44aac1d064d57ab880, type: 2}
+  - {fileID: 11400000, guid: f090d2720cf46d14eae478f729e0caaa, type: 2}
+  - {fileID: 11400000, guid: 339ee72459b134e4986f96fd48122183, type: 2}
+  - {fileID: 11400000, guid: 9e5bf3edc49e6ba4a89b6163d0e66ba6, type: 2}
   - {fileID: 11400000, guid: 1de82299f6633d946b30cf78e974ec9d, type: 2}

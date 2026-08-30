@@ -9,7 +9,7 @@ namespace HexaBit.Core {
         public float GlobalDamageMultiplier { get; private set; } = 1f;
         public float GlobalCooldownModifier { get; private set; } = 1f;
         public float GlobalAreaModifier { get; private set; } = 1f;
-        public float GlobalPickupRadius { get; private set; } = 3f;
+        public float GlobalPickupRadius { get; private set; } = 0.5f;
         public float GlobalXPMultiplier { get; private set; } = 1f;
         public float GlobalArmor { get; private set; } = 0f;
 
@@ -44,7 +44,7 @@ namespace HexaBit.Core {
             GlobalAreaModifier = 1f + areaBonus;
             GlobalArmor = heroData.armor + armorBonus;
             GlobalXPMultiplier = heroData.growthMultiplier * (1f + xpBonus);
-            GlobalPickupRadius = 3f + pickupBonus;
+            GlobalPickupRadius = 0.5f + pickupBonus;
 
             currentSpeed = heroData.moveSpeed * (1f + speedBonus);
 

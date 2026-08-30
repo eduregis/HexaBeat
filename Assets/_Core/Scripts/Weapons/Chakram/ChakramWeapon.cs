@@ -25,7 +25,7 @@ namespace HexaBit.Core {
             GameObject chakramGO = Instantiate(data.attackPrefab, transform.position, Quaternion.identity);
             ChakramProjectile chakram = chakramGO.GetComponent<ChakramProjectile>();
             if (chakram != null) {
-                chakram.Initialize(data, currentLevel, direction, hero.transform);
+                chakram.Initialize(data, currentLevel, direction, hero);
                 isThrowing = true;
             }
         }

@@ -14,7 +14,7 @@ namespace HexaBit.Core {
         private Transform target;
         private bool isDead = false;
 
-        public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 direction, Transform heroTransform) {
+        public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 direction, HeroController hero) {
             data = weaponData;
             level = levelIndex;
             splashArea = data.GetFloat(level, DynamicParameter.SplashArea);

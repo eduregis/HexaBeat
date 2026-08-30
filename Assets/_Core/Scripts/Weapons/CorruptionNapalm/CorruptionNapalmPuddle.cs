@@ -22,13 +22,13 @@ namespace HexaBit.Core {
         // Status data from weapon
         private StatusData corruptedStatusData;
 
-        public void Initialize(WeaponData weaponData, int levelIndex, Transform hero) {
+        public void Initialize(WeaponData weaponData, int levelIndex, HeroController hero) {
             data = weaponData;
             level = levelIndex;
-            heroTransform = hero;
+            heroTransform = hero.transform;
 
             duration = data.GetFloat(level, DynamicParameter.Duration);
-            radius = data.GetFloat(level, DynamicParameter.Radius);
+            radius = data.GetFloat(level, DynamicParameter.Radius) * hero.GlobalAreaModifier;
             damagePerTick = Mathf.RoundToInt(data.GetDamage(level));
             tickInterval = data.GetFloat(level, DynamicParameter.Tick);
 

@@ -12,7 +12,7 @@ namespace HexaBit.Core {
         private WeaponData data;
         private int level;
         private Vector2 direction;
-        private Transform heroTransform;
+        private HeroController hero;
         private Vector3 targetPosition;
         private bool hasReachedTarget = false;
         private bool hasCollided = false;
@@ -20,11 +20,11 @@ namespace HexaBit.Core {
         // Collision detection radius
         [SerializeField] private float collisionRadius = 0.4f;
 
-        public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 dir, Transform hero) {
+        public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 dir, HeroController hero) {
             data = weaponData;
             level = levelIndex;
             direction = dir.normalized;
-            heroTransform = hero;
+            this.hero = hero;
 
             float range = data.GetFloat(levelIndex, DynamicParameter.Range);
             targetPosition = transform.position + (Vector3)(direction * range);
@@ -84,7 +84,7 @@ namespace HexaBit.Core {
             GameObject puddleGO = Instantiate(puddlePrefab, position, Quaternion.identity);
             CorruptionNapalmPuddle puddle = puddleGO.GetComponent<CorruptionNapalmPuddle>();
             if (puddle != null) {
-                puddle.Initialize(data, level, heroTransform);
+                puddle.Initialize(data, level, hero);
             } else {
                 Destroy(puddleGO);
             }

@@ -32,15 +32,22 @@ namespace HexaBit.Core {
         [Header("Upgrade Pool")]
         [SerializeField] private UpgradePoolData upgradePoolData;
 
+        [Header("Timer")]
+        [SerializeField] private float currentTime = 0f;
+        private bool isTimerPaused = false;
+
         public int CurrentXP => currentXP;
         public int CurrentLevel => currentLevel;
         public int TotalKills => totalKills;
         public int XPToNextLevel => baseXPToLevel + (currentLevel - 1) * xpPerLevelMultiplier;
+        public float CurrentTime => currentTime;
+        public bool IsTimerPaused => isTimerPaused;
 
         // Events
         public UnityEvent<int> OnXPChanged;
         public UnityEvent<int> OnLevelUp;
         public UnityEvent<int> OnKillCountChanged;
+        public UnityEvent<float> OnTimerUpdated;
 
         private void Awake() {
             if (Instance != null && Instance != this) {
@@ -79,12 +86,27 @@ namespace HexaBit.Core {
                     // Set Follow and LookAt to the first hero that was spawned
                     vcam.Follow = activeHeroes[0].transform;
                     vcam.LookAt = activeHeroes[0].transform;
-                } 
+                }
             }
         }
 
+        private void Update() {
+            if (!isTimerPaused) {
+                currentTime += Time.deltaTime;
+                OnTimerUpdated?.Invoke(currentTime);
+            }
+        }
+
+        /// <summary>
+        /// Pauses or resumes the game timer.
+        /// </summary>
+        public void SetTimerPaused(bool paused) {
+            isTimerPaused = paused;
+        }
+
         // XP is shared and added directly to the pool.
-        public void AddXP(int amount) {
+        public void AddXP(int amount, HeroController hero) {
+
             currentXP += amount;
             OnXPChanged?.Invoke(currentXP);
 
@@ -125,7 +147,7 @@ namespace HexaBit.Core {
             public string displayName;
             public string description;
             public Sprite icon;
-            public bool isWeapon; 
+            public bool isWeapon;
             public int targetLevel;
             public System.Action onSelected;
         }
@@ -156,24 +178,17 @@ namespace HexaBit.Core {
             // Shuffle the available items
             List<Object> shuffledPool = availableItems.OrderBy(x => System.Guid.NewGuid()).ToList();
 
-            Debug.Log($"GenerateChoices: Generating {count} options for hero {hero.name}");
-            Debug.Log($"Available items: {shuffledPool.Count} (Weapons: {upgradePoolData.GetAvailableWeapons(hero).Count}, Buffs: {upgradePoolData.GetAvailableBuffs(hero).Count})");
 
             foreach (var item in shuffledPool) {
                 if (options.Count >= count) break;
 
-                Debug.Log($"GenerateChoices: Processing item: {item.name} (Type: {item.GetType()})");
 
                 if (item is WeaponData weaponData) {
                     LevelUpOption option = weaponData.GetUpgradeOption(hero);
                     options.Add(option);
-                    Debug.Log($"Added Weapon option: {option.displayName}, targetLevel={option.targetLevel}");
                 } else if (item is BuffData buffData) {
                     LevelUpOption option = buffData.GetUpgradeOption(hero);
                     options.Add(option);
-                    Debug.Log($"Added Buff option: {option.displayName}, targetLevel={option.targetLevel}");
-                } else {
-                    Debug.LogWarning($"GenerateChoices: Unknown item type: {item.GetType()} - skipping.");
                 }
             }
 
@@ -191,7 +206,6 @@ namespace HexaBit.Core {
             }
 
             // Log final summary
-            Debug.Log($"GenerateChoices: Generated {options.Count} options:");
             for (int i = 0; i < options.Count; i++) {
                 var opt = options[i];
                 Debug.Log($"  [{i}] {opt.displayName} | isWeapon={opt.isWeapon} | targetLevel={opt.targetLevel}");

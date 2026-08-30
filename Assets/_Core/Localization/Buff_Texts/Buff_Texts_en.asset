@@ -19,11 +19,67 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 19388977152
-    m_Localized: Injection
+    m_Localized: Reinforced Core
     m_Metadata:
       m_Items: []
   - m_Id: 178923524096
-    m_Localized: description
+    m_Localized: Increases the character's maximum health.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2485025621430272
+    m_Localized: Nano-Plating
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2485099294380032
+    m_Localized: Reduces the damage taken from each hit.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2487910224646144
+    m_Localized: Magnetron
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181016301457408
+    m_Localized: Increases the XP pickup radius.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181381054910464
+    m_Localized: Overclocker
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181519706017792
+    m_Localized: Increases the amount of XP gained.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182007834923008
+    m_Localized: Increases the damage of all weapons.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3181951593500672
+    m_Localized: Overdrive
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182206187753472
+    m_Localized: Coolant Sync
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3182273137233920
+    m_Localized: Reduces the cooldown of all weapons.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3183556048998400
+    m_Localized: Increases the character's movement speed.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3183220617924608
+    m_Localized: Accelerator
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3187625513734144
+    m_Localized: Amplifier
+    m_Metadata:
+      m_Items: []
+  - m_Id: 3187677460189184
+    m_Localized: Increases the area of effect of all weapons.
     m_Metadata:
       m_Items: []
   references:

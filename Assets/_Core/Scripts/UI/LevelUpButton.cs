@@ -18,9 +18,6 @@ namespace HexaBit.Core {
         public void SetSelected(bool isSelected) {
             if (selectionGlow != null) {
                 selectionGlow.gameObject.SetActive(isSelected);
-                Debug.Log($"SetSelected({isSelected}) on {gameObject.name} - Glow active: {selectionGlow.gameObject.activeSelf}");
-            } else {
-                Debug.LogWarning($"selectionGlow is null on {gameObject.name}!");
             }
         }
     }

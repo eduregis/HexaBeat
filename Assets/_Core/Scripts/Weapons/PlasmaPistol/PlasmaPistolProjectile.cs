@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace HexaBit.Core {
-    public class HomingPistolProjectile : WeaponEffect {
+    public class PlasmaPistolProjectile : WeaponEffect {
         [Header("Projectile Settings")]
         [SerializeField] private float maxLifetime = 3f; // Life time
 
@@ -10,7 +10,7 @@ namespace HexaBit.Core {
         private float damage;
         private float lifetimeTimer;
 
-        public override void Initialize(WeaponData data, int levelIndex, Vector2 dir, Transform heroTransform) {
+        public override void Initialize(WeaponData data, int levelIndex, Vector2 dir, HeroController hero) {
             damage = data.GetDamage(levelIndex);
             speed = data.GetFloat(levelIndex, DynamicParameter.Speed);
             direction = dir.normalized;

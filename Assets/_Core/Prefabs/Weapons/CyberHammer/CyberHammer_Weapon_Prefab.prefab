@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6704580486489842859}
   - component: {fileID: 7166994827142001092}
   m_Layer: 0
-  m_Name: SledgeHammer_Weapon_Prefab
+  m_Name: CyberHammer_Weapon_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
