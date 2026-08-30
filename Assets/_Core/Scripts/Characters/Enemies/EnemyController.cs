@@ -26,6 +26,10 @@ namespace HexaBit.Core {
 
         private HeroController heroController;
 
+        // Knockback state
+        private float knockbackTimer = 0f;
+        private const float knockbackDuration = 0.2f;
+
         protected override void Awake() {
             base.Awake();
             rb = GetComponent<Rigidbody2D>();
@@ -55,6 +59,7 @@ namespace HexaBit.Core {
             CurrentSpeed = baseSpeed;
             isDead = false;
             attackTimer = 0f;
+            knockbackTimer = 0f;
             if (animator != null) {
                 animator.SetBool("IsDead", false);
                 animator.SetTrigger("Respawn");
@@ -64,6 +69,24 @@ namespace HexaBit.Core {
         public void SetPlayerReference(HeroController hero) {
             heroController = hero;
             player = hero != null ? hero.transform : null;
+        }
+
+        /// <summary>
+        /// Applies a knockback force to the enemy and briefly prevents movement override.
+        /// </summary>
+        public void ApplyKnockback(float force, Vector2 direction) {
+            if (isDead) return;
+            if (rb == null) return;
+
+            // Reset velocity and wake up
+            rb.linearVelocity = Vector2.zero;
+            rb.WakeUp();
+
+            // Apply force
+            rb.AddForce(direction * force, ForceMode2D.Impulse);
+
+            // Activate knockback timer to prevent movement override
+            knockbackTimer = knockbackDuration;
         }
 
         private void OnEnable() {
@@ -79,6 +102,7 @@ namespace HexaBit.Core {
 
             isDead = false;
             attackTimer = 0f;
+            knockbackTimer = 0f;
             if (animator != null) {
                 animator.SetBool("IsDead", false);
                 animator.SetTrigger("Respawn");
@@ -98,8 +122,14 @@ namespace HexaBit.Core {
             if (isDead) return;
             if (heroController == null || heroController.IsDead) return;
 
+            // If knockback is active, don't override velocity
+            if (knockbackTimer > 0f) {
+                knockbackTimer -= Time.fixedDeltaTime;
+                return; // Skip normal movement while knockback is active
+            }
+
             Vector2 direction = (player.position - transform.position).normalized;
-            rb.MovePosition(rb.position + direction * CurrentSpeed * Time.fixedDeltaTime);
+            rb.linearVelocity = direction * CurrentSpeed;
 
             if (direction.x != 0) {
                 Vector3 scale = transform.localScale;

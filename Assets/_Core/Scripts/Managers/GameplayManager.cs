@@ -85,12 +85,9 @@ namespace HexaBit.Core {
 
         // XP is shared and added directly to the pool.
 
-            public void AddXP(int amount) {
-            // Apply the XP multiplier from hero (Overclocker)
-            HeroController hero = activeHeroes.Count > 0 ? activeHeroes[0] : null;
-            int modifiedAmount = hero != null ? Mathf.RoundToInt(amount * hero.GlobalXPMultiplier) : amount;
+            public void AddXP(int amount, HeroController hero) {
 
-            currentXP += modifiedAmount;
+            currentXP += amount;
             OnXPChanged?.Invoke(currentXP);
 
             while (currentXP >= XPToNextLevel) {
@@ -161,25 +158,18 @@ namespace HexaBit.Core {
             // Shuffle the available items
             List<Object> shuffledPool = availableItems.OrderBy(x => System.Guid.NewGuid()).ToList();
 
-            Debug.Log($"GenerateChoices: Generating {count} options for hero {hero.name}");
-            Debug.Log($"Available items: {shuffledPool.Count} (Weapons: {upgradePoolData.GetAvailableWeapons(hero).Count}, Buffs: {upgradePoolData.GetAvailableBuffs(hero).Count})");
-
+            
             foreach (var item in shuffledPool) {
                 if (options.Count >= count) break;
 
-                Debug.Log($"GenerateChoices: Processing item: {item.name} (Type: {item.GetType()})");
-
+               
                 if (item is WeaponData weaponData) {
                     LevelUpOption option = weaponData.GetUpgradeOption(hero);
                     options.Add(option);
-                    Debug.Log($"Added Weapon option: {option.displayName}, targetLevel={option.targetLevel}");
                 } else if (item is BuffData buffData) {
                     LevelUpOption option = buffData.GetUpgradeOption(hero);
                     options.Add(option);
-                    Debug.Log($"Added Buff option: {option.displayName}, targetLevel={option.targetLevel}");
-                } else {
-                    Debug.LogWarning($"GenerateChoices: Unknown item type: {item.GetType()} - skipping.");
-                }
+                } 
             }
 
             // Fill remaining slots with "Skip" option
@@ -196,7 +186,6 @@ namespace HexaBit.Core {
             }
 
             // Log final summary
-            Debug.Log($"GenerateChoices: Generated {options.Count} options:");
             for (int i = 0; i < options.Count; i++) {
                 var opt = options[i];
                 Debug.Log($"  [{i}] {opt.displayName} | isWeapon={opt.isWeapon} | targetLevel={opt.targetLevel}");

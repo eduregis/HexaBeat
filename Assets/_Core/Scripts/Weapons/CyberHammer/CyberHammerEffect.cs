@@ -105,22 +105,17 @@ namespace HexaBit.Core {
             if (other.CompareTag("Enemy")) {
                 EnemyController enemy = other.GetComponent<EnemyController>();
                 if (enemy != null && !hitEnemies.Contains(enemy)) {
-                    enemy.TakeDamage(damage);
+                    // Apply knockback using the enemy's built-in method
                     if (knockback > 0) {
-                        Rigidbody2D rb = enemy.GetComponent<Rigidbody2D>();
-                        if (rb != null) {
-                            Vector2 knockbackDir = (enemy.transform.position - transform.position).normalized;
-                            rb.AddForce(knockbackDir * knockback, ForceMode2D.Impulse);
-                        }
+                        Vector2 knockbackDir = (enemy.transform.position - transform.position).normalized;
+                        enemy.ApplyKnockback(knockback, knockbackDir);
                     }
+
+                    // Then apply damage
+                    enemy.TakeDamage(damage);
                     hitEnemies.Add(enemy);
                 }
             }
-        }
-
-        private void OnDrawGizmosSelected() {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, size);
         }
     }
 }

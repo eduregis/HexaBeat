@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1647549571976818017}
   - component: {fileID: 8040605034496716041}
   - component: {fileID: 5138504854747623965}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: XPDrop_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
