@@ -16,11 +16,23 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: 5d9b9906f171a594190160af4b6abf72
   m_Entries:
   - m_Id: 19388977152
-    m_Key: buff_injection_name
+    m_Key: buff_reinforced_core_name
     m_Metadata:
       m_Items: []
   - m_Id: 178923524096
-    m_Key: buff_injection_description
+    m_Key: buff_reinforced_core_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2485025621430272
+    m_Key: buff_nano_plating_name
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2485099294380032
+    m_Key: buff_nano_plating_description
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2487910224646144
+    m_Key: buff_magnetrom_name
     m_Metadata:
       m_Items: []
   m_Metadata:

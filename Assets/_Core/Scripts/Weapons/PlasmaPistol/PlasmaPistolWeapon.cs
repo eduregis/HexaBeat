@@ -1,7 +1,7 @@
 using UnityEngine;
 
 namespace HexaBit.Core {
-    public class HomingPistol : WeaponBase {
+    public class PlasmaPistolWeapon : WeaponBase {
         protected override void Fire() {
             if (data.attackPrefab == null) return;
 
@@ -23,7 +23,7 @@ namespace HexaBit.Core {
 
             for (int i = 0; i < projectileCount; i++) {
                 GameObject proj = Instantiate(data.attackPrefab, transform.position, Quaternion.identity);
-                HomingPistolProjectile effect = proj.GetComponent<HomingPistolProjectile>();
+                PlasmaPistolProjectile effect = proj.GetComponent<PlasmaPistolProjectile>();
                 if (effect != null) {
                     Vector2 dir = direction;
                     // Aplica offset angular para múltiplos projéteis
@@ -32,7 +32,7 @@ namespace HexaBit.Core {
                         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg + angleOffset;
                         dir = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
                     }
-                    effect.Initialize(data, currentLevel, dir, hero.transform);
+                    effect.Initialize(data, currentLevel, dir, hero);
                 }
             }
         }

@@ -2,12 +2,12 @@ using UnityEngine;
 
 namespace HexaBit.Core {
     public class HammerHeadCollision : MonoBehaviour {
-        [SerializeField] private SledgeHammerEffect parentEffect;
+        [SerializeField] private CyberHammerEffect parentEffect;
 
         private void Start() {
             // Busca o pai automaticamente se não estiver atribuído
             if (parentEffect == null)
-                parentEffect = GetComponentInParent<SledgeHammerEffect>();
+                parentEffect = GetComponentInParent<CyberHammerEffect>();
         }
 
         private void OnTriggerEnter2D(Collider2D other) {

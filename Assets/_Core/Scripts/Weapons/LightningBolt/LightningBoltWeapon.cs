@@ -20,7 +20,7 @@ namespace HexaBit.Core {
                 GameObject boltGO = Instantiate(data.attackPrefab, target.position, Quaternion.identity);
                 LightningBoltEffect effect = boltGO.GetComponent<LightningBoltEffect>();
                 if (effect != null) {
-                    effect.Initialize(data, currentLevel, Vector2.zero, hero.transform);
+                    effect.Initialize(data, currentLevel, Vector2.zero, hero);
                     effect.SetTarget(target);
                 }
             }

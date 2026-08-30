@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 namespace HexaBit.Core {
-    public class SledgeHammerEffect : WeaponEffect {
+    public class CyberHammerEffect : WeaponEffect {
         [Header("Swing Settings")]
         [SerializeField] private float swingDuration = 0.3f;
         [SerializeField] private EasingType easingType = EasingType.Senoidal;
@@ -23,11 +23,11 @@ namespace HexaBit.Core {
 
         private List<EnemyController> hitEnemies = new List<EnemyController>();
 
-        public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 dir, Transform heroTransform) {
+        public override void Initialize(WeaponData weaponData, int levelIndex, Vector2 dir, HeroController hero) {
             data = weaponData;
             level = levelIndex;
             direction = -dir.normalized;
-            this.heroTransform = heroTransform; // Armazena a referência injetada
+            this.heroTransform = hero.transform;
 
             totalAngle = data.GetFloat(level, DynamicParameter.Angle);
             size = data.GetFloat(level, DynamicParameter.Size);

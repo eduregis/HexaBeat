@@ -19,11 +19,11 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 190210396160
-    m_Localized: Pistola Teleguiada
+    m_Localized: Pistola de Plasma
     m_Metadata:
       m_Items: []
   - m_Id: 666188402688
-    m_Localized: Marreta
+    m_Localized: Cyber-Martelo
     m_Metadata:
       m_Items: []
   - m_Id: 272956251721728
@@ -35,19 +35,20 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 335790493696
-    m_Localized: "descri\xE7\xE3o"
+    m_Localized: "Dispara proj\xE9teis teleguiados que perseguem o inimigo mais pr\xF3ximo."
     m_Metadata:
       m_Items: []
   - m_Id: 734400368640
-    m_Localized: "descri\xE7\xE3o"
+    m_Localized: "Um golpe devastador em arco que empurra os inimigos para tr\xE1s."
     m_Metadata:
       m_Items: []
   - m_Id: 273103811530752
-    m_Localized: "descri\xE7\xE3o"
+    m_Localized: "Cai um raio sobre o inimigo mais pr\xF3ximo, causando dano em \xE1rea."
     m_Metadata:
       m_Items: []
   - m_Id: 716956364460032
-    m_Localized: "descri\xE7\xE3o"
+    m_Localized: "Um campo eletromagn\xE9tico pulsante que causa dano e reduz a velocidade
+      dos inimigos pr\xF3ximos."
     m_Metadata:
       m_Items: []
   - m_Id: 1942063061684224
@@ -55,11 +56,11 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 1942186340667392
-    m_Localized: "descri\xE7\xE3o"
+    m_Localized: "Um disco de l\xE2mina lan\xE7ado em linha reta que volta ao dono."
     m_Metadata:
       m_Items: []
   - m_Id: 2259146995683328
-    m_Localized: "descri\xE7\xE3o"
+    m_Localized: "Cria uma po\xE7a corruptora que danifica e enfraquece os inimigos."
     m_Metadata:
       m_Items: []
   - m_Id: 2259006947872768

@@ -21,7 +21,7 @@ namespace HexaBit.Core {
             GameObject projectileGO = Instantiate(data.attackPrefab, transform.position, Quaternion.identity);
             CorruptionNapalmProjectile projectile = projectileGO.GetComponent<CorruptionNapalmProjectile>();
             if (projectile != null) {
-                projectile.Initialize(data, currentLevel, direction, hero.transform);
+                projectile.Initialize(data, currentLevel, direction, hero);
             }
         }
 

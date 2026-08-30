@@ -84,8 +84,13 @@ namespace HexaBit.Core {
         }
 
         // XP is shared and added directly to the pool.
-        public void AddXP(int amount) {
-            currentXP += amount;
+
+            public void AddXP(int amount) {
+            // Apply the XP multiplier from hero (Overclocker)
+            HeroController hero = activeHeroes.Count > 0 ? activeHeroes[0] : null;
+            int modifiedAmount = hero != null ? Mathf.RoundToInt(amount * hero.GlobalXPMultiplier) : amount;
+
+            currentXP += modifiedAmount;
             OnXPChanged?.Invoke(currentXP);
 
             while (currentXP >= XPToNextLevel) {

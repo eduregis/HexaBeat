@@ -19,11 +19,23 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 19388977152
-    m_Localized: "Inje\xE7\xE3o"
+    m_Localized: "N\xFAcleo Refor\xE7ado"
     m_Metadata:
       m_Items: []
   - m_Id: 178923524096
-    m_Localized: "descri\xE7\xE3o"
+    m_Localized: "Aumenta a vida m\xE1xima do personagem."
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2485025621430272
+    m_Localized: Revestimento de Nanofibras
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2485099294380032
+    m_Localized: Reduz o dano recebido de cada golpe.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2487910224646144
+    m_Localized: Magnetron
     m_Metadata:
       m_Items: []
   references:

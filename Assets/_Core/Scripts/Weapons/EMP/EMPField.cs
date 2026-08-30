@@ -26,7 +26,7 @@ namespace HexaBit.Core {
             currentLevel = level;
             hero = heroController;
 
-            radius = data.GetFloat(currentLevel, DynamicParameter.Radius);
+            radius = data.GetFloat(currentLevel, DynamicParameter.Radius) * hero.GlobalAreaModifier;
             slowAmount = data.GetFloat(currentLevel, DynamicParameter.SlowAmount);
             damage = Mathf.RoundToInt(data.GetDamage(currentLevel));
             tickInterval = data.GetCooldown(currentLevel);
