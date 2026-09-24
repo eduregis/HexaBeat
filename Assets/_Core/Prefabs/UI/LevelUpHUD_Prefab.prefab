@@ -701,8 +701,8 @@ MonoBehaviour:
   - {fileID: 2398853979101620886, guid: b1a74ae7fe5cf8d42bcc1baeb112bef4, type: 3}
   - {fileID: -1849810437313239372, guid: b1a74ae7fe5cf8d42bcc1baeb112bef4, type: 3}
   defaultIcon: {fileID: 7571422448734101759, guid: b2158d16e0a3b384b9bf0922f58d3795, type: 3}
-  weaponColor: {r: 1, g: 0.07843138, b: 0.5764706, a: 1}
-  buffColor: {r: 0.11764705, g: 0.93333334, b: 0.16671576, a: 1}
+  weaponColor: {r: 0.6980392, g: 0.1333333, b: 0.1333333, a: 1}
+  buffColor: {r: 0, g: 0.5019608, b: 0.5019608, a: 1}
 --- !u!1 &6986234065841106671
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,7 +763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.13261355, b: 0.6037736, a: 0.6745098}
+  m_Color: {r: 0.001334992, g: 0.021394815, b: 0.09433961, a: 0.89411765}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -863,6 +863,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2957674977959733916}
     m_Modifications:
+    - target: {fileID: 3343009820719358777, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c72a7812c65e4e43beaa3c8f94dd1a3, type: 3}
+    - target: {fileID: 3343009820719358777, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3718546076906113040, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1076,6 +1084,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5693920717748540091, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1317690327311799502, guid: 1d02f227a3e65b6419efc9b196018b84, type: 3}
+    - target: {fileID: 5693920717748540091, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566579460924281643, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1317690327311799502, guid: 1d02f227a3e65b6419efc9b196018b84, type: 3}
     - target: {fileID: 9157238765413803583, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
       propertyPath: m_Name
       value: ThirdButton
@@ -1224,6 +1244,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6566579460924281643, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1317690327311799502, guid: 1d02f227a3e65b6419efc9b196018b84, type: 3}
     - target: {fileID: 9157238765413803583, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
       propertyPath: m_Name
       value: SecondButton
@@ -1607,14 +1631,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8600808098085495110}
     m_Modifications:
-    - target: {fileID: 3855967534409010971, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3855967534409010971, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
-      propertyPath: m_Navigation.m_SelectOnDown
-      value: 
-      objectReference: {fileID: 2316591786227882172}
     - target: {fileID: 5062537045257238815, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -1646,18 +1662,6 @@ PrefabInstance:
     - target: {fileID: 5062537045257238815, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
       propertyPath: m_SizeDelta.y
       value: 88
-      objectReference: {fileID: 0}
-    - target: {fileID: 5062537045257238815, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5062537045257238815, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5062537045257238815, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5062537045257238815, guid: 4ca433359134452468bc6206e1e897f0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1864,6 +1868,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2957674977959733916}
     m_Modifications:
+    - target: {fileID: 910668824475270548, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9433962
+      objectReference: {fileID: 0}
+    - target: {fileID: 910668824475270548, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8346979
+      objectReference: {fileID: 0}
+    - target: {fileID: 910668824475270548, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Color.r
+      value: 0.004449993
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343009820719358777, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 3c72a7812c65e4e43beaa3c8f94dd1a3, type: 3}
+    - target: {fileID: 3343009820719358777, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343009820719358777, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3343009820719358777, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3718546076906113040, guid: 9b3ccb9ecfdf0e34389f78fdde059ea8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

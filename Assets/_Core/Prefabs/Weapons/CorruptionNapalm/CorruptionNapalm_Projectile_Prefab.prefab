@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -50,6 +50,7 @@ MonoBehaviour:
   projectileSpeed: 5
   rotationSpeed: 360
   puddlePrefab: {fileID: 8062793920900308070, guid: f4828029c3de6f34e823221e0e7cab0d, type: 3}
+  collisionRadius: 0.4
 --- !u!212 &4545599946943699899
 SpriteRenderer:
   serializedVersion: 2
@@ -99,7 +100,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 679709998, guid: feb6e2aa0a3db7540a806e22ac7be3e5, type: 3}
+  m_Sprite: {fileID: -5264150899349736606, guid: d5b08021e4c29064c8b86813e604be21, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -694,14 +694,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2267975535158423393, guid: 2142e115cb5ae6248ab9aa28935048f6, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -920,7 +920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: HexaBit.Core::HexaBit.Core.LevelUpButton
   frameImage: {fileID: 6586325171162132587}
-  iconImage: {fileID: 6566579460924281643}
+  iconImage: {fileID: 0}
   backgroundImage: {fileID: 2402269949679193578}
   selectionGlow: {fileID: 5323419318656617931}
   nameText: {fileID: 92417303329796223}
