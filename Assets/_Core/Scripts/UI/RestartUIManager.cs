@@ -1,19 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 namespace HexaBit.Core {
-    public class PauseUIManager : MonoBehaviour {
-        public static PauseUIManager Instance { get; private set; }
+    public class RestartUIManager : MonoBehaviour {
+        public static RestartUIManager Instance { get; private set; }
 
         [Header("UI References")]
-        [SerializeField] private GameObject pausePanel;
-        [SerializeField] private HUDButton resumeButton;
+        [SerializeField] private GameObject restartPanel;
         [SerializeField] private HUDButton restartButton;
         [SerializeField] private HUDButton quitButton;
 
-        private bool _isPaused = false;
-        public bool IsPaused => _isPaused;
+        private bool _isOpen = false;
+        public bool IsOpen => _isOpen;
         private HUDButton[] _buttons;
 
         private void Awake() {
@@ -24,17 +24,12 @@ namespace HexaBit.Core {
             Instance = this;
             DontDestroyOnLoad(gameObject);
 
-            _buttons = new HUDButton[] { resumeButton, restartButton, quitButton };
+            _buttons = new HUDButton[] { restartButton, quitButton };
 
-            if (pausePanel != null)
-                pausePanel.SetActive(false);
+            if (restartPanel != null)
+                restartPanel.SetActive(false);
 
             // Setup button listeners
-            if (resumeButton != null && resumeButton.button != null) {
-                resumeButton.button.onClick.RemoveAllListeners();
-                resumeButton.button.onClick.AddListener(ResumeGame);
-            }
-
             if (restartButton != null && restartButton.button != null) {
                 restartButton.button.onClick.RemoveAllListeners();
                 restartButton.button.onClick.AddListener(RestartGame);
@@ -76,29 +71,35 @@ namespace HexaBit.Core {
             }
         }
 
-        public void OpenPauseMenu() {
-            if (_isPaused) return;
+        /// <summary>
+        /// Opens the restart menu, freezing the game. Called when all heroes die.
+        /// </summary>
+        public void OpenRestartMenu() {
+            if (_isOpen) return;
 
-            _isPaused = true;
+            _isOpen = true;
 
             if (GameplayManager.Instance != null) {
                 GameplayManager.Instance.SetTimerPaused(true);
             }
 
             Time.timeScale = 0f;
-            if (pausePanel != null)
-                pausePanel.SetActive(true);
+            if (restartPanel != null)
+                restartPanel.SetActive(true);
 
-            if (resumeButton != null && resumeButton.button != null && EventSystem.current != null) {
-                EventSystem.current.SetSelectedGameObject(resumeButton.button.gameObject);
+            if (restartButton != null && restartButton.button != null && EventSystem.current != null) {
+                EventSystem.current.SetSelectedGameObject(restartButton.button.gameObject);
                 SetSelectedButton(0);
             }
         }
 
-        public void ResumeGame() {
-            if (!_isPaused) return;
+        /// <summary>
+        /// Closes the restart menu without restarting (not normally used).
+        /// </summary>
+        public void CloseRestartMenu() {
+            if (!_isOpen) return;
 
-            _isPaused = false;
+            _isOpen = false;
 
             Time.timeScale = 1f;
 
@@ -106,14 +107,17 @@ namespace HexaBit.Core {
                 GameplayManager.Instance.SetTimerPaused(false);
             }
 
-            if (pausePanel != null)
-                pausePanel.SetActive(false);
+            if (restartPanel != null)
+                restartPanel.SetActive(false);
 
             if (EventSystem.current != null) {
                 EventSystem.current.SetSelectedGameObject(null);
             }
         }
 
+        /// <summary>
+        /// Reloads the current scene, restarting the run.
+        /// </summary>
         public void RestartGame() {
             Time.timeScale = 1f;
 
@@ -121,21 +125,20 @@ namespace HexaBit.Core {
                 GameplayManager.Instance.SetTimerPaused(false);
             }
 
-            // Hide the pause panel before reloading
-            if (pausePanel != null)
-                pausePanel.SetActive(false);
+            // Hide the restart panel before reloading
+            if (restartPanel != null)
+                restartPanel.SetActive(false);
 
-            _isPaused = false;
+            _isOpen = false;
 
-            UnityEngine.SceneManagement.SceneManager.LoadScene(
-                UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
         /// <summary>
         /// Quit action. Currently a no-op placeholder for future navigation.
         /// </summary>
         public void QuitGame() {
-            Debug.Log("PauseUIManager: QuitGame called (no-op for now)");
+            Debug.Log("RestartUIManager: QuitGame called (no-op for now)");
             // TODO: Implement future navigation (e.g., return to main menu)
         }
 
