@@ -33,6 +33,12 @@ namespace HexaBit.Core {
                 return;
             }
 
+            // If time is frozen but pause menu isn't open, another menu (LevelUp, Restart) is active.
+            // Ignore the pause input in this case.
+            if (Time.timeScale == 0f && !PauseUIManager.Instance.IsPaused) {
+                return;
+            }
+
             // Toggle: if paused, resume; otherwise, open pause menu
             if (PauseUIManager.Instance.IsPaused) {
                 PauseUIManager.Instance.ResumeGame();
