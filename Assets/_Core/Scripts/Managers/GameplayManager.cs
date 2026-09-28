@@ -188,21 +188,6 @@ namespace HexaBit.Core {
         }
 
         /// <summary>
-        /// Finds and caches the InputSystemUIInputModule from the scene's EventSystem.
-        /// </summary>
-        private void CacheUIModule() {
-            var eventSystem = FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>();
-            if (eventSystem != null) {
-                cachedUIModule = eventSystem.GetComponent<InputSystemUIInputModule>();
-                if (cachedUIModule == null) {
-                    Debug.LogWarning("GameplayManager: InputSystemUIInputModule not found on EventSystem!");
-                }
-            } else {
-                Debug.LogWarning("GameplayManager: EventSystem not found in the scene!");
-            }
-        }
-
-        /// <summary>
         /// Assigns the cached UI Input Module to the given hero's PlayerInput component.
         /// </summary>
         private void AssignUIModuleToHero(HeroController hero) {
@@ -236,25 +221,6 @@ namespace HexaBit.Core {
 
             if (allDead && RestartUIManager.Instance != null) {
                 RestartUIManager.Instance.OpenRestartMenu();
-            }
-        }
-
-        /// <summary>
-        /// Assigns the cached UI Input Module to the given hero's PlayerInput component.
-        /// </summary>
-        private void AssignUIModuleToHero(HeroController hero) {
-            if (hero == null) return;
-
-            PlayerInput playerInput = hero.GetComponent<PlayerInput>();
-            if (playerInput != null) {
-                if (cachedUIModule != null) {
-                    playerInput.uiInputModule = cachedUIModule;
-                    Debug.Log($"GameplayManager: UI Input Module assigned to {hero.name}");
-                } else {
-                    Debug.LogWarning($"GameplayManager: Cannot assign UI Input Module to {hero.name} - module is null!");
-                }
-            } else {
-                Debug.LogWarning($"GameplayManager: PlayerInput not found on {hero.name}!");
             }
         }
 
