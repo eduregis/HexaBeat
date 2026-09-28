@@ -29,6 +29,9 @@ namespace HexaBit.Core {
         [Header("Level Up UI")]
         [SerializeField] private GameObject levelUpPanelPrefab;
 
+        [Header("UI Prefabs")]
+        [SerializeField] private GameObject pausePanelPrefab;
+
         [Header("Upgrade Pool")]
         [SerializeField] private UpgradePoolData upgradePoolData;
 
@@ -87,6 +90,12 @@ namespace HexaBit.Core {
                     vcam.Follow = activeHeroes[0].transform;
                     vcam.LookAt = activeHeroes[0].transform;
                 }
+            }
+
+            if (pausePanelPrefab != null) {
+                Instantiate(pausePanelPrefab);
+            } else {
+                Debug.LogWarning("GameplayManager: pausePanelPrefab is not assigned!");
             }
         }
 

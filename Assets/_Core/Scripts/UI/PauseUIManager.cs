@@ -4,20 +4,27 @@ using UnityEngine.EventSystems;
 
 namespace HexaBit.Core {
     public class PauseUIManager : MonoBehaviour {
+        public static PauseUIManager Instance { get; private set; }
+
         [Header("UI References")]
         [SerializeField] private GameObject pausePanel;
         [SerializeField] private HUDButton resumeButton;
         [SerializeField] private HUDButton restartButton;
-        [SerializeField] private HUDButton quitButton;
 
         private bool _isPaused = false;
+        public bool IsPaused => _isPaused;
         private HUDButton[] _buttons;
 
         private void Awake() {
-            // Collect all buttons for navigation
-            _buttons = new HUDButton[] { resumeButton, restartButton, quitButton };
+            if (Instance != null && Instance != this) {
+                Destroy(gameObject);
+                return;
+            }
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
 
-            // Ensure the panel starts hidden
+            _buttons = new HUDButton[] { resumeButton, restartButton };
+
             if (pausePanel != null)
                 pausePanel.SetActive(false);
 
@@ -32,18 +39,9 @@ namespace HexaBit.Core {
                 restartButton.button.onClick.AddListener(RestartGame);
             }
 
-            if (quitButton != null && quitButton.button != null) {
-                quitButton.button.onClick.RemoveAllListeners();
-                quitButton.button.onClick.AddListener(QuitGame);
-            }
-
-            // Setup selection listeners for glow feedback
             SetupSelectionListeners();
         }
 
-        /// <summary>
-        /// Sets up EventTrigger listeners to detect when each button is selected.
-        /// </summary>
         private void SetupSelectionListeners() {
             for (int i = 0; i < _buttons.Length; i++) {
                 if (_buttons[i] == null || _buttons[i].button == null) continue;
@@ -64,9 +62,6 @@ namespace HexaBit.Core {
             }
         }
 
-        /// <summary>
-        /// Highlights the selected button and removes highlight from others.
-        /// </summary>
         private void SetSelectedButton(int index) {
             for (int i = 0; i < _buttons.Length; i++) {
                 if (_buttons[i] != null) {
@@ -75,15 +70,11 @@ namespace HexaBit.Core {
             }
         }
 
-        /// <summary>
-        /// Opens the pause menu, freezing the game.
-        /// </summary>
         public void OpenPauseMenu() {
             if (_isPaused) return;
 
             _isPaused = true;
 
-            // Pause the game timer
             if (GameplayManager.Instance != null) {
                 GameplayManager.Instance.SetTimerPaused(true);
             }
@@ -92,16 +83,12 @@ namespace HexaBit.Core {
             if (pausePanel != null)
                 pausePanel.SetActive(true);
 
-            // Select the resume button by default
             if (resumeButton != null && resumeButton.button != null && EventSystem.current != null) {
                 EventSystem.current.SetSelectedGameObject(resumeButton.button.gameObject);
                 SetSelectedButton(0);
             }
         }
 
-        /// <summary>
-        /// Closes the pause menu, resuming the game.
-        /// </summary>
         public void ResumeGame() {
             if (!_isPaused) return;
 
@@ -109,7 +96,6 @@ namespace HexaBit.Core {
 
             Time.timeScale = 1f;
 
-            // Resume the game timer
             if (GameplayManager.Instance != null) {
                 GameplayManager.Instance.SetTimerPaused(false);
             }
@@ -117,15 +103,11 @@ namespace HexaBit.Core {
             if (pausePanel != null)
                 pausePanel.SetActive(false);
 
-            // Clear selection
             if (EventSystem.current != null) {
                 EventSystem.current.SetSelectedGameObject(null);
             }
         }
 
-        /// <summary>
-        /// Restarts the current scene.
-        /// </summary>
         public void RestartGame() {
             Time.timeScale = 1f;
 
@@ -137,21 +119,9 @@ namespace HexaBit.Core {
                 UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex);
         }
 
-        /// <summary>
-        /// Quits the game (or returns to main menu).
-        /// </summary>
-        public void QuitGame() {
-            Time.timeScale = 1f;
-
-#if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-#else
-                Application.Quit();
-#endif
-        }
-
         private void OnDestroy() {
             Time.timeScale = 1f;
+            if (Instance == this) Instance = null;
         }
     }
 }

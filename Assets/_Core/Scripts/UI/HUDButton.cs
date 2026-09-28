@@ -6,7 +6,6 @@ namespace HexaBit.Core {
     public class HUDButton : MonoBehaviour {
         [Header("UI References")]
         public Image backgroundImage;
-        public Image iconImage;
         public Image selectionGlow;
         public TextMeshProUGUI labelText;
 
