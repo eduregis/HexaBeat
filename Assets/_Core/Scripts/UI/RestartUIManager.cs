@@ -72,18 +72,20 @@ namespace HexaBit.Core {
         }
 
         /// <summary>
-        /// Opens the restart menu, freezing the game. Called when all heroes die.
+        /// Opens the restart menu. Does NOT freeze time - the arena stays visible.
+        /// The hero cannot move because IsDead is true.
         /// </summary>
         public void OpenRestartMenu() {
             if (_isOpen) return;
 
             _isOpen = true;
 
+            // Pause only the timer (survival time stops at death), but not the game itself
             if (GameplayManager.Instance != null) {
                 GameplayManager.Instance.SetTimerPaused(true);
             }
 
-            Time.timeScale = 0f;
+            // 🔥 Do NOT freeze time - arena remains visible and animated
             if (restartPanel != null)
                 restartPanel.SetActive(true);
 
@@ -101,8 +103,6 @@ namespace HexaBit.Core {
 
             _isOpen = false;
 
-            Time.timeScale = 1f;
-
             if (GameplayManager.Instance != null) {
                 GameplayManager.Instance.SetTimerPaused(false);
             }
@@ -119,13 +119,11 @@ namespace HexaBit.Core {
         /// Reloads the current scene, restarting the run.
         /// </summary>
         public void RestartGame() {
-            Time.timeScale = 1f;
-
+            // GameplayManager resets the timer state on scene reload
             if (GameplayManager.Instance != null) {
                 GameplayManager.Instance.SetTimerPaused(false);
             }
 
-            // Hide the restart panel before reloading
             if (restartPanel != null)
                 restartPanel.SetActive(false);
 
@@ -143,7 +141,6 @@ namespace HexaBit.Core {
         }
 
         private void OnDestroy() {
-            Time.timeScale = 1f;
             if (Instance == this) Instance = null;
         }
     }

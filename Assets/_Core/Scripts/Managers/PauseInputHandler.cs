@@ -33,8 +33,12 @@ namespace HexaBit.Core {
                 return;
             }
 
-            // If time is frozen but pause menu isn't open, another menu (LevelUp, Restart) is active.
-            // Ignore the pause input in this case.
+            // Block pause input if the restart menu is open
+            if (RestartUIManager.Instance != null && RestartUIManager.Instance.IsOpen) {
+                return;
+            }
+
+            // Block pause input if time is frozen by another menu (Level Up)
             if (Time.timeScale == 0f && !PauseUIManager.Instance.IsPaused) {
                 return;
             }
