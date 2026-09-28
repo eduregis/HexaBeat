@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Collections;
+using UnityEngine;
 
 namespace HexaBit.Core {
     public class SpawnerController : MonoBehaviour {
@@ -24,15 +24,35 @@ namespace HexaBit.Core {
         private int currentEnemyCount = 0;
 
         private void Start() {
-            // Find player if not assigned
-            if (player == null) {
-                GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-                if (playerObj != null) player = playerObj.transform;
-                else Debug.LogError("SpawnerController: Player not found!");
-            }
-
             mainCamera = Camera.main;
             if (mainCamera == null) Debug.LogError("SpawnerController: Main Camera not found!");
+
+            // Wait until the hero is spawned by GameplayManager, then start spawning
+            StartCoroutine(WaitForPlayerAndStart());
+        }
+
+        /// <summary>
+        /// Waits until a GameObject with the "Player" tag exists, then starts spawning.
+        /// Handles the race condition where SpawnerController runs before GameplayManager spawns the hero.
+        /// </summary>
+        private IEnumerator WaitForPlayerAndStart() {
+            // If player is not assigned, wait until it exists
+            if (player == null) {
+                Debug.Log("SpawnerController: Waiting for player...");
+                while (player == null) {
+                    GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+                    if (playerObj != null) {
+                        player = playerObj.transform;
+                        Debug.Log($"SpawnerController: Player found: {playerObj.name}");
+                    }
+                    yield return null;
+                }
+            }
+
+            // Reset counters and start the spawn loop
+            currentEnemyCount = 0;
+            currentWave = 0;
+            waveTimer = 0f;
 
             StartCoroutine(SpawnLoop());
         }
@@ -51,6 +71,9 @@ namespace HexaBit.Core {
             while (true) {
                 yield return new WaitForSeconds(spawnInterval);
                 if (currentEnemyCount >= maxEnemies) continue;
+
+                // Skip if player is still null (e.g., hero died)
+                if (player == null) continue;
 
                 Vector3 spawnPos = GetSpawnPosition();
                 GameObject enemy = Instantiate(enemyPrefab, spawnPos, Quaternion.identity);

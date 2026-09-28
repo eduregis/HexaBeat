@@ -75,6 +75,10 @@ namespace HexaBit.Core {
 
         // --- Movement ---
         public void OnMove(InputValue value) {
+            if (Time.timeScale == 0f || IsDead) {
+                moveInput = Vector2.zero;
+                return;
+            }
             moveInput = value.Get<Vector2>().normalized;
             if (moveInput != Vector2.zero) {
                 FacingDirection = moveInput;
@@ -85,6 +89,7 @@ namespace HexaBit.Core {
         }
 
         private void FixedUpdate() {
+            if (Time.timeScale == 0f || IsDead) return;
             // Use CurrentSpeed which is modified by statuses
             float effectiveSpeed = CurrentSpeed > 0 ? CurrentSpeed : currentSpeed;
             Vector2 targetPosition = rb.position + moveInput * effectiveSpeed * Time.fixedDeltaTime;
