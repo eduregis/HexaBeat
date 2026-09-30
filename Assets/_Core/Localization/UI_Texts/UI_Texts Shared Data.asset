@@ -51,6 +51,10 @@ MonoBehaviour:
     m_Key: hud_quit_btn
     m_Metadata:
       m_Items: []
+  - m_Id: 14575698231418880
+    m_Key: hud_highscore
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

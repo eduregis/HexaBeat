@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 namespace HexaBit.Core {
     public class GameOverUIManager : MonoBehaviour {
@@ -12,9 +15,21 @@ namespace HexaBit.Core {
         [SerializeField] private HUDButton restartButton;
         [SerializeField] private HUDButton quitButton;
 
+        [Header("Score Labels")]
+        [SerializeField] private TextMeshProUGUI killsText;      // Kills desta run
+        [SerializeField] private TextMeshProUGUI highScoreText;  // Melhor kills local
+
+        [Header("Localization")]
+        [SerializeField] private LocalizedString killsFormat     = new LocalizedString("UI_Texts", "hud_kills");
+        [SerializeField] private LocalizedString highScoreFormat = new LocalizedString("UI_Texts", "hud_highscore");
+
         private bool _isOpen = false;
         public bool IsOpen => _isOpen;
         private HUDButton[] _buttons;
+
+        // Guardamos os valores para reformatar quando o idioma mudar
+        private int _lastKills;
+        private long _lastHighScore;
 
         private void Awake() {
             if (Instance != null && Instance != this) {
@@ -29,7 +44,6 @@ namespace HexaBit.Core {
             if (restartPanel != null)
                 restartPanel.SetActive(false);
 
-            // Setup button listeners
             if (restartButton != null && restartButton.button != null) {
                 restartButton.button.onClick.RemoveAllListeners();
                 restartButton.button.onClick.AddListener(RestartGame);
@@ -41,6 +55,21 @@ namespace HexaBit.Core {
             }
 
             SetupSelectionListeners();
+        }
+
+        private void OnEnable() {
+            LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
+        }
+
+        private void OnDisable() {
+            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
+        }
+
+        private void OnLocaleChanged(UnityEngine.Localization.Locale newLocale) {
+            // Reformata os textos se o menu estiver aberto
+            if (_isOpen) {
+                RefreshScoreTexts();
+            }
         }
 
         private void SetupSelectionListeners() {
@@ -72,20 +101,29 @@ namespace HexaBit.Core {
         }
 
         /// <summary>
-        /// Opens the restart menu. Does NOT freeze time - the arena stays visible.
-        /// The hero cannot move because IsDead is true.
+        /// Abre o menu de game over com as estatísticas da run.
+        /// Salva os scores localmente e atualiza os textos localizados.
         /// </summary>
-        public void OpenGameOverMenu() {
+        public void OpenGameOverMenu(int totalKills, float survivalTime) {
             if (_isOpen) return;
-
             _isOpen = true;
 
-            // Pause only the timer (survival time stops at death), but not the game itself
-            if (GameplayManager.Instance != null) {
-                GameplayManager.Instance.SetTimerPaused(true);
-            }
+            // --- 1. Persistir scores (local por enquanto) ---
+            long timeScore = (long)(survivalTime * 1000f);
+            long killsScore = totalKills;
 
-            // 🔥 Do NOT freeze time - arena remains visible and animated
+            LocalLeaderboardService.SubmitScore(LeaderboardKeys.SurvivalTime, timeScore);
+            LocalLeaderboardService.SubmitScore(LeaderboardKeys.TotalKills,   killsScore);
+
+            // --- 2. Guardar valores e atualizar textos ---
+            _lastKills = totalKills;
+            _lastHighScore = LocalLeaderboardService.GetHighScore(LeaderboardKeys.TotalKills);
+            RefreshScoreTexts();
+
+            // --- 3. Lógica existente do menu ---
+            if (GameplayManager.Instance != null)
+                GameplayManager.Instance.SetTimerPaused(true);
+
             if (restartPanel != null)
                 restartPanel.SetActive(true);
 
@@ -96,16 +134,27 @@ namespace HexaBit.Core {
         }
 
         /// <summary>
-        /// Closes the restart menu without restarting (not normally used).
+        /// Overload de compatibilidade para chamadas sem estatísticas.
         /// </summary>
+        public void OpenGameOverMenu() {
+            OpenGameOverMenu(0, 0f);
+        }
+
+        private void RefreshScoreTexts() {
+            if (killsText != null && killsFormat != null) {
+                killsText.text = killsFormat.GetLocalizedString(_lastKills);
+            }
+            if (highScoreText != null && highScoreFormat != null) {
+                highScoreText.text = highScoreFormat.GetLocalizedString(_lastHighScore);
+            }
+        }
+
         public void CloseRestartMenu() {
             if (!_isOpen) return;
-
             _isOpen = false;
 
-            if (GameplayManager.Instance != null) {
+            if (GameplayManager.Instance != null)
                 GameplayManager.Instance.SetTimerPaused(false);
-            }
 
             if (restartPanel != null)
                 restartPanel.SetActive(false);
@@ -115,26 +164,17 @@ namespace HexaBit.Core {
             }
         }
 
-        /// <summary>
-        /// Reloads the current scene, restarting the run.
-        /// </summary>
         public void RestartGame() {
-            // GameplayManager resets the timer state on scene reload
-            if (GameplayManager.Instance != null) {
+            if (GameplayManager.Instance != null)
                 GameplayManager.Instance.SetTimerPaused(false);
-            }
 
             if (restartPanel != null)
                 restartPanel.SetActive(false);
 
             _isOpen = false;
-
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
 
-        /// <summary>
-        /// Quit action. Currently a no-op placeholder for future navigation.
-        /// </summary>
         public void QuitGame() {
             Debug.Log("GameOverUIManager: QuitGame called (no-op for now)");
             // TODO: Implement future navigation (e.g., return to main menu)

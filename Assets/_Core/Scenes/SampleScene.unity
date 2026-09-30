@@ -235,7 +235,7 @@ MonoBehaviour:
   vcam: {fileID: 845402945}
   levelUpPanelPrefab: {fileID: 6326986732019956444, guid: 4f10577951c5b864bb5a5e84a2434ccc, type: 3}
   pausePanelPrefab: {fileID: 8977130791948101297, guid: 8bfc0c61360414e3aade410ae3bc9d82, type: 3}
-  restartPanelPrefab: {fileID: 8638498894754675500, guid: b90ed79cea65946b6906eb6604e93fd0, type: 3}
+  gameOverPanelPrefab: {fileID: 8638498894754675500, guid: b90ed79cea65946b6906eb6604e93fd0, type: 3}
   upgradePoolData: {fileID: 11400000, guid: f3565500e19639341972ca7eb4fcafa1, type: 2}
   currentTime: 0
   OnXPChanged:

@@ -229,7 +229,7 @@ namespace HexaBit.Core {
                 }
 
                 if (GameOverUIManager.Instance != null) {
-                    GameOverUIManager.Instance.OpenGameOverMenu();
+                    GameOverUIManager.Instance.OpenGameOverMenu(totalKills, currentTime);
                 }
             }
         }

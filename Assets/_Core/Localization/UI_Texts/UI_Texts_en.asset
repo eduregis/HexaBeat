@@ -54,6 +54,10 @@ MonoBehaviour:
     m_Localized: QUIT
     m_Metadata:
       m_Items: []
+  - m_Id: 14575698231418880
+    m_Localized: 'High: {0}'
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
