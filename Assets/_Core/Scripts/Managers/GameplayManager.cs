@@ -69,6 +69,24 @@ namespace HexaBit.Core {
             }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            // Cache the UI Input Module from the scene's EventSystem
+            CacheUIModule();
+        }
+
+        /// <summary>
+        /// Finds and caches the InputSystemUIInputModule from the scene's EventSystem.
+        /// </summary>
+        private void CacheUIModule() {
+            var eventSystem = FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>();
+            if (eventSystem != null) {
+                cachedUIModule = eventSystem.GetComponent<InputSystemUIInputModule>();
+                if (cachedUIModule == null) {
+                    Debug.LogWarning("GameplayManager: InputSystemUIInputModule not found on EventSystem!");
+                }
+            } else {
+                Debug.LogWarning("GameplayManager: EventSystem not found in the scene!");
+            }
         }
 
         private void OnEnable() {
@@ -166,21 +184,6 @@ namespace HexaBit.Core {
                 }
             } else {
                 Debug.LogWarning("GameplayManager: restartPanelPrefab is not assigned!");
-            }
-        }
-
-        /// <summary>
-        /// Finds and caches the InputSystemUIInputModule from the scene's EventSystem.
-        /// </summary>
-        private void CacheUIModule() {
-            var eventSystem = FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>();
-            if (eventSystem != null) {
-                cachedUIModule = eventSystem.GetComponent<InputSystemUIInputModule>();
-                if (cachedUIModule == null) {
-                    Debug.LogWarning("GameplayManager: InputSystemUIInputModule not found on EventSystem!");
-                }
-            } else {
-                Debug.LogWarning("GameplayManager: EventSystem not found in the scene!");
             }
         }
 
