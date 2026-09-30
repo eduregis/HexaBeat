@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 135388912315494232}
   - component: {fileID: 4437763895583402257}
   m_Layer: 5
-  m_Name: RestartHUD_Prefab
+  m_Name: GameOverHUD_Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

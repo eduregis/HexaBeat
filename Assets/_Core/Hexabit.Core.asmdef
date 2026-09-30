@@ -2,6 +2,8 @@
     "name": "HexaBit.Core",
     "rootNamespace": "",
     "references": [
+        "Apple.GameKit",
+        "Apple.Core",
         "Unity.TextMeshPro",
         "Unity.InputSystem",
         "Unity.Cinemachine",
@@ -15,8 +17,9 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": [],
+    "defineConstraints": [
+        "!UNITY_EDITOR_WIN"
+    ],
     "versionDefines": [],
-    "noEngineReferences": false,
-    "assemblyDefinitionReferences": []
+    "noEngineReferences": false
 }

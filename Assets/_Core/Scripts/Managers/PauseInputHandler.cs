@@ -34,7 +34,7 @@ namespace HexaBit.Core {
             }
 
             // Block pause input if the restart menu is open
-            if (RestartUIManager.Instance != null && RestartUIManager.Instance.IsOpen) {
+            if (GameOverUIManager.Instance != null && GameOverUIManager.Instance.IsOpen) {
                 return;
             }
 

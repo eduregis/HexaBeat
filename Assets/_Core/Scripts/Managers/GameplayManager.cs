@@ -34,7 +34,7 @@ namespace HexaBit.Core {
 
         [Header("UI Prefabs")]
         [SerializeField] private GameObject pausePanelPrefab;
-        [SerializeField] private GameObject restartPanelPrefab;
+        [SerializeField] private GameObject gameOverPanelPrefab;
 
         [Header("Upgrade Pool")]
         [SerializeField] private UpgradePoolData upgradePoolData;
@@ -177,13 +177,13 @@ namespace HexaBit.Core {
                 Debug.LogWarning("GameplayManager: pausePanelPrefab is not assigned!");
             }
 
-            // Instantiate the Restart UI (singleton persists across the session)
-            if (restartPanelPrefab != null) {
-                if (RestartUIManager.Instance == null) {
-                    Instantiate(restartPanelPrefab);
+            // Instantiate the Game Over UI (singleton persists across the session)
+            if (gameOverPanelPrefab != null) {
+                if (GameOverUIManager.Instance == null) {
+                    Instantiate(gameOverPanelPrefab);
                 }
             } else {
-                Debug.LogWarning("GameplayManager: restartPanelPrefab is not assigned!");
+                Debug.LogWarning("GameplayManager: gameOverPanelPrefab is not assigned!");
             }
         }
 
@@ -207,7 +207,7 @@ namespace HexaBit.Core {
         }
 
         /// <summary>
-        /// Called when a hero dies. Checks if all heroes are dead and opens the restart menu.
+        /// Called when a hero dies. Checks if all heroes are dead and opens the game over menu.
         /// </summary>
         private void OnHeroDied() {
             // Check if ALL heroes are dead
@@ -219,8 +219,18 @@ namespace HexaBit.Core {
                 }
             }
 
-            if (allDead && RestartUIManager.Instance != null) {
-                RestartUIManager.Instance.OpenRestartMenu();
+            if (allDead) {
+                // --- Game Center Integration ---
+                if (GameCenterManager.Instance != null) {
+                    // Fire and forget: send scores asynchronously
+                    _ = GameCenterManager.Instance.SubmitScore(currentTime, totalKills);
+                } else {
+                    Debug.LogWarning("GameplayManager: GameCenterManager instance not found!");
+                }
+
+                if (GameOverUIManager.Instance != null) {
+                    GameOverUIManager.Instance.OpenGameOverMenu();
+                }
             }
         }
 

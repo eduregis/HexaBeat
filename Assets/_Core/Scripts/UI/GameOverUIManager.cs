@@ -4,8 +4,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 namespace HexaBit.Core {
-    public class RestartUIManager : MonoBehaviour {
-        public static RestartUIManager Instance { get; private set; }
+    public class GameOverUIManager : MonoBehaviour {
+        public static GameOverUIManager Instance { get; private set; }
 
         [Header("UI References")]
         [SerializeField] private GameObject restartPanel;
@@ -75,7 +75,7 @@ namespace HexaBit.Core {
         /// Opens the restart menu. Does NOT freeze time - the arena stays visible.
         /// The hero cannot move because IsDead is true.
         /// </summary>
-        public void OpenRestartMenu() {
+        public void OpenGameOverMenu() {
             if (_isOpen) return;
 
             _isOpen = true;
@@ -136,7 +136,7 @@ namespace HexaBit.Core {
         /// Quit action. Currently a no-op placeholder for future navigation.
         /// </summary>
         public void QuitGame() {
-            Debug.Log("RestartUIManager: QuitGame called (no-op for now)");
+            Debug.Log("GameOverUIManager: QuitGame called (no-op for now)");
             // TODO: Implement future navigation (e.g., return to main menu)
         }
 
