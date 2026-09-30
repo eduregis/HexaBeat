@@ -34,6 +34,26 @@ MonoBehaviour:
     m_Localized: 'Escolha um:'
     m_Metadata:
       m_Items: []
+  - m_Id: 14304081089417216
+    m_Localized: JOGO PAUSADO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304157115371520
+    m_Localized: FIM DE JOGO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304225398640640
+    m_Localized: "RECOME\xC7AR"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304292050325504
+    m_Localized: RETOMAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304369791750144
+    m_Localized: SAIR
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

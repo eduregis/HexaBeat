@@ -34,6 +34,26 @@ MonoBehaviour:
     m_Localized: 'Choose one:'
     m_Metadata:
       m_Items: []
+  - m_Id: 14304081089417216
+    m_Localized: GAME PAUSED
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304157115371520
+    m_Localized: GAME OVER
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304225398640640
+    m_Localized: RESTART
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304292050325504
+    m_Localized: RESUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304369791750144
+    m_Localized: QUIT
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

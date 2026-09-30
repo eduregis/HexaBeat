@@ -31,6 +31,26 @@ MonoBehaviour:
     m_Key: hud_choose_one
     m_Metadata:
       m_Items: []
+  - m_Id: 14304081089417216
+    m_Key: hud_game_paused
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304157115371520
+    m_Key: hud_game_over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304225398640640
+    m_Key: hud_restart_btn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304292050325504
+    m_Key: hud_resume_btn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14304369791750144
+    m_Key: hud_quit_btn
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

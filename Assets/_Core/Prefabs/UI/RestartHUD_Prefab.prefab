@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5376005131212669116}
   - component: {fileID: 8305246693513359300}
   - component: {fileID: 5445457410647818567}
+  - component: {fileID: 5697275213378568463}
   m_Layer: 5
   m_Name: GameOverText
   m_TagString: Untagged
@@ -137,6 +138,46 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &5697275213378568463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3374375150502945291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Localization::UnityEngine.Localization.Components.LocalizeStringEvent
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:eedfd0bf2708dcd488616cf4e5f0698c
+    m_TableEntryReference:
+      m_KeyId: 14304157115371520
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5445457410647818567}
+        m_TargetAssemblyTypeName: TMPro.TextMeshProUGUI, Unity.TextMeshPro
+        m_MethodName: SetText
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &3985812389292390237
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +404,7 @@ PrefabInstance:
       objectReference: {fileID: 1316817018178499649}
     - target: {fileID: 7119825801276340201, guid: 42b47568b7f5e45f0bc4835b1a571999, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 13850766727962624
+      value: 14304225398640640
       objectReference: {fileID: 0}
     - target: {fileID: 7119825801276340201, guid: 42b47568b7f5e45f0bc4835b1a571999, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
@@ -515,7 +556,7 @@ PrefabInstance:
       objectReference: {fileID: 6740188192377645863}
     - target: {fileID: 7119825801276340201, guid: 42b47568b7f5e45f0bc4835b1a571999, type: 3}
       propertyPath: m_StringReference.m_TableEntryReference.m_KeyId
-      value: 13850817055416320
+      value: 14304369791750144
       objectReference: {fileID: 0}
     - target: {fileID: 7119825801276340201, guid: 42b47568b7f5e45f0bc4835b1a571999, type: 3}
       propertyPath: m_StringReference.m_TableReference.m_TableCollectionName
